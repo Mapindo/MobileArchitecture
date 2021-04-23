@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import '../../../product/widget/bottomNavigation/bottom_navigation.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -9,6 +10,8 @@ class HomeView extends StatelessWidget {
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+          child: SvgPicture.asset('asset/svg/Network.svg'),
+          backgroundColor: Color(0xff758296),
           elevation: 1,
           onPressed: () {
             print('Click');

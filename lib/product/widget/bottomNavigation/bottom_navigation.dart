@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+// import '../../../core/extension/string_extension.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
@@ -13,7 +14,7 @@ class BottomNavigation extends StatelessWidget {
       child: BottomAppBar(
         elevation: 1,
         notchMargin: 10,
-        color: Colors.amber,
+        color: Colors.white,
         shape: const CircularNotchedRectangle(),
         child: Container(
           height: 60,
@@ -21,11 +22,11 @@ class BottomNavigation extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              bottomNavigationBarItem(),
-              bottomNavigationBarItem(),
+              bottomNavigationBarItem('Home'),
+              bottomNavigationBarItem('Send'),
               Spacer(),
-              bottomNavigationBarItem(),
-              bottomNavigationBarItem(),
+              bottomNavigationBarItem('Notification'),
+              bottomNavigationBarItem('Profil'),
             ],
           ),
         ),
@@ -33,9 +34,9 @@ class BottomNavigation extends StatelessWidget {
     );
   }
 
-  Expanded bottomNavigationBarItem() {
+  Expanded bottomNavigationBarItem(String icon) {
     return Expanded(
-      child: SvgPicture.asset("asset/svg/Home.svg"),
+      child: SvgPicture.asset('asset/svg/${icon}.svg'),
     );
   }
 }
