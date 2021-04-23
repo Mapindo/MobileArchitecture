@@ -5,10 +5,10 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            flex: 4,
+          Container(
+            height: context.mediaQuery.size.height * 0.3,
             child: Column(
               children: [
                 Spacer(
@@ -68,21 +68,35 @@ class HomeView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Nirvana",
-                                    style: context.textTheme.subtitle1.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: context.colors.secondary),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      "Nirvana",
+                                      style: context.textTheme.subtitle1
+                                          .copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: context.colors.secondary),
+                                    ),
                                   ),
-                                  Text(
-                                    '2 Şubat' + ' / ' + '22:00',
-                                    style: context.textTheme.subtitle2.copyWith(
-                                        color: context.colors.secondary),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '2 Şubat' + ' / ' + '22:00',
+                                      style: context.textTheme.subtitle2
+                                          .copyWith(
+                                              color: context.colors.secondary),
+                                    ),
                                   ),
-                                  Spacer(
-                                    flex: 1,
-                                  ),
-                                  Text('Concert')
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      'Concert',
+                                      style: context.textTheme.bodyText1
+                                          .copyWith(
+                                              color: context.colors.secondary,
+                                              fontWeight: FontWeight.w500),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -93,12 +107,67 @@ class HomeView extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            flex: 8,
-            child: Container(
-              color: Colors.blueGrey,
-            ),
-          )
+          DraggableScrollableSheet(
+              initialChildSize: 0.7,
+              minChildSize: 0.7,
+              maxChildSize: 1,
+              builder: (context, scrollController) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.4),
+                        spreadRadius: 0.01,
+                        blurRadius: 14,
+                        offset: Offset(0, 0.1), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: context.colors.onSecondary.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(20)),
+                        margin: context.paddingLowVertical,
+                        width: 80,
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(flex: 1, child: Icon(Icons.search)),
+                          Expanded(
+                            flex: 10,
+                            child: Padding(
+                              padding: context.paddingLowHorizontal.copyWith(
+                                  right: context.mediaQuery.size.width * 0.06),
+                              child: TextFormField(
+                                decoration:
+                                    InputDecoration(border: InputBorder.none),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Flexible(
+                        child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text('index $index'),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                );
+              })
         ],
       ),
     );
