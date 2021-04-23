@@ -26,7 +26,7 @@ class TextThemeLight {
   final TextStyle subtitle2 =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
   final TextStyle bodyText1 =
-      TextStyle(fontSize: 14, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
   final TextStyle button = TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
   final TextStyle caption =
       TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
