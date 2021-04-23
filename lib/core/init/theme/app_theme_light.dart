@@ -73,7 +73,7 @@ class AppThemeLight extends AppTheme with ILightTheme {
         error: colorSchemeLight.singlo,
         onPrimary: colorSchemeLight.ebony_clay,
         onSecondary: colorSchemeLight.slate_gray,
-        onSurface: Colors.white30,
+        onSurface: colorSchemeLight.fiord,
         onBackground: Colors.black12,
         onError: Color(0xffffc93c),
         brightness: Brightness.light);
