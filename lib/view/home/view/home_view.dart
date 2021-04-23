@@ -7,21 +7,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      // extendBody: true,
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: FloatingActionButton(
-      //     child: SvgPicture.asset('asset/svg/Network.svg'),
-      //     backgroundColor: Color(0xff758296),
-      //     elevation: 1,
-      //     onPressed: () {
-      //       print('Click');
-      //     }),
-      // bottomNavigationBar: BottomNavigation(),
-      body: Column(
-=======
       body: Stack(
->>>>>>> 2fb66938fca0478ad120d6e26a9a996d2bdf12d9
         children: [
           Container(
             height: context.mediaQuery.size.height * 0.3,

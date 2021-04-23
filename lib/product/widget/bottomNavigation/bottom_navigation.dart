@@ -34,9 +34,8 @@ class BottomNavigation extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       child: BottomAppBar(
-        elevation: 1,
         notchMargin: 10,
-        color: Colors.white,
+        color: Colors.grey[50],
         shape: const CircularNotchedRectangle(),
         child: Container(
           height: 60,
