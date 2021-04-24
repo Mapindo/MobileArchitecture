@@ -5,7 +5,7 @@ import '../../../view/home/view/home_view.dart';
 // import '../../../core/extension/string_extension.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
+  BottomNavigation({
     Key key,
   }) : super(key: key);
   final color = ColorSchemeLight.instance;
