@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 import '../../../core/init/theme/light/color_scheme_light.dart';
 import '../../../view/home/view/home_view.dart';
 // import '../../../core/extension/string_extension.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
+  BottomNavigation({
     Key key,
   }) : super(key: key);
   final color = ColorSchemeLight.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: buildFloatingActionButton(),
       bottomNavigationBar: buildBottomAppBar(),
-      body: HomeView(),
+      // body: HomeView(),
+      body: EventDetailView(),
     );
   }
 
