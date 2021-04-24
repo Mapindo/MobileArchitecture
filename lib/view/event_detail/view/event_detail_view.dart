@@ -9,8 +9,8 @@ class EventDetailView extends StatelessWidget {
       children: [
         Container(
           height: context.height * .3,
-          child: Image.network(
-            'https://www.kisa.link/ONU3',
+          child: Image.asset(
+            'asset/image/event.png',
             fit: BoxFit.cover,
           ),
           color: Colors.red,

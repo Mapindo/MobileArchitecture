@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 // import '../../../product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -82,56 +83,69 @@ class HomeView extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 20,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: context.paddingLow,
-                            child: Container(
-                              padding: context.paddingMediumHorizontal.copyWith(
-                                  top: context.mediaQuery.size.height * 0.015),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      colorFilter: ColorFilter.mode(
-                                          Colors.black.withOpacity(0.2),
-                                          BlendMode.dstATop),
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'asset/image/image_concert.png')),
-                                  color: context.colors.primary,
-                                  borderRadius: BorderRadius.circular(24)),
-                              width: context.mediaQuery.size.width * 0.7,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      "Nirvana",
-                                      style: context.textTheme.subtitle1
-                                          .copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              color: context.colors.secondary),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EventDetailView()),
+                              );
+                            },
+                            child: Padding(
+                              padding: context.paddingLow,
+                              child: Container(
+                                padding: context.paddingMediumHorizontal
+                                    .copyWith(
+                                        top: context.mediaQuery.size.height *
+                                            0.015),
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.black.withOpacity(0.2),
+                                            BlendMode.dstATop),
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            'asset/image/image_concert.png')),
+                                    color: context.colors.primary,
+                                    borderRadius: BorderRadius.circular(24)),
+                                width: context.mediaQuery.size.width * 0.7,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        "Nirvana",
+                                        style: context.textTheme.subtitle1
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color:
+                                                    context.colors.secondary),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '2 Şubat' + ' / ' + '22:00',
-                                      style: context.textTheme.subtitle2
-                                          .copyWith(
-                                              color: context.colors.secondary),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        '2 Şubat' + ' / ' + '22:00',
+                                        style: context.textTheme.subtitle2
+                                            .copyWith(
+                                                color:
+                                                    context.colors.secondary),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      'Concert',
-                                      style: context.textTheme.bodyText1
-                                          .copyWith(
-                                              color: context.colors.secondary,
-                                              fontWeight: FontWeight.w500),
-                                    ),
-                                  )
-                                ],
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        'Concert',
+                                        style: context.textTheme.bodyText1
+                                            .copyWith(
+                                                color: context.colors.secondary,
+                                                fontWeight: FontWeight.w500),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           );

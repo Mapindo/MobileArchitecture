@@ -18,8 +18,8 @@ class BottomNavigation extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: buildFloatingActionButton(),
       bottomNavigationBar: buildBottomAppBar(),
-      // body: HomeView(),
-      body: EventDetailView(),
+      body: HomeView(),
+      // body: EventDetailView(),
     );
   }
 
