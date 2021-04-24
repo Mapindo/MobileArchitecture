@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
+// import '../../../product/widget/bottomNavigation/bottom_navigation.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeView extends StatelessWidget {
   @override
