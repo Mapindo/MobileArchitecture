@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
+import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
 class OnBoardingPage extends StatefulWidget {
   OnBoardingPage({Key key}) : super(key: key);
@@ -16,28 +18,28 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "assets/images/onBoarding1Photo.jpg"
+      "photo": "asset/image/onBoarding1Photo.jpg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "assets/images/onBoarding2Photo.jpg"
+      "photo": "asset/image/onBoarding2Photo.jpg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "assets/images/onBoarding3Photo.jpg"
+      "photo": "asset/image/onBoarding3Photo.jpg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "assets/images/onBoarding4Photo.jpg"
+      "photo": "asset/image/onBoarding4Photo.jpg"
     },
   ];
 
@@ -100,8 +102,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              // builder: (context) => LoginScreen(),
-              ),
+            builder: (context) => LoginScreen(),
+          ),
         );
       },
       color: Colors.black,
@@ -127,8 +129,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              // builder: (context) => SignUp(),
-              ),
+            builder: (context) => SignUp(),
+          ),
         );
       },
       child: Text(
