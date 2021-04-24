@@ -54,7 +54,7 @@ class EventDetailView extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Devfest İstanbul 2021',
+                          'Devfest Denizli 2021',
                           style: context.textTheme.headline6
                               .copyWith(color: Color(0xff355070)),
                         ),
@@ -167,7 +167,7 @@ class EventDetailView extends StatelessWidget {
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                              'GDG DevFest Istanbul brings together the world class expertsin Android, Web and Cloud technologies to Istanbul for 2 days of sessions, workshops and showcases.'),
+                              'GDG DevFest Denizli brings together the world class expertsin Android, Web and Cloud technologies to Istanbul for 2 days of sessions, workshops and showcases.'),
                         ),
                       ),
                       Padding(
