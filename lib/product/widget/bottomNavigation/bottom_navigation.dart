@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 import 'package:fluttermvvmtemplate/view/map/view/map_view.dart';
+import 'package:fluttermvvmtemplate/view/notification_view/view/notification_view.dart';
 import '../../../core/init/theme/light/color_scheme_light.dart';
 import '../../../view/home/view/home_view.dart';
 import '../../../core/extension/string_extension.dart';
+import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 
 class BottomNavigation extends StatefulWidget {
   BottomNavigation({
@@ -17,13 +19,13 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   final color = ColorSchemeLight.instance;
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
     // MapView(),
     Center(child: Text('Map')),
     Center(child: Text('Sosyal medya yakında...')),
-    Center(child: Text('Bildirimler yakında...')),
+    NotificationView(),
     Center(child: Text('Profil yakında...'))
   ];
   @override
@@ -90,7 +92,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         },
         child: SvgPicture.asset(
           'asset/svg/${icon}.svg',
-          color: _selectedIndex == index ? Colors.indigo[400] : null,
+          color: _selectedIndex == index ? context.colors.primary : null,
         ),
       ),
     );
