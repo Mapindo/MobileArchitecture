@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
+import 'package:fluttermvvmtemplate/view/category_select/category.dart';
+import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
 import 'select_photo_view_model.dart';
 
 class SelectPhotoView extends SelectPhotoViewModel {
@@ -94,9 +97,16 @@ class SelectPhotoView extends SelectPhotoViewModel {
 
   RaisedButton butonFinish() {
     return RaisedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Category(),
+          ),
+        );
+      },
       child: Text(
-        "Kaydı Tamamla",
+        "İlerle",
         style: TextStyle(color: Colors.white, fontSize: 20),
       ),
       color: Colors.black,

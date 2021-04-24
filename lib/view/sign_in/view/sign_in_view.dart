@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
+import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -224,7 +225,14 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(fontSize: 17),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUp(),
+              ),
+            );
+          },
           child: Text(
             "Kayıt Ol",
             style: TextStyle(fontSize: 17),

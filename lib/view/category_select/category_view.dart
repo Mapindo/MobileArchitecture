@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'category_view_model.dart';
 
 class CategoryView extends CategoryViewModel {
@@ -354,7 +355,14 @@ class CategoryView extends CategoryViewModel {
               ),
               shape: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigation(),
+                  ),
+                );
+              },
             ),
             Spacer(flex: 1),
           ],

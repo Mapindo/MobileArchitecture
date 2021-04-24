@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttermvvmtemplate/view/category_select/category.dart';
+import 'package:fluttermvvmtemplate/view/category_select/category_view.dart';
+import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -86,6 +89,12 @@ class _SignUpState extends State<SignUp> {
 
           debugPrint(
               "Ad Soyad: $adSoyad \nKullanıcı Adı: $kullaniciAdi \nEmail: $emailAdress\nŞifre: $sifre\nŞifre tekrarı: $sifreTekrar\nTelefon Numarası: $telefonNo");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SelectPhoto(),
+            ),
+          );
         } else {
           setState(() {
             autoControl = true;
