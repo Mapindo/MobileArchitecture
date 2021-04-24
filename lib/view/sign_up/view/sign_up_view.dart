@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
                 ),
                 Image.asset(
-                  "assets/images/onBoarding1Photo.jpg",
+                  "asset/image/onBoarding1Photo.jpg",
                   height: 170,
                 ),
                 Align(
