@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
+import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Image img() {
     return Image.asset(
-      "assets/images/onBoarding2Photo.jpg",
+      "asset/image/onBoarding2Photo.jpg",
       height: 200,
     );
   }
@@ -99,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextFormField(
       obscureText: obsureText, // şifre görünmezliği
       keyboardType: inputType,
-      decoration: InputDecoration(hintText: hintText, labelText: labelText),
+      decoration: InputDecoration(
+          fillColor: Colors.grey, hintText: hintText, labelText: labelText),
       validator: validatorFunc,
       onSaved: (value) {
         if (hintText == "Email") _email = value;
@@ -149,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 width: 40,
                 height: 40,
-                child: Image.asset("assets/images/googleBlackLogo.jpg"),
+                child: Image.asset("asset/image/googleBlackLogo.jpg"),
               ),
             ),
           ),
@@ -165,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 width: 40,
                 height: 40,
-                child: Image.asset("assets/images/twitterBlackLogo.jpg"),
+                child: Image.asset("asset/image/twitterBlackLogo.jpg"),
               ),
             ),
           ),
@@ -180,8 +183,13 @@ class _LoginScreenState extends State<LoginScreen> {
       onPressed: () {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-
           debugPrint("Email: $_email \nŞifre: $_sifre");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BottomNavigation(),
+            ),
+          );
         } else {
           setState(() {
             autoControl = true;
@@ -217,7 +225,14 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(fontSize: 17),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUp(),
+              ),
+            );
+          },
           child: Text(
             "Kayıt Ol",
             style: TextStyle(fontSize: 17),
