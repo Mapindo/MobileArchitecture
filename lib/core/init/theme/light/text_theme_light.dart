@@ -31,8 +31,8 @@ class TextThemeLight {
   final TextStyle caption =
       TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
   final TextStyle overlinemd =
-      TextStyle(fontSize: 10, fontWeight: FontWeight.w500, letterSpacing: 1.5);
+      TextStyle(fontSize: 10, fontWeight: FontWeight.w600);
 
   final TextStyle overlinebld =
-      TextStyle(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5);
+      TextStyle(fontSize: 10, fontWeight: FontWeight.w700);
 }
