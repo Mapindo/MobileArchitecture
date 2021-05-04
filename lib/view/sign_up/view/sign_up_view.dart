@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                       Expanded(
                         flex: 2,
                         child: text(registerText,
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                            fontSize: 26, fontWeight: FontWeight.bold),
                       ),
                       //Text(registerText,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25))),
                       Expanded(
@@ -70,8 +70,8 @@ class _SignUpState extends State<SignUp> {
                         flex: 2,
                         child: Column(
                           children: [
-                            Expanded(child: Text(topText1)),
-                            Expanded(child: Text(topText2)),
+                            Expanded(child: text(topText1, fontSize: 14)),
+                            Expanded(child: text(topText2, fontSize: 14)),
                           ],
                         ),
                       ),
@@ -116,9 +116,13 @@ class _SignUpState extends State<SignUp> {
     return TextFormField(
         obscureText: obsureText, // şifre görünmezliği
         keyboardType: inputType,
+        cursorColor: Colors.black,
         decoration: InputDecoration(
           hintText: hintText,
           labelText: labelText,
+          labelStyle: TextStyle(fontSize: 12),
+          hintStyle: TextStyle(fontSize: 12),
+          
           enabledBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:
@@ -177,8 +181,8 @@ class _SignUpState extends State<SignUp> {
         registerOnPressed();
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        child: text(registerText, color: Colors.white, fontSize: 25),
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        child: text(registerText, color: Colors.white, fontSize: 22),
       ),
       color: Colors.black,
       shape: shape,
