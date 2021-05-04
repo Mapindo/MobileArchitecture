@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
@@ -18,28 +19,28 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding1Photo.jpg"
+      "photo": "asset/svg/onBoard3.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding2Photo.jpg"
+      "photo": "asset/svg/onBoard4.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding3Photo.jpg"
+      "photo": "asset/svg/onBoard1.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding4Photo.jpg"
+      "photo": "asset/svg/onBoard2.svg"
     },
   ];
 
@@ -57,20 +58,27 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Spacer(flex: 1),
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 35),
-                        child: splashScreenLists(),
-                      ),
+                      flex: 10,
+                      child: splashScreenLists(),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 7),
-                      child: login(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 50),
-                      child: signUp(),
-                    ),
+                    Expanded(
+                        flex: 4,
+                        child: Column(
+                          children: [
+                            Spacer(flex: 2),
+                            Expanded(
+                              flex: 3,
+                              child: login(),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: signUp(),
+                            ),
+                            Spacer(flex: 2),
+                          ],
+                        ))
                   ],
                 ),
               ),
@@ -192,7 +200,7 @@ class OnboardingSliderCard extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(top: 20),
-            child: Image.asset("${photo.toString()}"),
+            child: SvgPicture.asset("${photo.toString()}"),
           ),
         ],
       ),
