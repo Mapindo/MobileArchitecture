@@ -4,6 +4,7 @@ import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/home/view/home_view.dart';
 import 'package:fluttermvvmtemplate/view/onboarding/view/onboarding_view.dart';
+import 'package:fluttermvvmtemplate/view/profile/view/profile_view.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/app/app_constants.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
-      home: OnBoardingPage(),
+      home: ProfileView(),
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
@@ -37,7 +38,7 @@ class SelectPhotoView extends SelectPhotoViewModel {
 
   Text h1text() {
     return Text("Profil fotoğrafını seç",
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold));
+        style: context.textTheme.headline4.copyWith(color: Colors.black));
   }
 
   Column textColumn() {
