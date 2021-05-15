@@ -28,5 +28,10 @@ abstract class  LocaleKeys {
   static const home_build_subTitle = 'home.build.subTitle';
   static const home_build = 'home.build';
   static const home = 'home';
+  static const notificaiton_notificaitons = 'notificaiton.notificaitons';
+  static const notificaiton_following = 'notificaiton.following';
+  static const notificaiton_postTagged = 'notificaiton.postTagged';
+  static const notificaiton_follow = 'notificaiton.follow';
+  static const notificaiton = 'notificaiton';
 
 }

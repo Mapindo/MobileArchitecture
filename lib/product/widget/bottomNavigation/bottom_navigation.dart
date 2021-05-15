@@ -19,7 +19,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   final color = ColorSchemeLight.instance;
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
     // MapView(),
