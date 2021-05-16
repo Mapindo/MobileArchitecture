@@ -216,6 +216,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  TextButton sifreUnuttum() {
+    return TextButton(
+      onPressed: () {},
+      child: GestureDetector(
+        onTap: () {
+          print('gesture dedector calisti');
+        },
+        child: Text(
+          "Şifremi Unuttum ?",
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+    );
   void loginOnPressed() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();

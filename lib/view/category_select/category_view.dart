@@ -117,29 +117,6 @@ class CategoryView extends CategoryViewModel {
                   ),
                   Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: colorButton3,
-                        ),
-                        height: 50,
-                        width: 50,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.emoji_nature_outlined,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              if (colorButton3 == Colors.indigo)
-                                colorButton3 = Colors.indigo.shade100;
-                              else
-                                colorButton3 = Colors.indigo;
-                            });
-                          },
-                        ),
-                      ),
                       SizedBox(height: 5),
                       Text("Doğa"),
                     ],

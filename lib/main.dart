@@ -4,6 +4,7 @@ import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/home/view/home_view.dart';
 import 'package:fluttermvvmtemplate/view/onboarding/view/onboarding_view.dart';
+import 'package:fluttermvvmtemplate/view/profile/view/profile_view.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
