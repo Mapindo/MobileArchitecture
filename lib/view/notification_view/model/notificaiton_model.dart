@@ -9,6 +9,7 @@ class Notificaiton extends INetworkModel<Notificaiton> {
   String token;
   String date;
   String image;
+  int status;
   bool isReady;
 
   Notificaiton({
@@ -17,6 +18,7 @@ class Notificaiton extends INetworkModel<Notificaiton> {
     this.token,
     this.date,
     this.image,
+    this.status,
     this.isReady,
   });
 

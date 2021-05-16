@@ -13,6 +13,7 @@ Notificaiton _$NotificaitonFromJson(Map<String, dynamic> json) {
     token: json['token'] as String,
     date: json['date'] as String,
     image: json['image'] as String,
+    status: json['status'] as int,
     isReady: json['isReady'] as bool,
   );
 }
@@ -24,5 +25,6 @@ Map<String, dynamic> _$NotificaitonToJson(Notificaiton instance) =>
       'token': instance.token,
       'date': instance.date,
       'image': instance.image,
+      'status': instance.status,
       'isReady': instance.isReady,
     };
