@@ -22,8 +22,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 3;
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
-    // MapView(),
-    Center(child: Text('Map')),
+    MapView(),
+    // Center(child: Text('Map')),
     Center(child: Text('Sosyal medya yakında...')),
     NotificationView(),
     Center(child: Text('Profil yakında...'))

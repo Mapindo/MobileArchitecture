@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -9,65 +11,108 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String _sifre, _email;
   final formKey = GlobalKey<FormState>();
   bool autoControl = false;
+  // PATTERN
+  Pattern pattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  //
+  String _sifre, _email;
+  //
+  String textSifre = "Şifre";
+  String textEmail = "Email";
+  String login = "Giriş Yap";
+  String forgetPassword = "Şifremi Unuttum ?";
+  String register = "Kayıt Ol";
+  String bottomText = "Eğer mevcut bir hesabın yoksa ";
+  // IMAGE URLS
+  String loginSvgUrl = "asset/svg/signIn.svg";
+
+  IconData googleIcon = MaterialCommunityIcons.google;
+  IconData twitterIcon = MaterialCommunityIcons.twitter;
+  // LOGO URL googleLogoSvg
+  String logo1 = "asset/svg/googleLogo.svg";
+  // ERROR
+  String errorEmail = "Geçersiz mail adresi";
+  String errorSifre = "Şifre zorunludur";
+  // SHAPE
+  OutlineInputBorder shape =
+      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(80)));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: Form(
           key: formKey,
           autovalidate: autoControl,
           child: Container(
-            height: double.infinity,
-            child: ListView(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
+                Spacer(
+                  flex: 2,
+                ),
+                Expanded(
+                  flex: 1,
                   child: Align(
                     child: text(Colors.black),
                     alignment: Alignment.center,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
-                  child: img(),
+                Expanded(
+                  flex: 9,
+                  child: svg(),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: formField("Email", "Email", TextInputType.emailAddress,
-                      false, _emailKontrol),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: formField(textEmail, textEmail,
+                            TextInputType.emailAddress, false, _emailKontrol),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: formField(textSifre, textSifre,
+                            TextInputType.visiblePassword, true, _sifreKontrol),
+                      ),
+                    ],
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: formField("Şifre", "Şifre",
-                      TextInputType.visiblePassword, true, _sifreKontrol),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20),
+                Spacer(flex: 1),
+                Expanded(
+                  flex: 1,
                   child: tarz(),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10, right: 40, left: 40),
+                Expanded(
+                  flex: 4,
                   child: googleAndTwitter(),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
+                Expanded(
+                  flex: 2,
                   child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 50),
-                      child: girisYap()),
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    child: loginButton(),
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
-                  child: sifreUnuttum(),
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    children: [
+                      Spacer(flex: 1),
+                      Expanded(
+                        child: forgetPasword(),
+                      ),
+                      Expanded(
+                        child: textBottom(),
+                      ),
+                    ],
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
-                  child: textEnd(),
-                ),
+                Spacer(flex: 1),
               ],
             ),
           ),
@@ -78,35 +123,34 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Text text(dColor) {
     Color color = dColor;
-    return Text(
-      "Giriş Yap",
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: color),
-    );
+    return Text(login,
+        style: Theme.of(context)
+            .textTheme
+            .title
+            .copyWith(color: color, fontWeight: FontWeight.bold));
   }
 
-  Image img() {
-    return Image.asset(
-      "asset/image/onBoarding2Photo.jpg",
-      height: 200,
-    );
-  }
+  SvgPicture svg() => SvgPicture.asset(loginSvgUrl);
 
-  TextFormField formField(String dhintText, String dlabelText,
-      TextInputType dnputType, bool dobsureText, dvalidatorFunc) {
-    String hintText = dhintText;
-    String labelText = dlabelText;
-    TextInputType inputType = dnputType;
-    bool obsureText = dobsureText;
-    Function validatorFunc = dvalidatorFunc;
+  TextFormField formField(String hintText, String labelText,
+      TextInputType inputType, bool obsureText, Function validatorFunc) {
     return TextFormField(
       obscureText: obsureText, // şifre görünmezliği
       keyboardType: inputType,
       decoration: InputDecoration(
-          fillColor: Colors.grey, hintText: hintText, labelText: labelText),
+        hintText: hintText,
+        labelText: labelText,
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+        errorBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      ),
       validator: validatorFunc,
       onSaved: (value) {
-        if (hintText == "Email") _email = value;
-        if (hintText == "Şifre") _sifre = value;
+        if (hintText == textEmail) _email = value;
+        if (hintText == textSifre) _sifre = value;
       },
     );
   }
@@ -114,148 +158,118 @@ class _LoginScreenState extends State<LoginScreen> {
   Row tarz() {
     return Row(
       children: [
-        Expanded(
-          child: Divider(
-            height: 10,
-            thickness: 1,
-            color: Colors.black,
-            indent: 20,
-            endIndent: 15,
-          ),
-        ),
+        Expanded(child: buildDivider()),
         Text("ya da"),
-        Expanded(
-          child: Divider(
-            height: 10,
-            thickness: 1,
-            color: Colors.black,
-            indent: 15,
-            endIndent: 20,
-          ),
-        ),
+        Expanded(child: buildDivider()),
       ],
+    );
+  }
+
+  Divider buildDivider() {
+    return Divider(
+      thickness: 1,
+      color: Colors.grey,
+      indent: MediaQuery.of(context).size.width * 0.04,
+      endIndent: MediaQuery.of(context).size.width * 0.04,
     );
   }
 
   Row googleAndTwitter() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        RaisedButton(
-          elevation: 20,
-          color: Colors.white,
-          onPressed: () {},
-          child: ClipOval(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: Container(
-                width: 40,
-                height: 40,
-                child: Image.asset("asset/image/googleBlackLogo.jpg"),
-              ),
-            ),
-          ),
-          shape: CircleBorder(),
-        ),
-        RaisedButton(
-          elevation: 20,
-          color: Colors.white,
-          onPressed: () {},
-          child: ClipOval(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: Container(
-                width: 40,
-                height: 40,
-                child: Image.asset("asset/image/twitterBlackLogo.jpg"),
-              ),
-            ),
-          ),
-          shape: CircleBorder(),
-        ),
+        logoButton(googleIcon),
+        logoButton(twitterIcon),
       ],
     );
   }
 
-  RaisedButton girisYap() {
+  RaisedButton logoButton(IconData icon) {
+    return RaisedButton(
+      elevation: 15,
+      color: Colors.white,
+      onPressed: () {},
+      child: ClipOval(
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Icon(
+            icon,
+            size: 50,
+          ),
+        ),
+      ),
+      shape: CircleBorder(),
+    );
+  }
+
+  RaisedButton loginButton() {
     return RaisedButton(
       onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-          debugPrint("Email: $_email \nŞifre: $_sifre");
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BottomNavigation(),
-            ),
-          );
-        } else {
-          setState(() {
-            autoControl = true;
-          });
-        }
+        loginOnPressed();
       },
       color: Colors.black,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 17),
+        padding: EdgeInsets.symmetric(horizontal: 30),
         child: text(Colors.white),
       ),
-      shape: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(80))),
+      shape: shape,
     );
   }
 
   TextButton sifreUnuttum() {
     return TextButton(
       onPressed: () {},
-      child: Text(
-        "Şifremi Unuttum ?",
-        style: TextStyle(fontSize: 18),
+      child: GestureDetector(
+        onTap: () {
+          print('gesture dedector calisti');
+        },
+        child: Text(
+          "Şifremi Unuttum ?",
+          style: TextStyle(fontSize: 18),
+        ),
       ),
     );
+  void loginOnPressed() {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+    } else {
+      setState(() {
+        autoControl = true;
+      });
+    }
   }
 
-  Row textEnd() {
+  GestureDetector forgetPasword() =>
+      GestureDetector(child: text2(forgetPassword));
+
+  Row textBottom() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "Eğer mevcut bir hesabın yoksa ",
-          style: TextStyle(fontSize: 17),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignUp(),
-              ),
-            );
-          },
-          child: Text(
-            "Kayıt Ol",
-            style: TextStyle(fontSize: 17),
-          ),
+        text2(bottomText),
+        GestureDetector(
+          onTap: () {},
+          child: text2(register, color: Colors.blue),
         ),
       ],
     );
   }
 
+  Text text2(String text, {Color color}) =>
+      Text(text, style: TextStyle(fontSize: 17, color: color));
+
 //kontroller
   String _emailKontrol(String mail) {
-    Pattern pattern =
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(mail))
-      return "Geçersiz mail adresi";
+      return errorEmail;
     else
       return null;
   }
 
   String _sifreKontrol(String sifre) {
     if (sifre == "")
-      return "Zorunlu";
+      return errorSifre;
     else
       return null;
   }

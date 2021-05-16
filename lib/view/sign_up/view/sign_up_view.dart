@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category_view.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
@@ -14,6 +15,27 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   String adSoyad, kullaniciAdi, emailAdress, sifre, sifreTekrar, telefonNo;
   bool autoControl = false;
+  // TEXT
+  String registerText = "Kayıt Ol";
+  String topText1 = "Sadece 2 dakikanı ayırarak Mappindo";
+  String topText2 = "hesabı oluştur ve güncel etkinlikleri takip et";
+  //--
+  String nameText = "Ad";
+  String userText = "Kullanıcı";
+  String userNameText = "Kullanıcı Adı";
+  String nameAndSurnameText = "Ad Soyad";
+  String emailText = "Email";
+  String passwordText = "Şifre";
+  String againPasswordText = "Şifre Tekrarı";
+  String phoneText = "Telefon";
+  String phoneNumberText = "Telefon Numaranız";
+
+  // URL
+  String registerTopUrl = "asset/svg/registerTop.svg";
+
+  // SHAPE
+  OutlineInputBorder shape =
+      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(80.0)));
 
   final formKey = GlobalKey<FormState>();
   @override
@@ -21,56 +43,52 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 17),
+          padding: EdgeInsets.symmetric(horizontal: 25),
           child: Form(
             key: formKey,
             autovalidate: autoControl,
-            child: ListView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text("Kayıt Ol",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-                ),
-                Image.asset(
-                  "asset/image/onBoarding1Photo.jpg",
-                  height: 170,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                      "   Sadece 2 dakikanı ayırarak Mappindo\nhesabı oluştur ve güncel etkinlikleri takip et"),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Ad", "Ad Soyad", TextInputType.name,
-                        false, _isimKontrol)),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Kullanıcı", "Kullanıcı Adı",
-                        TextInputType.name, false, _isimKontrol)),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Email", "Email",
-                        TextInputType.emailAddress, false, _emailKontrol)),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Şifre", "Şifre",
-                        TextInputType.visiblePassword, true, _sifreControl)),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Şifre", "Şifre Tekrarı",
-                        TextInputType.visiblePassword, true, _sifreControl)),
-                Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: formField("Telefon", "Telefon Numaranız",
-                        TextInputType.phone, false, _phoneControl)),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 15),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
-                    child: kayitOl(),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.92,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: text(registerText,
+                            fontSize: 26, fontWeight: FontWeight.bold),
+                      ),
+                      //Text(registerText,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25))),
+                      Expanded(
+                        flex: 8,
+                        child: SvgPicture.asset(registerTopUrl),
+                      ),
+                      Spacer(flex: 1),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Expanded(child: text(topText1, fontSize: 14)),
+                            Expanded(child: text(topText2, fontSize: 14)),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 20,
+                        child: formColum(),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          child: registirButton(),
+                        ),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -81,51 +99,16 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  RaisedButton kayitOl() {
-    return RaisedButton(
-      onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-
-          debugPrint(
-              "Ad Soyad: $adSoyad \nKullanıcı Adı: $kullaniciAdi \nEmail: $emailAdress\nŞifre: $sifre\nŞifre tekrarı: $sifreTekrar\nTelefon Numarası: $telefonNo");
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SelectPhoto(),
-            ),
-          );
-        } else {
-          setState(() {
-            autoControl = true;
-          });
-        }
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Text(
-          "Kayıt Ol",
+  Text text(String textValue,
+          {Color color, double fontSize, FontWeight fontWeight}) =>
+      Text(textValue,
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
-      ),
-      color: Colors.black,
-      shape: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0))),
-    );
-  }
+              color: color, fontSize: fontSize, fontWeight: fontWeight));
 
-  TextFormField formField(String dhintText, String dlabelText,
-      TextInputType dnputType, bool dobsureText, dvalidatorFunc) {
-    String hintText = dhintText;
-    String labelText = dlabelText;
-    TextInputType inputType = dnputType;
-    bool obsureText = dobsureText;
-    Function validatorFunc = dvalidatorFunc;
+  TextFormField formField(String hintText, String labelText,
+      TextInputType inputType, bool obsureText, validatorFunc) {
     int maxLength;
-    if (hintText == "Telefon") {
+    if (hintText == phoneText) {
       maxLength = 11;
     } else
       maxLength = null;
@@ -133,20 +116,92 @@ class _SignUpState extends State<SignUp> {
     return TextFormField(
         obscureText: obsureText, // şifre görünmezliği
         keyboardType: inputType,
-        decoration: InputDecoration(hintText: hintText, labelText: labelText),
+        cursorColor: Colors.black,
+        decoration: InputDecoration(
+          hintText: hintText,
+          labelText: labelText,
+          labelStyle: TextStyle(fontSize: 12),
+          hintStyle: TextStyle(fontSize: 12),
+          
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          focusedBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          errorBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        ),
         validator: validatorFunc,
         maxLength: maxLength,
         onSaved: (value) {
-          if (hintText == "Ad") adSoyad = value;
-          if (hintText == "Email") emailAdress = value;
-          if (hintText == "Kullanıcı") kullaniciAdi = value;
-          if (hintText == "Şifre") sifre = value;
-          if (labelText == "Şifre Tekrarı") sifreTekrar = value;
-          if (hintText == "Telefon") telefonNo = value;
+          if (hintText == nameText) adSoyad = value;
+          if (hintText == emailText) emailAdress = value;
+          if (hintText == userText) kullaniciAdi = value;
+          if (hintText == passwordText) sifre = value;
+          if (labelText == againPasswordText) sifreTekrar = value;
+          if (hintText == phoneText) telefonNo = value;
         });
   }
 
-  // Kontroller
+  Column formColum() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 1,
+          child: formField(nameText, nameAndSurnameText, TextInputType.name,
+              false, _isimKontrol),
+        ),
+        Expanded(
+          flex: 1,
+          child: formField(
+              userText, userNameText, TextInputType.name, false, _isimKontrol),
+        ),
+        Expanded(
+            flex: 1,
+            child: formField(emailText, emailText, TextInputType.emailAddress,
+                false, _emailKontrol)),
+        Expanded(
+            flex: 1,
+            child: formField(passwordText, passwordText,
+                TextInputType.visiblePassword, true, _sifreControl)),
+        Expanded(
+            flex: 1,
+            child: formField(passwordText, againPasswordText,
+                TextInputType.visiblePassword, true, _sifreControl)),
+        Expanded(
+            flex: 2,
+            child: formField(phoneText, phoneNumberText, TextInputType.phone,
+                false, _phoneControl)),
+      ],
+    );
+  }
+
+  RaisedButton registirButton() {
+    return RaisedButton(
+      onPressed: () {
+        registerOnPressed();
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        child: text(registerText, color: Colors.white, fontSize: 22),
+      ),
+      color: Colors.black,
+      shape: shape,
+    );
+  }
+
+  void registerOnPressed() {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SelectPhoto()));
+    } else {
+      setState(() {
+        autoControl = true;
+      });
+    }
+  }
+
+  // CONTROLS
   String _emailKontrol(String mail) {
     Pattern pattern =
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
@@ -162,13 +217,6 @@ class _SignUpState extends State<SignUp> {
       return "En az 3 harf olmalıdır";
     else
       return null;
-    /**
-     * RegExp regex = RegExp("^[a-zA-Z]+");
-    if (!regex.hasMatch(name))
-      return "İsim sadece harflerden oluşmalıdır.";
-    else
-      return null;
-     */
   }
 
   String _phoneControl(String phone) {
