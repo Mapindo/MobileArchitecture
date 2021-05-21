@@ -225,6 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
   void loginOnPressed() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
