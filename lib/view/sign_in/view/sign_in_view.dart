@@ -55,11 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   flex: 2,
                 ),
                 Expanded(
-                  flex: 1,
-                  child: Align(
-                    child: text(Colors.black),
-                    alignment: Alignment.center,
-                  ),
+                  flex: 2,
+                  child: text(login, color: Colors.black, fontSize: 26),
                 ),
                 Expanded(
                   flex: 9,
@@ -92,11 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: googleAndTwitter(),
                 ),
                 Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    child: loginButton(),
-                  ),
+                  flex: 3,
+                  child: loginButton(),
                 ),
                 Expanded(
                   flex: 3,
@@ -121,13 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Text text(dColor) {
-    Color color = dColor;
-    return Text(login,
-        style: Theme.of(context)
-            .textTheme
-            .title
-            .copyWith(color: color, fontWeight: FontWeight.bold));
+  Text text(String text, {Color color, double fontSize}) {
+    return Text(text,
+        style: TextStyle(
+            color: color, fontWeight: FontWeight.bold, fontSize: fontSize));
   }
 
   SvgPicture svg() => SvgPicture.asset(loginSvgUrl);
@@ -140,6 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         hintText: hintText,
         labelText: labelText,
+        hintStyle: TextStyle(fontSize: 12),
+        labelStyle: TextStyle(fontSize: 12),
         enabledBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         focusedBorder:
@@ -159,7 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Row(
       children: [
         Expanded(child: buildDivider()),
-        Text("ya da"),
+        Text(
+          "ya da",
+          style: TextStyle(fontSize: 13),
+        ),
         Expanded(child: buildDivider()),
       ],
     );
@@ -194,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.all(5),
           child: Icon(
             icon,
-            size: 50,
+            size: 40,
           ),
         ),
       ),
@@ -209,8 +205,8 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       color: Colors.black,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: text(Colors.white),
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        child: text(login, color: Colors.white, fontSize: 22),
       ),
       shape: shape,
     );
@@ -240,23 +236,23 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   GestureDetector forgetPasword() =>
-      GestureDetector(child: text2(forgetPassword));
+      GestureDetector(child: text2(forgetPassword, fontSize: 12));
 
   Row textBottom() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        text2(bottomText),
+        text2(bottomText, fontSize: 12),
         GestureDetector(
           onTap: () {},
-          child: text2(register, color: Colors.blue),
+          child: text2(register, color: Colors.blue, fontSize: 12),
         ),
       ],
     );
   }
 
-  Text text2(String text, {Color color}) =>
-      Text(text, style: TextStyle(fontSize: 17, color: color));
+  Text text2(String text, {Color color, double fontSize}) =>
+      Text(text, style: TextStyle(fontSize: fontSize, color: color));
 
 //kontroller
   String _emailKontrol(String mail) {
