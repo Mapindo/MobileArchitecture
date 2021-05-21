@@ -5,4 +5,7 @@ class ApplicationConstants {
   static const COMPANY_NAME = 'HWA';
 
   static const EMAIL_REGIEX = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$';
+
+  static const USER_TAG = r'@[0-9]{1,2}';
+  static const WORD_REGEX = r'(\w+)';
 }

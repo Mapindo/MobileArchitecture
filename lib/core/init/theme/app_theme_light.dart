@@ -64,18 +64,19 @@ class AppThemeLight extends AppTheme with ILightTheme {
 
   ColorScheme get _appColorScheme {
     return ColorScheme(
-        primary: colorSchemeLight.cornflower_blue,
-        primaryVariant: colorSchemeLight.ebony_clay,
-        secondary: Colors.white,
-        secondaryVariant: colorSchemeLight.royal_blue,
-        surface: colorSchemeLight.blue,
-        background: colorSchemeLight.athens_gray,
-        error: colorSchemeLight.singlo,
-        onPrimary: colorSchemeLight.ebony_clay,
-        onSecondary: colorSchemeLight.slate_gray,
-        onSurface: colorSchemeLight.fiord,
-        onBackground: colorSchemeLight.bali_hai,
-        onError: Color(0xffffc93c),
-        brightness: Brightness.light);
+      primary: colorSchemeLight.cornflower_blue,
+      primaryVariant: colorSchemeLight.ebony_clay,
+      secondary: Colors.white,
+      secondaryVariant: colorSchemeLight.royal_blue,
+      surface: colorSchemeLight.blue,
+      background: colorSchemeLight.athens_gray,
+      error: colorSchemeLight.singlo,
+      onPrimary: colorSchemeLight.ebony_clay,
+      onSecondary: colorSchemeLight.slate_gray,
+      onSurface: colorSchemeLight.fiord,
+      onBackground: colorSchemeLight.bali_hai,
+      onError: Color(0xffffc93c),
+      brightness: Brightness.light,
+    );
   }
 }
