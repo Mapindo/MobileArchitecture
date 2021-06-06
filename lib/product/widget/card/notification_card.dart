@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/core/components/text/auto_locale_text.dart';
 import 'package:fluttermvvmtemplate/core/constants/app/app_constants.dart';
+import 'package:fluttermvvmtemplate/core/init/lang/locale_keys.g.dart';
 import '../../../core/extension/context_extension.dart';
 import '../../../view/notification_view/model/notificaiton_model.dart';
 import '../../helpers/dateDiff.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 List<UserList> userTag = [
   UserList(user: 'Fatih Emre Kalem', id: 1),
@@ -18,7 +21,7 @@ class NotificationCard extends StatelessWidget {
     Key key,
     @required this.item,
   }) : super(key: key);
-  @override
+
   @override
   Widget build(BuildContext context) {
     // context = context;
@@ -73,9 +76,8 @@ class NotificationCard extends StatelessWidget {
                   onPressed: () {
                     print('Takip et benii');
                   },
-                  label: Text(
-                    'Takip Et',
-                    style: TextStyle(fontSize: context.normalValue),
+                  label: AutoLocaleText(
+                    value: LocaleKeys.notificaiton_follow,
                   ),
                 ),
               ),
@@ -103,7 +105,7 @@ class NotificationCard extends StatelessWidget {
   // const user
 
   Widget bodyText(BuildContext context, String text, RegExp parse) {
-    List<TextSpan> textList = text
+    var textList = text
         .split(' ')
         .map((item) => parse.hasMatch(item)
             ? tagTextSpan(
@@ -118,7 +120,7 @@ class NotificationCard extends StatelessWidget {
 
     return Padding(
       padding: context.paddingLowHorizontal,
-      child: Text.rich(
+      child: AutoSizeText.rich(
         TextSpan(
           text: '',
           children: textList,
@@ -138,12 +140,12 @@ class NotificationCard extends StatelessWidget {
     return TextSpan(
       text: text,
       recognizer: TapGestureRecognizer()..onTap = _onTopText,
-      style: context.textTheme.bodyText1
+      style: context.textTheme.bodyText2
           .copyWith(color: context.colors.secondaryVariant),
     );
   }
 
-  _onTopText() => print('fatih');
+  void _onTopText() => print('fatih');
 }
 
 class UserList {
@@ -158,9 +160,9 @@ class UserList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['user'] = this.user;
-    data['id'] = this.id;
+    final data = <String, dynamic>{};
+    data['user'] = user;
+    data['id'] = id;
     return data;
   }
 }

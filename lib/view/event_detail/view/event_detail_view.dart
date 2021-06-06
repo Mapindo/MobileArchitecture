@@ -34,14 +34,6 @@ class EventDetailView extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                      color: context.colors.onSecondary.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20)),
-                  margin: context.paddingLowVertical,
-                  width: 80,
-                  height: 8,
-                ),
-                Container(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
