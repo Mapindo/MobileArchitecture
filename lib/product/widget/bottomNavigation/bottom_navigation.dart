@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 import 'package:fluttermvvmtemplate/view/map/view/map_view.dart';
 import 'package:fluttermvvmtemplate/view/notification_view/view/notification_view.dart';
+import 'package:fluttermvvmtemplate/view/profile/view/profile_view.dart';
 import '../../../core/init/theme/light/color_scheme_light.dart';
 import '../../../view/home/view/home_view.dart';
 import '../../../core/extension/string_extension.dart';
@@ -26,7 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     // Center(child: Text('Map')),
     Center(child: Text('Sosyal medya yakında...')),
     NotificationView(),
-    Center(child: Text('Profil yakında...'))
+    ProfileView()
   ];
   @override
   Widget build(BuildContext context) {
