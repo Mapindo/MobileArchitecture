@@ -9,6 +9,9 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
   @observable
   TabController tabController;
 
+  @observable
+  int isTabSelectedValue = 1;
+
   void setContext(BuildContext context) => this.context = context;
   void init() {}
 }

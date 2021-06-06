@@ -10,20 +10,101 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  TabController _tabController;
 
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _tabController = TabController(length: 4, vsync: this);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> myTabs = [
-      Tab(text: 'Gönderiler'),
-      Tab(text: 'Etkinlikler'),
-      Tab(text: 'Yorumlar'),
+    final feedData = [
+      {
+        'photo': 'https://avatars.githubusercontent.com/u/34376691?v=4',
+        'name': 'Abdullah Oğuz',
+        'time': '13.40',
+        'text': 'Bugün NSIstanbul etkinliğine gelen var mı ?'
+      },
+      {
+        'photo': 'https://avatars.githubusercontent.com/u/34376691?v=4',
+        'name': 'Abdullah Oğuz',
+        'time': '14.50',
+        'text': 'Karaköyde bir konser varmış giden var mı ?'
+      },
+      {
+        'photo': 'https://avatars.githubusercontent.com/u/34376691?v=4',
+        'name': 'Abdullah Oğuz',
+        'time': '8.50',
+        'text': 'Korona bitse de hep birlikte duman konserine gitsek :('
+      },
+      {
+        'photo': 'https://avatars.githubusercontent.com/u/34376691?v=4',
+        'name': 'Abdullah Oğuz',
+        'time': '10.50',
+        'text':
+            'UI/UX üzerine dolu dolu bir etkinlik serisi düşünüyorum. Şu an planlamasını yapıyorum. Böyle bir işte gönüllü olarak yardımcı olabilecek kişilerle konuşarak daha da güzel bir iş çıkartabiliriz. Eğer gönüllü olmak isteyen varsa benimle iletişime geçebilir'
+      }
+    ];
+    final eventCard = [
+      {
+        'type': 'Konser',
+        'name': 'No Clear Mind',
+        'time': '11 Mart',
+        'image': 'asset/image/image_concert.png'
+      },
+      {
+        'type': 'Konferans',
+        'name': 'TEDx',
+        'time': '12 Kasım',
+        'image': 'asset/image/tedx_talk.png'
+      },
+      {
+        'type': 'Spor',
+        'name': 'Anadolu Efes & Asvel Lyon',
+        'time': '23 Ekim',
+        'image': 'asset/image/anadolu_efes.png'
+      },
+    ];
+
+    final commentData = [
+      {
+        'type': 'Konser',
+        'name': 'No Clear Mind',
+        'time': '11 Mart',
+        'text':
+            'Organizasyon ve sanatçılar çok kaliteliydi, böyle konserlerin devam etmesi dileğiyle..'
+      },
+      {
+        'type': 'Konferans',
+        'name': 'TEDx',
+        'time': '12 Kasım',
+        'text':
+            'Oldukça bilgilendirici ve destekleyici bir seminer oldu. Çok teşekkkürler.'
+      },
+      {
+        'type': 'Spor',
+        'name': 'Anadolu Efes & Asvel Lyon',
+        'time': '23 Ekim',
+        'text': 'Harika bir maçtı, Yaşasın Anadolu Efes!'
+      },
+    ];
+
+    final tabs = <Widget>[
+      Tab(
+        text: 'Gönderiler',
+      ),
+      Tab(
+        text: 'Etkinlikler',
+      ),
+      Tab(
+        text: 'Yorumlar',
+      ),
+      Tab(
+        text: 'Başarılar',
+      ),
     ];
 
     return BaseView<ProfileViewModel>(
@@ -33,222 +114,287 @@ class _ProfileViewState extends State<ProfileView>
       },
       onPageBuilder: (BuildContext context, ProfileViewModel viewModel) =>
           DefaultTabController(
-        length: 6,
+        initialIndex: 0,
+        length: tabs.length,
         child: Scaffold(
-          backgroundColor: Color(0xffFFF8F6),
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(250),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: AppBar(
-                backgroundColor: Color(0xffFFF8F6),
-                elevation: 0,
-                flexibleSpace: Column(
-                  children: [
-                    Padding(
-                      padding: context.paddingMediumVertical
-                          .copyWith(bottom: context.lowValue),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              icon: Icon(Icons.arrow_back_ios),
-                              onPressed: () {}),
-                          Text(
-                            'Profil',
-                            style: context.textTheme.subtitle2.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                          Spacer(),
-                          IconButton(
-                              icon: Icon(Icons.message), onPressed: () {})
-                        ],
+          floatingActionButton: Padding(
+            padding: context.paddingNormalVertical
+                .copyWith(top: 0, bottom: context.mediaQuery.size.height * 0.1),
+            child: FloatingActionButton(
+                elevation: 8,
+                child: Icon(
+                  Icons.add,
+                  size: 27,
+                  color: context.colors.background,
+                ),
+                backgroundColor: context.colors.primary,
+                onPressed: () {}),
+          ),
+          appBar: AppBar(
+            shadowColor: Colors.transparent,
+            backgroundColor: Colors.white,
+            leading:
+                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+            actions: [IconButton(onPressed: () {}, icon: Icon(Icons.message))],
+            centerTitle: false,
+            title: Text('Profil', style: TextStyle(color: Colors.black)),
+          ),
+          backgroundColor: Colors.white,
+          body: Column(
+            children: [
+              Column(
+                children: [
+                  /*   Row(
+                    children: [
+                      IconButton(
+                          icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+                      Text(
+                        'Profil',
+                        style: context.textTheme.subtitle2.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundImage: NetworkImage(
-                                          'https://avatars.githubusercontent.com/u/34376691?v=4'),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 6,
-                              child: Container(
-                                padding: context.paddingMediumHorizontal
-                                    .copyWith(right: 0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text('Merhaba Abdullah',
-                                                style: context
-                                                    .textTheme.subtitle2),
-                                            Text('@aoguz',
-                                                style:
-                                                    context.textTheme.bodyText1)
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        TextButton(
-                                            onPressed: () {},
-                                            child: Text('Takip Et +'))
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text('15 Takip Edilen'),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Text('15 Takipçi')
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TabBar(
-                                unselectedLabelColor: Colors.black,
-                                labelColor: Colors.red,
-                                tabs: [
-                                  Tab(
-                                    text: '1st tab',
-                                  ),
-                                  Tab(
-                                    text: '2 nd tab',
+                      Spacer(),
+                      IconButton(icon: Icon(Icons.message), onPressed: () {})
+                    ],
+                  ), */
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              // color: Colors.blue,
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: NetworkImage(
+                                        'https://avatars.githubusercontent.com/u/34376691?v=4'),
                                   )
                                 ],
-                                controller: tabController,
-                                indicatorSize: TabBarIndicatorSize.tab,
                               ),
                             ),
-                            TabBarView(
-                              children: [
-                                Container(child: Center(child: Text('people'))),
-                                Text('Person')
-                              ],
-                              controller: tabController,
+                          ),
+                          Expanded(
+                            flex: 6,
+                            child: Container(
+                              // color: Colors.red,
+                              padding: context.paddingMediumHorizontal
+                                  .copyWith(right: 0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Abdullah Oğuz',
+                                              style:
+                                                  context.textTheme.subtitle2),
+                                          Text('@aoguz',
+                                              style:
+                                                  context.textTheme.bodyText1)
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      TextButton(
+                                          onPressed: () {},
+                                          child: Text('Takip Et +'))
+                                    ],
+                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                  //   children: [
+                                  //     Text('15 Takip Edilen'),
+                                  //     SizedBox(
+                                  //       width: 20,
+                                  //     ),
+                                  //     Text('15 Takipçi')
+                                  //   ],
+                                  // )
+                                ],
+                              ),
                             ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  TabBar(
+                    controller: _tabController,
+                    labelPadding: context.paddingNormalHorizontal,
+                    isScrollable: true,
+                    indicatorWeight: 0.01,
+                    onTap: (int selected) {},
+                    indicatorColor: Colors.black,
+                    labelColor: context.colors.primary,
+                    labelStyle: context.textTheme.subtitle1,
+                    unselectedLabelStyle: TextStyle(),
+                    tabs: tabs,
+                  ),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(children: [
+                  Container(
+                    height: 100,
+                    child: ListView.builder(
+                      itemCount: feedData.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(feedData[index]['photo']),
+                          ),
+                          title: Text(feedData[index]['name']),
+                          subtitle: Text(feedData[index]['text']),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                      child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: eventCard.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: context.mediaQuery.size.height * 0.2,
+                        width: context.mediaQuery.size.width * 0.8,
+                        padding: context.paddingLow,
+                        child: Stack(
+                          children: [
+                            Container(
+                              // width: context.mediaQuery.size.height * 0.25,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(eventCard[index]['image']),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              // width: context.mediaQuery.size.height * 0.25,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color(0xff111467),
+                                      Colors.transparent
+                                    ],
+                                  )),
+                            ),
+                            Container(
+                              padding: context.paddingNormalHorizontal
+                                  .copyWith(right: 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Spacer(
+                                    flex: 2,
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(right: 10),
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  context.colors.onBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(60)),
+                                          width: 4,
+                                          height: 30,
+                                        ),
+                                        Text(
+                                          eventCard[index]['type'],
+                                          style: context.textTheme.overline
+                                              .copyWith(
+                                                  fontSize: 12,
+                                                  color:
+                                                      context.colors.secondary),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      eventCard[index]['name'],
+                                      style:
+                                          context.textTheme.bodyText1.copyWith(
+                                        fontSize: 16,
+                                        color: context.colors.secondary,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      eventCard[index]['time'],
+                                      style:
+                                          context.textTheme.bodyText1.copyWith(
+                                        fontSize: 16,
+                                        color: context.colors.secondary,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
-                        )
-                      ],
+                        ),
+                      );
+                    },
+                  )),
+                  Container(
+                    child: Center(
+                      child: ListView.builder(
+                        itemCount: commentData.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Text(commentData[index]['name']),
+                                Spacer(),
+                                Text(
+                                  commentData[index]['time'],
+                                  style: context.textTheme.caption,
+                                )
+                              ],
+                            ),
+                            subtitle: Text(commentData[index]['text']),
+                          );
+                        },
+                      ),
                     ),
-                    TabBar(
-                      isScrollable: true,
-                      indicatorWeight: 0.01,
-                      indicatorColor: Colors.amber,
-                      labelColor: Color(0xff2D2727),
-                      labelStyle:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                      unselectedLabelStyle: TextStyle(),
-                      tabs: <Widget>[
-                        Tab(
-                          text: 'Tab 1',
-                        ),
-                        Tab(
-                          text: 'Tab 2',
-                        ),
-                        Tab(
-                          text: 'Tab 3',
-                        ),
-                        Tab(
-                          text: 'Tab 4',
-                        ),
-                        Tab(
-                          text: 'Tab 5',
-                        ),
-                        Tab(
-                          text: 'Tab 6',
-                        ),
-                      ],
+                  ),
+                  Container(
+                    color: Colors.red,
+                    height: 200,
+                    child: Center(
+                      child: Text(
+                        'Tab 2',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ]),
               ),
-            ),
+            ],
           ),
-          body: TabBarView(children: [
-            Container(
-              color: Colors.amber,
-              height: 100,
-              child: Center(
-                child: Text(
-                  'Tab 1',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.red,
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Tab 2',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.brown,
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Tab 3',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.deepOrange,
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Tab 4',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.blueAccent,
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Tab 5',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.deepPurple,
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Tab 6',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            )
-          ]),
         ),
       ),
     );

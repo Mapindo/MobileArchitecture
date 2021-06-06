@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
-
 import 'core/constants/app/app_constants.dart';
 import 'core/init/cache/locale_manager.dart';
 import 'core/init/lang/language_manager.dart';

@@ -31,7 +31,7 @@ class MapViewState extends State<MapView> {
           DraggableScrollableSheet(
               initialChildSize: 0.43,
               minChildSize: 0.2,
-              maxChildSize: 0.7,
+              maxChildSize: 1,
               builder: (context, scrollController) {
                 return SingleChildScrollView(
                   physics: ScrollPhysics(parent: BouncingScrollPhysics()),
