@@ -36,7 +36,6 @@ class _CustomDraggableScrollViewState extends State<CustomDraggableScrollView> {
   }
 
   bool scrollNotificationScroll(DraggableScrollableNotification value) {
-    // widget.draggableController = value;
     if (value.extent != null) {
       Provider.of<DraggableControllerNotifier>(context, listen: false)
           .changeValue(value);

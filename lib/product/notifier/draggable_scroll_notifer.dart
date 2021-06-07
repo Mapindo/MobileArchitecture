@@ -6,7 +6,7 @@ class DraggableControllerNotifier extends ChangeNotifier {
   DraggableScrollableNotification get currenValue => _currentScroll;
 
   bool get handleAnimation => _currentScroll != null
-      ? _currentScroll.extent > _currentScroll.maxExtent - .1
+      ? _currentScroll.extent > _currentScroll.maxExtent - .05
       : false;
 
   void changeValue(DraggableScrollableNotification value) {

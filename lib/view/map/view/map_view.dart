@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/components/container/random_color_container.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
+import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/draggable_scroll_view/custom_draggable_scroll_view.dart';
+import 'package:fluttermvvmtemplate/product/widget/image_slider/draggable_image_slider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MapView extends StatefulWidget {
   @override
@@ -31,10 +34,11 @@ class MapViewState extends State<MapView> {
           //   initialCameraPosition: _kGooglePlex,
           // ),
           Expanded(child: RandomColorContainer()),
+          CustomDraggableScrollImageSlider(),
           CustomDraggableScrollView(
-            initialChildSize: 0.5,
+            initialChildSize: 0.4,
             minChildSize: 0.3,
-            maxChildSize: 0.8,
+            maxChildSize: 0.7,
             // builder: (context, scrollController) {
             // return SingleChildScrollView(
             // physics: ScrollPhysics(parent: BouncingScrollPhysics()),
