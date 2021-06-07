@@ -122,7 +122,6 @@ class _SignUpState extends State<SignUp> {
           labelText: labelText,
           labelStyle: TextStyle(fontSize: 12),
           hintStyle: TextStyle(fontSize: 12),
-          
           enabledBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:

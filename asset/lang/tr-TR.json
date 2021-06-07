@@ -25,15 +25,20 @@
       "dontAccount": "Dont have account"
     },
     "home": {
-      "build": {
-        "tabbar": {
-          "tab1": "Latest",
-          "tab2": "Decorative",
-          "tab3": "Music",
-          "tab4": "Style"
-        },
-        "subTitle": "Recommended"
-      }
+      "title": "Merhaba",
+      "upcomingEvents" : "Yaklaşan etkinlikler",
+      "findEvent": "Etkinliğini bul",
+      "scrollEvent":{
+        "all": "Tümü",
+        "science": "Bilim",
+        "sport": "Spor",
+        "technology": "Teknoloji",
+        "artAndCulture": "Kültür & Sanat",
+        "history": "Tarih"
+      },
+      "suggested": "Önerilen",
+      "viewAll": "Hepsini Gör",
+      "willFriendsGo": "Arkadaşlarının Gidecekleri"
     },
     "notificaiton": {
       "notificaitons": "Bildirimler",
@@ -41,6 +46,10 @@
       "postTagged": "tagged you in a post",
       "follow":"Takip Et"
   
+    },
+    "profile" :{
+      "title": "Profil",
+      "follow": "Takip Et"
     }
   }
   

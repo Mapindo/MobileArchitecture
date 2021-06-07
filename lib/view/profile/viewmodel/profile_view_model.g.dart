@@ -24,10 +24,27 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
     });
   }
 
+  final _$isTabSelectedValueAtom =
+      Atom(name: '_ProfileViewModelBase.isTabSelectedValue');
+
+  @override
+  int get isTabSelectedValue {
+    _$isTabSelectedValueAtom.reportRead();
+    return super.isTabSelectedValue;
+  }
+
+  @override
+  set isTabSelectedValue(int value) {
+    _$isTabSelectedValueAtom.reportWrite(value, super.isTabSelectedValue, () {
+      super.isTabSelectedValue = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-tabController: ${tabController}
+tabController: ${tabController},
+isTabSelectedValue: ${isTabSelectedValue}
     ''';
   }
 }

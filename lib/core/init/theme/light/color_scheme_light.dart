@@ -20,7 +20,7 @@ class ColorSchemeLight {
   final Color fiord = Color(0xff3F4A61);
   final Color singlo = Color(0xffE56B6F);
   final Color gray = Color(0xffa5a6ae);
-  final Color lightGray = Color(0xfff7f7f7);
+  final Color lightGray = Color(0xffF6F7F9);
   final Color darkGray = Color(0xff676870);
   final Color black = Color(0xff020306);
   final Color bali_hai = Color(0xffFA4A0C);
