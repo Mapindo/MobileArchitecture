@@ -27,7 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   AnimationController _controller;
   Animation<Offset> _offsetAnimation;
 
-  int _selectedIndex = 3;
+  int _selectedIndex = 1;
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
@@ -41,9 +41,8 @@ class _BottomNavigationState extends State<BottomNavigation>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _offsetAnimation = Tween<Offset>(
@@ -63,6 +62,7 @@ class _BottomNavigationState extends State<BottomNavigation>
 
   @override
   Widget build(BuildContext context) {
+    isAnimationBottomSheet(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -135,5 +135,11 @@ class _BottomNavigationState extends State<BottomNavigation>
         ),
       ),
     );
+  }
+
+  void isAnimationBottomSheet(context) {
+    var _handleAnimation =
+        Provider.of<DraggableControllerNotifier>(context).handleAnimation;
+    _handleAnimation ? _controller.forward() : _controller.reverse();
   }
 }
