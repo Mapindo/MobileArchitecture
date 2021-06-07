@@ -30,6 +30,71 @@ class DateDiff {
       return '${_diff.inDays.toMonth}ay';
     }
   }
+
+  String get dateDayMinute {
+    String mount;
+    final dateParse = DateTime.parse(date.toString());
+
+    mount = getMountName(dateParse.month);
+
+    final formattedDate =
+        '${dateParse.day} ${mount} / ${dateParse.hour}.${dateParse.minute} ';
+    return formattedDate;
+  }
+
+  String get getDayMount {
+    String mount;
+    final dateParse = DateTime.parse(date.toString());
+
+    mount = getMountName(dateParse.month);
+
+    final formattedDate = '${dateParse.day} ${mount}';
+    return formattedDate;
+  }
+}
+
+String getMountName(int mount) {
+  String mountName;
+  switch (mount) {
+    case 1:
+      mountName = 'Ocak';
+      break;
+    case 2:
+      mountName = 'Şubat';
+      break;
+    case 3:
+      mountName = 'Mart';
+      break;
+    case 4:
+      mountName = 'Nisan';
+      break;
+    case 5:
+      mountName = 'Mayıs';
+      break;
+    case 6:
+      mountName = 'Haziran';
+      break;
+    case 7:
+      mountName = 'Temmuz';
+      break;
+    case 8:
+      mountName = 'Ağustos';
+      break;
+    case 9:
+      mountName = 'Eylül';
+      break;
+    case 10:
+      mountName = 'Ekim';
+      break;
+    case 11:
+      mountName = 'Kasım';
+      break;
+    case 12:
+      mountName = 'Aralık';
+      break;
+    default:
+  }
+  return mountName;
 }
 
 extension TimeSwitch on num {

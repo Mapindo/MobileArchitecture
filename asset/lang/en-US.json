@@ -25,21 +25,31 @@
     "dontAccount": "Dont have account"
   },
   "home": {
-    "build": {
-      "tabbar": {
-        "tab1": "Latest",
-        "tab2": "Decorative",
-        "tab3": "Music",
-        "tab4": "Style"
-      },
-      "subTitle": "Recommended"
-    }
+    "title": "Hello",
+    "upcomingEvents" : "Upcoming Events",
+    "findEvent": "Find Event",
+    "scrollEvent":{
+      "all": "All",
+      "science": "Science",
+      "sport": "Spor",
+      "technology": "Technology",
+      "artAndCulture": "Culture & Art",
+      "history": "History"
+    },
+    "suggested": "Recommended",
+    "viewAll": "View All",
+    "willFriendsGo": "Arkadaşlarının Gidecekleri"
   },
   "notificaiton": {
-    "notificaitons": "Notificaitons",
+    "notificaitons": "Notifications",
     "following": "started following",
     "postTagged": "tagged you in a post",
     "follow":"Follow"
 
+  },
+  "profile" :{
+    "title": "Profile",
+    "follow": "Follow"
   }
 }
+
