@@ -1,8 +1,10 @@
+import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import '../navigation/navigation_service.dart';
 import 'theme_notifer.dart';
+import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/draggable_scroll_view/custom_draggable_scroll_view.dart';
 
 class ApplicationProvider {
   static ApplicationProvider _instance;
@@ -20,5 +22,9 @@ class ApplicationProvider {
     ),
     Provider.value(value: NavigationService.instance)
   ];
-  List<SingleChildWidget> uiChangesItems = [];
+  List<SingleChildWidget> uiChangesItems = [
+    ChangeNotifierProvider(
+      create: (context) => DraggableControllerNotifier(),
+    )
+  ];
 }
