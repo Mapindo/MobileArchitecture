@@ -22,7 +22,10 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleManager.prefrencesInit();
   runApp(MultiProvider(
-    providers: [...ApplicationProvider.instance.dependItems],
+    providers: [
+      ...ApplicationProvider.instance.dependItems,
+      ...ApplicationProvider.instance.uiChangesItems
+    ],
     child: EasyLocalization(
         child: MyApp(),
         supportedLocales: LanguageManager.instance.supportedLocales,
