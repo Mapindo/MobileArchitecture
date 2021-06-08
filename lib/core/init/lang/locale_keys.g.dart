@@ -42,5 +42,9 @@ abstract class  LocaleKeys {
   static const profile_title = 'profile.title';
   static const profile_follow = 'profile.follow';
   static const profile = 'profile';
+  static const sendFeed_cancel = 'sendFeed.cancel';
+  static const sendFeed_send = 'sendFeed.send';
+  static const sendFeed_shareYourThought = 'sendFeed.shareYourThought';
+  static const sendFeed = 'sendFeed';
 
 }
