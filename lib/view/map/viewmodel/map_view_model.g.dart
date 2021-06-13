@@ -9,25 +9,25 @@ part of 'map_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MapViewModel on MapViewBase, Store {
-  final _$dogIconAtom = Atom(name: 'MapViewBase.dogIcon');
+  final _$eventIconAtom = Atom(name: 'MapViewBase.eventIcon');
 
   @override
-  BitmapDescriptor get dogIcon {
-    _$dogIconAtom.reportRead();
-    return super.dogIcon;
+  BitmapDescriptor get eventIcon {
+    _$eventIconAtom.reportRead();
+    return super.eventIcon;
   }
 
   @override
-  set dogIcon(BitmapDescriptor value) {
-    _$dogIconAtom.reportWrite(value, super.dogIcon, () {
-      super.dogIcon = value;
+  set eventIcon(BitmapDescriptor value) {
+    _$eventIconAtom.reportWrite(value, super.eventIcon, () {
+      super.eventIcon = value;
     });
   }
 
   @override
   String toString() {
     return '''
-dogIcon: ${dogIcon}
+eventIcon: ${eventIcon}
     ''';
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
 import 'package:fluttermvvmtemplate/core/components/container/random_color_container.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
@@ -15,6 +16,8 @@ class MapView extends StatefulWidget {
 }
 
 class MapViewState extends State<MapView> {
+  BitmapDescriptor eventIcon;
+
   @override
   Widget build(BuildContext context) {
     return BaseView(
@@ -26,12 +29,15 @@ class MapViewState extends State<MapView> {
       onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
         body: Stack(
           children: [
-            GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: value.kLake,
-              zoomControlsEnabled: false,
-              markers: createMarker(value),
-            )
+            Observer(builder: (_) {
+              return GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: value.kLake,
+                zoomControlsEnabled: false,
+                onMapCreated: (map) => value.mapsInit(map),
+                markers: createMarker(value),
+              );
+            })
           ],
         ),
       ),
@@ -44,8 +50,8 @@ class MapViewState extends State<MapView> {
           (e) => Marker(
             markerId: MarkerId(e.hashCode.toString()),
             position: LatLng(e.location.latitude, e.location.longitude),
-            // icon: value.dogIcon,
-            zIndex: 10,
+            icon: value.eventIcon ?? BitmapDescriptor.defaultMarker,
+            zIndex: 5,
             infoWindow: InfoWindow(title: 'Test'),
           ),
         )
