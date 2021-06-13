@@ -14,7 +14,7 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   // @override
   // void initState() {
@@ -256,11 +256,11 @@ class _ProfileViewState extends State<ProfileView>
                         return ListTile(
                           leading: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(feedData[index]['photo']),
+                                NetworkImage(feedData[index]['photo']!),
                           ),
                           title: Row(
                             children: [
-                              AutoSizeText(feedData[index]['name'],
+                              AutoSizeText(feedData[index]['name']!,
                                   style: context.textTheme.subtitle2),
                               Spacer(),
                               AutoSizeText(
@@ -270,7 +270,7 @@ class _ProfileViewState extends State<ProfileView>
                               )
                             ],
                           ),
-                          subtitle: AutoSizeText(feedData[index]['text']),
+                          subtitle: AutoSizeText(feedData[index]['text']!),
                         );
                       },
                     ),
@@ -295,7 +295,7 @@ class _ProfileViewState extends State<ProfileView>
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image:
-                                        AssetImage(eventCard[index]['image']),
+                                        AssetImage(eventCard[index]['image']!),
                                   ),
                                 ),
                               ),
@@ -338,8 +338,8 @@ class _ProfileViewState extends State<ProfileView>
                                             height: 30,
                                           ),
                                           AutoSizeText(
-                                            eventCard[index]['type'],
-                                            style: context.textTheme.overline
+                                            eventCard[index]['type']!,
+                                            style: context.textTheme.overline!
                                                 .copyWith(
                                                     color: context
                                                         .colors.secondary),
@@ -353,8 +353,8 @@ class _ProfileViewState extends State<ProfileView>
                                     ),
                                     Expanded(
                                       child: AutoSizeText(
-                                        eventCard[index]['name'],
-                                        style: context.textTheme.bodyText1
+                                        eventCard[index]['name']!,
+                                        style: context.textTheme.bodyText1!
                                             .copyWith(
                                           color: context.colors.secondary,
                                           fontWeight: FontWeight.w700,
@@ -366,9 +366,11 @@ class _ProfileViewState extends State<ProfileView>
                                         padding: context.paddingLowVertical),
                                     Expanded(
                                       child: AutoSizeText(
-                                        DateDiff(date: eventCard[index]['time'])
+                                        DateDiff(
+                                                date: eventCard[index]['time'],
+                                                dateDiff: '')
                                             .getDayMount,
-                                        style: context.textTheme.bodyText1
+                                        style: context.textTheme.bodyText1!
                                             .copyWith(
                                           fontSize: 13,
                                           color: context.colors.secondary,
@@ -397,7 +399,7 @@ class _ProfileViewState extends State<ProfileView>
                           return ListTile(
                             title: Row(
                               children: [
-                                AutoSizeText(commentData[index]['name'],
+                                AutoSizeText(commentData[index]['name']!,
                                     style: context.textTheme.subtitle2),
                                 Spacer(),
                                 AutoSizeText(
@@ -407,7 +409,7 @@ class _ProfileViewState extends State<ProfileView>
                                 ),
                               ],
                             ),
-                            subtitle: AutoSizeText(commentData[index]['text']),
+                            subtitle: AutoSizeText(commentData[index]['text']!),
                           );
                         },
                       ),

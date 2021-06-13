@@ -14,7 +14,7 @@ import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 
 class BottomNavigation extends StatefulWidget {
   BottomNavigation({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -25,8 +25,8 @@ class _BottomNavigationState extends State<BottomNavigation>
     with SingleTickerProviderStateMixin {
   final color = ColorSchemeLight.instance;
 
-  AnimationController _controller;
-  Animation<Offset> _offsetAnimation;
+  late AnimationController _controller;
+  late Animation<Offset> _offsetAnimation;
 
   int _selectedIndex = 1;
 
@@ -85,9 +85,10 @@ class _BottomNavigationState extends State<BottomNavigation>
     return SlideTransition(
       position: _offsetAnimation,
       child: FloatingActionButton(
+          heroTag: 'c',
           child: SvgPicture.asset('asset/svg/Network.svg'),
           backgroundColor:
-              _selectedIndex == 2 ? Colors.indigo[400] : color.slate_gray,
+              _selectedIndex == 2 ? Colors.indigo[400] : color!.slate_gray,
           elevation: 1,
           onPressed: () {
             _onItemTapped(2);
@@ -124,7 +125,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   }
 
   Expanded bottomNavigationBarItem(BuildContext context, String icon, int index,
-      {Color color}) {
+      {Color? color}) {
     return Expanded(
       child: GestureDetector(
         onTap: () {

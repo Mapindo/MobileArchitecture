@@ -8,13 +8,13 @@ part of 'notificaiton_model.dart';
 
 Notificaiton _$NotificaitonFromJson(Map<String, dynamic> json) {
   return Notificaiton(
-    title: json['title'] as String,
-    body: json['body'] as String,
-    token: json['token'] as String,
-    date: json['date'] as String,
-    image: json['image'] as String,
-    status: json['status'] as int,
-    isReady: json['isReady'] as bool,
+    title: json['title'] as String?,
+    body: json['body'] as String?,
+    token: json['token'] as String?,
+    date: json['date'] as String?,
+    image: json['image'] as String?,
+    status: json['status'] as int?,
+    isReady: json['isReady'] as bool?,
   );
 }
 

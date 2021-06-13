@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../../extension/string_extension.dart';
 
 class AutoLocaleText extends StatelessWidget {
-  final String value;
-  final TextAlign textAlign;
-  final TextStyle style;
-  final double minFontSize;
+  final String? value;
+  final TextAlign? textAlign;
+  final TextStyle? style;
+  final double? minFontSize;
 
   const AutoLocaleText(
-      {Key key,
-      @required this.value,
+      {Key? key,
+      required this.value,
       this.textAlign,
       this.style,
       this.minFontSize})
@@ -19,7 +19,7 @@ class AutoLocaleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
-      value.locale,
+      value!.locale,
       minFontSize: minFontSize ?? 12,
       textAlign: textAlign,
       style: style,

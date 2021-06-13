@@ -50,6 +50,12 @@
   "profile" :{
     "title": "Profile",
     "follow": "Follow"
+  },
+  "sendFeed": {
+    "cancel":"Cancel",
+    "send": "Send",
+    "shareYourThought" : "Share your thought.."
   }
+
 }
 

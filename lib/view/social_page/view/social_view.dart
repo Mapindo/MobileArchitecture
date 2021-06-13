@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/helpers/dateDiff.dart';
+import 'package:fluttermvvmtemplate/view/send_feed_view/view/send_feed_view.dart';
 import 'package:fluttermvvmtemplate/view/social_page/view_model/social_view_model.dart';
 
 class SocialView extends StatelessWidget {
-  const SocialView({Key key}) : super(key: key);
+  const SocialView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,7 @@ class SocialView extends StatelessWidget {
     return BaseView<SocialViewModel>(
       viewModel: SocialViewModel(),
       onModelReady: (model) {
+        model.init();
         model.setContext(context);
       },
       onPageBuilder: (BuildContext context, SocialViewModel value) => Scaffold(
@@ -82,8 +84,12 @@ class SocialView extends StatelessWidget {
           padding: context.paddingNormalVertical
               .copyWith(top: 0, bottom: context.mediaQuery.size.height * 0.1),
           child: FloatingActionButton(
+              heroTag: 'a',
               backgroundColor: context.colors.primary,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SendFeedView()));
+              },
               child: Icon(
                 Icons.add,
                 color: context.colors.background,
@@ -154,7 +160,7 @@ class SocialView extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 28,
                           backgroundImage:
-                              NetworkImage(storyFeed[index]['photo']),
+                              NetworkImage(storyFeed[index]['photo']!),
                         ),
                       );
                     },
@@ -176,11 +182,11 @@ class SocialView extends StatelessWidget {
                       return ListTile(
                         leading: CircleAvatar(
                           backgroundImage:
-                              NetworkImage(feedData[index]['photo']),
+                              NetworkImage(feedData[index]['photo']!),
                         ),
                         title: Row(
                           children: [
-                            Text(feedData[index]['name'],
+                            Text(feedData[index]['name']!,
                                 style: context.textTheme.subtitle2),
                             Spacer(),
                             Text(
@@ -189,7 +195,7 @@ class SocialView extends StatelessWidget {
                                 style: context.textTheme.caption)
                           ],
                         ),
-                        subtitle: Text(feedData[index]['text']),
+                        subtitle: Text(feedData[index]['text']!),
                       );
                     },
                   ),

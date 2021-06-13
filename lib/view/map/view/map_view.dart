@@ -29,11 +29,11 @@ class MapViewState extends State<MapView> {
     return Scaffold(
       body: Stack(
         children: [
-          // GoogleMap(
-          //   mapType: MapType.normal,
-          //   initialCameraPosition: _kGooglePlex,
-          // ),
-          Expanded(child: RandomColorContainer()),
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: _kGooglePlex,
+          ),
+          // Expanded(child: RandomColorContainer()),
           CustomDraggableScrollImageSlider(),
           CustomDraggableScrollView(
             initialChildSize: 0.4,
@@ -85,7 +85,7 @@ class MapViewState extends State<MapView> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           hintText: 'Etkinliğini Bul',
-                          hintStyle: context.textTheme.subtitle2
+                          hintStyle: context.textTheme.subtitle2!
                               .copyWith(color: context.colors.onSecondary)),
                     ),
                     Container(
@@ -95,14 +95,14 @@ class MapViewState extends State<MapView> {
                           ListTile(
                             title: Text(
                               'Teknoloji',
-                              style: context.textTheme.bodyText1
+                              style: context.textTheme.bodyText1!
                                   .copyWith(color: context.colors.primary),
                             ),
                           ),
                           ListTile(
                             title: Text(
                               'Devfest Denizli 2021',
-                              style: context.textTheme.headline6
+                              style: context.textTheme.headline6!
                                   .copyWith(color: Color(0xff355070)),
                             ),
                             trailing: Row(
@@ -132,7 +132,7 @@ class MapViewState extends State<MapView> {
                             ),
                             title: Text(
                               'GDG Denizli',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                   fontWeight: FontWeight.bold,
                                   fontSize: context.width * .05,
                                   color: Color(0xff355070)),
@@ -173,13 +173,13 @@ class MapViewState extends State<MapView> {
                             ),
                             title: Text(
                               'Pazar, 6 Mart 2021',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                 color: Color(0xff355070),
                               ),
                             ),
                             subtitle: Text(
                               '10.00 - 17:00',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                 color: Colors.grey[400],
                               ),
                             ),
@@ -195,13 +195,13 @@ class MapViewState extends State<MapView> {
                             ),
                             title: Text(
                               'Nihat Zeybekçi Kongre ve Kültür Merkezi',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                 color: Color(0xff355070),
                               ),
                             ),
                             subtitle: Text(
                               'İncilipınar, 20150 Pamukkale/Denizli',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                 color: Colors.grey[400],
                               ),
                             ),
@@ -209,7 +209,7 @@ class MapViewState extends State<MapView> {
                           ListTile(
                             title: Text(
                               'Etkinlik hakkında :',
-                              style: context.textTheme.bodyText1.copyWith(
+                              style: context.textTheme.bodyText1!.copyWith(
                                 color: Color(0xff355070),
                               ),
                             ),
