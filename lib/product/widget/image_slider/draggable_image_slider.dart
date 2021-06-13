@@ -11,13 +11,16 @@ class CustomDraggableScrollImageSlider extends StatelessWidget {
     var animationController = Provider.of<DraggableControllerNotifier>(context);
     return AnimatedContainer(
       duration: context.lowDuration,
+      width: double.infinity,
       height: animationController.handleAnimation
           ? context.height * (1 - animationController.currenValue.maxExtent)
           : 0,
-      width: double.infinity,
-      color: Colors.green,
-      child: FlutterLogo(
-        size: 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+              'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
