@@ -18,21 +18,37 @@ class MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-        viewModel: MapViewModel(),
-        onModelReady: (model) {
-          model.setContext(context);
-          model.init();
-        },
-        onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
-              body: Stack(
-                children: [
-                  GoogleMap(
-                    mapType: MapType.normal,
-                    initialCameraPosition: value.kLake,
-                    zoomControlsEnabled: false,
-                  )
-                ],
-              ),
-            ));
+      viewModel: MapViewModel(),
+      onModelReady: (model) {
+        model.setContext(context);
+        model.init();
+      },
+      onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: value.kLake,
+              zoomControlsEnabled: false,
+              markers: createMarker(value),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Set<Marker> createMarker(MapViewModel value) {
+    return value.mapEventList
+        .map(
+          (e) => Marker(
+            markerId: MarkerId(e.hashCode.toString()),
+            position: LatLng(e.location.latitude, e.location.longitude),
+            // icon: value.dogIcon,
+            zIndex: 10,
+            infoWindow: InfoWindow(title: 'Test'),
+          ),
+        )
+        .toSet();
   }
 }

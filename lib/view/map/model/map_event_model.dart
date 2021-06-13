@@ -68,6 +68,10 @@ class Location extends INetworkModel<Location> {
     return _$LocationFromJson(json);
   }
 
+  factory Location.fromJson(Map<String, Object> json) {
+    return _$LocationFromJson(json);
+  }
+
   @override
   Map<String, Object> toJson() {
     return _$LocationToJson(this);
