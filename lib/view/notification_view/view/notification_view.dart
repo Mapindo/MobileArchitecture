@@ -48,7 +48,7 @@ List<Notificaiton> notify = [
 DateTime dateNow = DateTime.now();
 
 class NotificationView extends StatelessWidget {
-  const NotificationView({Key key}) : super(key: key);
+  const NotificationView({Key? key}) : super(key: key);
   final empty = 'empty';
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class NotificationView extends StatelessWidget {
         title: Text(
           LocaleKeys.notificaiton_notificaitons.locale,
           style:
-              context.textTheme.headline6.copyWith(fontWeight: FontWeight.w500),
+              context.textTheme.headline6!.copyWith(fontWeight: FontWeight.w500),
         ),
       ),
       body: Container(

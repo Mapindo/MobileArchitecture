@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
@@ -5,19 +8,21 @@ import 'package:fluttermvvmtemplate/core/components/text/auto_locale_text.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/core/init/lang/locale_keys.g.dart';
 import 'package:fluttermvvmtemplate/view/send_feed_view/viewmodel/send_feed_viewmodel.dart';
+import 'package:images_picker/images_picker.dart';
 import '../../../core/extension/string_extension.dart';
 
 class SendFeedView extends StatelessWidget {
-  const SendFeedView({Key key}) : super(key: key);
+  const SendFeedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var res;
     return BaseView<SendFeedViewModel>(
       viewModel: SendFeedViewModel(),
       onModelReady: (model) {
         model.setContext(context);
       },
-      onPageBuilder: (BuildContext context, SendFeedViewModel value) =>
+      onPageBuilder: (BuildContext context, SendFeedViewModel viewModel) =>
           Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -28,10 +33,15 @@ class SendFeedView extends StatelessWidget {
                 onTap: () {
                   print('denemee');
                 },
-                child: AutoLocaleText(
-                  value: LocaleKeys.sendFeed_cancel.locale,
-                  style: context.textTheme.button
-                      .copyWith(color: context.colors.primary),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: AutoLocaleText(
+                    value: LocaleKeys.sendFeed_cancel.locale,
+                    style: context.textTheme.button!
+                        .copyWith(color: context.colors.primary),
+                  ),
                 )),
           ),
           actions: [
@@ -51,7 +61,7 @@ class SendFeedView extends StatelessWidget {
                     padding: context.paddingNormalHorizontal,
                     child: AutoLocaleText(
                       value: LocaleKeys.sendFeed_send.locale,
-                      style: context.textTheme.button
+                      style: context.textTheme.button!
                           .copyWith(color: context.colors.background),
                     ),
                   )),
@@ -59,10 +69,14 @@ class SendFeedView extends StatelessWidget {
           ],
         ),
         body: Container(
-            color: context.colors.background,
-            child: Column(
-              children: [
-                Row(
+          color: context.colors.background,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                flex: 14,
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
@@ -79,6 +93,8 @@ class SendFeedView extends StatelessWidget {
                     Expanded(
                         flex: 10,
                         child: TextFormField(
+                          autofocus: true,
+                          focusNode: viewModel.focus,
                           maxLines: 20,
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -94,9 +110,77 @@ class SendFeedView extends StatelessWidget {
                                   LocaleKeys.sendFeed_shareYourThought.locale),
                         ))
                   ],
-                )
-              ],
-            )),
+                ),
+              ),
+              res ??
+                  Container(
+                    color: Colors.red,
+                  ),
+              Container(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: context.paddingLowHorizontal,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: context.mediaQuery.size.height * 0.020),
+                        ),
+                        backgroundColor:
+                            MaterialStateProperty.all(context.colors.primary),
+                      ),
+                      child: Icon(Icons.camera_enhance,
+                          color: context.colors.background),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext bc) {
+                              return SafeArea(
+                                child: Container(
+                                  // ignore: unnecessary_new
+                                  child: new Wrap(
+                                    children: <Widget>[
+                                      ListTile(
+                                          leading: Icon(Icons.photo_library),
+                                          title: Text('Photo Library'),
+                                          onTap: () async {
+                                            res = await ImagesPicker.pick(
+                                                pickType: PickType.all,
+                                                gif: true,
+                                                quality: 0.8,
+                                                maxSize: 500
+                                                // record video max time
+                                                );
+                                          }),
+                                      ListTile(
+                                        leading: Icon(Icons.photo_camera),
+                                        title: Text('Camera'),
+                                        onTap: () {
+                                          //  :
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      }),
+                ),
+              ),
+              Spacer(
+                flex: 13,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

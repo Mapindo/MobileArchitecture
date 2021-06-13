@@ -38,7 +38,7 @@ class SelectPhotoView extends SelectPhotoViewModel {
 
   Text h1text() {
     return Text("Profil fotoğrafını seç",
-        style: context.textTheme.headline4.copyWith(color: Colors.black));
+        style: context.textTheme.headline4!.copyWith(color: Colors.black));
   }
 
   Column textColumn() {

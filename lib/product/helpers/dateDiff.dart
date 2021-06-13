@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class DateDiff {
-  final String date;
-  final String dateDiff;
-  DateTime firstDate;
+  final String? date;
+  final String? dateDiff;
+  late DateTime firstDate;
   DateDiff({
     this.date,
-    @required this.dateDiff,
+    required this.dateDiff,
   }) {
     firstDate = date != null
-        ? DateTime.parse(date).toLocal()
+        ? DateTime.parse(date!).toLocal()
         : DateTime.now().toLocal();
   }
 
-  DateTime get _secondDate => DateTime.parse(dateDiff);
+  DateTime get _secondDate => DateTime.parse(dateDiff!);
 
   Duration get _diff => firstDate.difference(_secondDate);
 
@@ -32,7 +32,7 @@ class DateDiff {
   }
 
   String get dateDayMinute {
-    String mount;
+    String? mount;
     final dateParse = DateTime.parse(date.toString());
 
     mount = getMountName(dateParse.month);
@@ -43,7 +43,7 @@ class DateDiff {
   }
 
   String get getDayMount {
-    String mount;
+    String? mount;
     final dateParse = DateTime.parse(date.toString());
 
     mount = getMountName(dateParse.month);
@@ -53,8 +53,8 @@ class DateDiff {
   }
 }
 
-String getMountName(int mount) {
-  String mountName;
+String? getMountName(int mount) {
+  String? mountName;
   switch (mount) {
     case 1:
       mountName = 'Ocak';
@@ -98,7 +98,7 @@ String getMountName(int mount) {
 }
 
 extension TimeSwitch on num {
-  int get toDay => this * 24;
+  int get toDay => this * 24 as int;
   int get toWeek => this ~/ 7;
   int get toMonth => this ~/ 30;
 }

@@ -5,8 +5,8 @@ import 'app_theme.dart';
 import 'light/light_theme_interface.dart';
 
 class AppThemeLight extends AppTheme with ILightTheme {
-  static AppThemeLight _instance;
-  static AppThemeLight get instance {
+  static AppThemeLight? _instance;
+  static AppThemeLight? get instance {
     if (_instance == null) _instance = AppThemeLight._init();
     return _instance;
   }
@@ -40,7 +40,7 @@ class AppThemeLight extends AppTheme with ILightTheme {
     return TabBarTheme(
       labelPadding: insets.lowPaddingAll,
       labelColor: _appColorScheme.onSecondary,
-      labelStyle: textThemeLight.headline5,
+      labelStyle: textThemeLight!.headline5,
       unselectedLabelColor: _appColorScheme.onSecondary.withOpacity(0.2),
       // unselectedLabelStyle: textThemeLight.headline4.copyWith(color: colorSchemeLight.red),
     );
@@ -48,33 +48,33 @@ class AppThemeLight extends AppTheme with ILightTheme {
 
   TextTheme textTheme() {
     return ThemeData.light().textTheme.copyWith(
-        headline1: textThemeLight.headline1,
-        headline2: textThemeLight.headline2,
-        headline3: textThemeLight.headline3,
-        headline4: textThemeLight.headline4,
-        headline5: textThemeLight.headline5,
-        headline6: textThemeLight.headline6,
-        subtitle1: textThemeLight.subtitle1,
-        subtitle2: textThemeLight.subtitle2,
-        caption: textThemeLight.caption,
-        button: textThemeLight.button,
-        bodyText1: textThemeLight.bodyText1,
-        overline: textThemeLight.overlinebld);
+        headline1: textThemeLight!.headline1,
+        headline2: textThemeLight!.headline2,
+        headline3: textThemeLight!.headline3,
+        headline4: textThemeLight!.headline4,
+        headline5: textThemeLight!.headline5,
+        headline6: textThemeLight!.headline6,
+        subtitle1: textThemeLight!.subtitle1,
+        subtitle2: textThemeLight!.subtitle2,
+        caption: textThemeLight!.caption,
+        button: textThemeLight!.button,
+        bodyText1: textThemeLight!.bodyText1,
+        overline: textThemeLight!.overlinebld);
   }
 
   ColorScheme get _appColorScheme {
     return ColorScheme(
-      primary: colorSchemeLight.cornflower_blue,
-      primaryVariant: colorSchemeLight.ebony_clay,
+      primary: colorSchemeLight!.cornflower_blue,
+      primaryVariant: colorSchemeLight!.ebony_clay,
       secondary: Colors.white,
-      secondaryVariant: colorSchemeLight.royal_blue,
-      surface: colorSchemeLight.blue,
-      background: colorSchemeLight.athens_gray,
-      error: colorSchemeLight.singlo,
-      onPrimary: colorSchemeLight.ebony_clay,
-      onSecondary: colorSchemeLight.slate_gray,
-      onSurface: colorSchemeLight.fiord,
-      onBackground: colorSchemeLight.bali_hai,
+      secondaryVariant: colorSchemeLight!.royal_blue,
+      surface: colorSchemeLight!.blue,
+      background: colorSchemeLight!.athens_gray,
+      error: colorSchemeLight!.singlo,
+      onPrimary: colorSchemeLight!.ebony_clay,
+      onSecondary: colorSchemeLight!.slate_gray,
+      onSurface: colorSchemeLight!.fiord,
+      onBackground: colorSchemeLight!.bali_hai,
       onError: Color(0xffffc93c),
       brightness: Brightness.light,
     );

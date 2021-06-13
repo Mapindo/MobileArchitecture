@@ -40,14 +40,14 @@ class EventDetailView extends StatelessWidget {
                       ListTile(
                         title: Text(
                           'Teknoloji',
-                          style: context.textTheme.bodyText1
+                          style: context.textTheme.bodyText1!
                               .copyWith(color: context.colors.primary),
                         ),
                       ),
                       ListTile(
                         title: Text(
                           'Devfest Denizli 2021',
-                          style: context.textTheme.headline6
+                          style: context.textTheme.headline6!
                               .copyWith(color: Color(0xff355070)),
                         ),
                         trailing: Row(
@@ -77,7 +77,7 @@ class EventDetailView extends StatelessWidget {
                         ),
                         title: Text(
                           'GDG Denizli',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                               fontWeight: FontWeight.bold,
                               fontSize: context.width * .05,
                               color: Color(0xff355070)),
@@ -116,13 +116,13 @@ class EventDetailView extends StatelessWidget {
                         ),
                         title: Text(
                           'Pazar, 6 Mart 2021',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                             color: Color(0xff355070),
                           ),
                         ),
                         subtitle: Text(
                           '10.00 - 17:00',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                             color: Colors.grey[400],
                           ),
                         ),
@@ -138,13 +138,13 @@ class EventDetailView extends StatelessWidget {
                         ),
                         title: Text(
                           'Nihat Zeybekçi Kongre ve Kültür Merkezi',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                             color: Color(0xff355070),
                           ),
                         ),
                         subtitle: Text(
                           'İncilipınar, 20150 Pamukkale/Denizli',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                             color: Colors.grey[400],
                           ),
                         ),
@@ -152,7 +152,7 @@ class EventDetailView extends StatelessWidget {
                       ListTile(
                         title: Text(
                           'Etkinlik hakkında :',
-                          style: context.textTheme.bodyText1.copyWith(
+                          style: context.textTheme.bodyText1!.copyWith(
                             color: Color(0xff355070),
                           ),
                         ),

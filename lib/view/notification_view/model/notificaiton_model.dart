@@ -4,13 +4,13 @@ part 'notificaiton_model.g.dart';
 
 @JsonSerializable()
 class Notificaiton extends INetworkModel<Notificaiton> {
-  String title;
-  String body;
-  String token;
-  String date;
-  String image;
-  int status;
-  bool isReady;
+  String? title;
+  String? body;
+  String? token;
+  String? date;
+  String? image;
+  int? status;
+  bool? isReady;
 
   Notificaiton({
     this.title,
@@ -23,7 +23,7 @@ class Notificaiton extends INetworkModel<Notificaiton> {
   });
 
   @override
-  Notificaiton fromJson(Map<String, Object> json) {
+  Notificaiton fromJson(Map<String, dynamic> json) {
     return _$NotificaitonFromJson(json);
   }
 

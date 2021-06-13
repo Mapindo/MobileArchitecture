@@ -7,10 +7,10 @@ class CustomDraggableScrollView extends StatefulWidget {
   final double initialChildSize;
   final double minChildSize;
   final double maxChildSize;
-  DraggableScrollableNotification draggableController;
+  DraggableScrollableNotification? draggableController;
   CustomDraggableScrollView({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.initialChildSize = 0.6,
     this.minChildSize = 0.2,
     this.maxChildSize = 0.5,
@@ -36,11 +36,9 @@ class _CustomDraggableScrollViewState extends State<CustomDraggableScrollView> {
   }
 
   bool scrollNotificationScroll(DraggableScrollableNotification value) {
-    if (value.extent != null) {
-      Provider.of<DraggableControllerNotifier>(context, listen: false)
-          .changeValue(value);
-      return false;
-    }
+    Provider.of<DraggableControllerNotifier>(context, listen: false)
+        .changeValue(value);
+    return false;
   }
 
   SingleChildScrollView singleChildScrollView(

@@ -18,17 +18,18 @@ import 'core/init/navigation/navigation_service.dart';
 import 'core/init/notifier/provider_list.dart';
 import 'core/init/notifier/theme_notifer.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocaleManager.prefrencesInit();
+  await LocaleManager.prefrencesInit();
+  await EasyLocalization.ensureInitialized();
   runApp(MultiProvider(
     providers: [
-      ...ApplicationProvider.instance.dependItems,
-      ...ApplicationProvider.instance.uiChangesItems
+      ...ApplicationProvider.instance!.dependItems,
+      ...ApplicationProvider.instance!.uiChangesItems
     ],
     child: EasyLocalization(
         child: MyApp(),
-        supportedLocales: LanguageManager.instance.supportedLocales,
+        supportedLocales: LanguageManager.instance!.supportedLocales,
         path: ApplicationConstants.LANG_ASSET_PATH),
   ));
 }
@@ -40,7 +41,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
       // home: OnBoardingPage(),
-      home: BottomNavigation(),
+      home: Container(
+          color: Color(0xffF7F8FA),
+          child: SafeArea(bottom: false, child: BottomNavigation())),
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
     );
