@@ -7,6 +7,8 @@ import 'package:fluttermvvmtemplate/view/map/model/map_event_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:ui' as ui;
+
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 part 'map_view_model.g.dart';
 
 class MapViewModel = MapViewBase with _$MapViewModel;
@@ -15,6 +17,7 @@ abstract class MapViewBase with Store, BaseViewModel {
   @override
   BuildContext context;
   GoogleMapController controller;
+  PanelController panelController;
   @observable
   BitmapDescriptor eventIcon;
 
@@ -23,6 +26,7 @@ abstract class MapViewBase with Store, BaseViewModel {
   void init() {
     // _throttleStringHelper = ThrottleStringHelper();
     // _fetchAllUser();
+    panelController = PanelController();
   }
 
 //example markers
@@ -39,6 +43,12 @@ abstract class MapViewBase with Store, BaseViewModel {
   //   controller.animateCamera(
   //       CameraUpdate.newLatLng(AppConstant.TURKEY_CENTER_LAT_LONG));
   // }
+
+  void markerOnTap(value) {
+    print(value);
+    panelController.animatePanelToSnapPoint(
+        curve: Curves.easeInOutExpo, duration: Duration(milliseconds: 700));
+  }
 
   Future<void> mapsInit(GoogleMapController controller) async {
     this.controller = controller;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
+import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 import 'package:fluttermvvmtemplate/view/map/view/map_view.dart';
 import 'package:fluttermvvmtemplate/view/notification_view/view/notification_view.dart';
@@ -63,7 +63,7 @@ class _BottomNavigationState extends State<BottomNavigation>
 
   @override
   Widget build(BuildContext context) {
-    isAnimationBottomSheet(context);
+    // isAnimationBottomSheet(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -138,9 +138,9 @@ class _BottomNavigationState extends State<BottomNavigation>
     );
   }
 
-  void isAnimationBottomSheet(context) {
-    var _handleAnimation =
-        Provider.of<DraggableControllerNotifier>(context).handleAnimation;
-    _handleAnimation ? _controller.forward() : _controller.reverse();
-  }
+  // void isAnimationBottomSheet(context) {
+  //   var _handleAnimation =
+  //       Provider.of<DraggableControllerNotifier>(context).handleAnimation;
+  //   _handleAnimation ? _controller.forward() : _controller.reverse();
+  // }
 }

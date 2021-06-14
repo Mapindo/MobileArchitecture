@@ -1,4 +1,4 @@
-import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
+import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -23,8 +23,8 @@ class ApplicationProvider {
     Provider.value(value: NavigationService.instance)
   ];
   List<SingleChildWidget> uiChangesItems = [
-    ChangeNotifierProvider(
-      create: (context) => DraggableControllerNotifier(),
-    )
+    // ChangeNotifierProvider(
+    // create: (context) => DraggableControllerNotifier(),
+    // )
   ];
 }

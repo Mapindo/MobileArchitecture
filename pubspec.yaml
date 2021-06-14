@@ -29,9 +29,10 @@ dependencies:
   dio: ^3.0.9
   easy_localization: ^2.3.2
   flutter_mobx: ^1.1.0
+  flutter_svg: ^0.22.0
+  flutter_vector_icons: ^1.0.0
   google_maps_flutter: ^2.0.3
   json_annotation: ^3.0.1
-  flutter_svg: ^0.22.0
   json_serializable: ^3.3.0
   kartal: ^1.1.0
   mobx: ^1.2.1
@@ -39,8 +40,8 @@ dependencies:
   pedantic: ^1.9.2
   provider: ^4.1.3
   shared_preferences: ^0.5.7+3
+  sliding_up_panel: ^2.0.0+1
   vexana: ^1.2.2
-  flutter_vector_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,5 @@ flutter:
         - asset: asset/fonts/Mulish-Regular.ttf
         - asset: asset/fonts/Mulish-SemiBold.ttf
         - asset: asset/fonts/Mulish-SemiBoldItalic.ttf
-
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
