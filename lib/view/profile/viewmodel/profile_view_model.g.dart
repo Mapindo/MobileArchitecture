@@ -12,13 +12,13 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
   final _$tabControllerAtom = Atom(name: '_ProfileViewModelBase.tabController');
 
   @override
-  TabController get tabController {
+  TabController? get tabController {
     _$tabControllerAtom.reportRead();
     return super.tabController;
   }
 
   @override
-  set tabController(TabController value) {
+  set tabController(TabController? value) {
     _$tabControllerAtom.reportWrite(value, super.tabController, () {
       super.tabController = value;
     });

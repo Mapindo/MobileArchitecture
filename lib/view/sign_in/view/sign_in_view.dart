@@ -5,7 +5,7 @@ import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Pattern pattern =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   //
-  String _sifre, _email;
+  String? _sifre, _email;
   //
   String textSifre = "Şifre";
   String textEmail = "Email";
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Text text(String text, {Color color, double fontSize}) {
+  Text text(String text, {Color? color, double? fontSize}) {
     return Text(text,
         style: TextStyle(
             color: color, fontWeight: FontWeight.bold, fontSize: fontSize));
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
         errorBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
       ),
-      validator: validatorFunc,
+      validator: validatorFunc as String? Function(String?)?,
       onSaved: (value) {
         if (hintText == textEmail) _email = value;
         if (hintText == textSifre) _sifre = value;
@@ -227,8 +227,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
   void loginOnPressed() {
-    if (formKey.currentState.validate()) {
-      formKey.currentState.save();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
     } else {
       setState(() {
         autoControl = true;
@@ -252,19 +252,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Text text2(String text, {Color color, double fontSize}) =>
+  Text text2(String text, {Color? color, double? fontSize}) =>
       Text(text, style: TextStyle(fontSize: fontSize, color: color));
 
 //kontroller
-  String _emailKontrol(String mail) {
-    RegExp regex = new RegExp(pattern);
+  String? _emailKontrol(String mail) {
+    RegExp regex = new RegExp(pattern as String);
     if (!regex.hasMatch(mail))
       return errorEmail;
     else
       return null;
   }
 
-  String _sifreKontrol(String sifre) {
+  String? _sifreKontrol(String sifre) {
     if (sifre == "")
       return errorSifre;
     else

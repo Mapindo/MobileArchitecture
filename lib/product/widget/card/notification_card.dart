@@ -18,8 +18,8 @@ class NotificationCard extends StatelessWidget {
   final Notificaiton item;
   // BuildContext context;
   NotificationCard({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   @override
@@ -39,7 +39,7 @@ class NotificationCard extends StatelessWidget {
               flex: 1,
               child: CircleAvatar(
                 backgroundColor:
-                    item.isReady ? context.colors.primary : Colors.transparent,
+                    item.isReady! ? context.colors.primary : Colors.transparent,
                 radius: context.width * 0.01,
               ),
             ),
@@ -48,7 +48,7 @@ class NotificationCard extends StatelessWidget {
               flex: 2,
               child: CircleAvatar(
                   radius: context.highValue * 0.4,
-                  backgroundImage: NetworkImage(item.image)
+                  backgroundImage: NetworkImage(item.image!)
                   // child: Text('FK'),
                   ),
             ),
@@ -56,7 +56,7 @@ class NotificationCard extends StatelessWidget {
               fit: FlexFit.tight,
               flex: 6,
               child: bodyText(
-                  context, item.body, RegExp(ApplicationConstants.USER_TAG)),
+                  context, item.body!, RegExp(ApplicationConstants.USER_TAG)),
               // child: ,
             ),
             Flexible(
@@ -89,7 +89,7 @@ class NotificationCard extends StatelessWidget {
                 height: double.infinity,
                 child: Text(
                   DateDiff(dateDiff: item.date).since,
-                  style: context.textTheme.bodyText2.copyWith(
+                  style: context.textTheme.bodyText2!.copyWith(
                     fontSize: context.normalValue * .9,
                     color: context.colors.onSecondary,
                   ),
@@ -132,15 +132,15 @@ class NotificationCard extends StatelessWidget {
   TextSpan normaltextSpan(BuildContext context, String text) {
     return TextSpan(
         text: ' $text',
-        style: context.textTheme.bodyText1
+        style: context.textTheme.bodyText1!
             .copyWith(color: context.colors.onSecondary));
   }
 
-  TextSpan tagTextSpan(BuildContext context, String text) {
+  TextSpan tagTextSpan(BuildContext context, String? text) {
     return TextSpan(
       text: text,
       recognizer: TapGestureRecognizer()..onTap = _onTopText,
-      style: context.textTheme.bodyText2
+      style: context.textTheme.bodyText2!
           .copyWith(color: context.colors.secondaryVariant),
     );
   }
@@ -149,8 +149,8 @@ class NotificationCard extends StatelessWidget {
 }
 
 class UserList {
-  String user;
-  int id;
+  String? user;
+  int? id;
 
   UserList({this.user, this.id});
 

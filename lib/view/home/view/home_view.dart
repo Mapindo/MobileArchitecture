@@ -138,7 +138,8 @@ class HomeView extends StatelessWidget {
                                             BlendMode.dstATop),
                                         fit: BoxFit.cover,
                                         image: AssetImage(
-                                            eventCardUpcoming[index]['image'])),
+                                            eventCardUpcoming[index]
+                                                ['image']!)),
                                     color: context.colors.primary,
                                     borderRadius: BorderRadius.circular(24)),
                                 width: context.mediaQuery.size.width * 0.7,
@@ -149,8 +150,8 @@ class HomeView extends StatelessWidget {
                                     Expanded(
                                       flex: 2,
                                       child: AutoSizeText(
-                                        eventCardUpcoming[index]['name'],
-                                        style: context.textTheme.subtitle1
+                                        eventCardUpcoming[index]['name']!,
+                                        style: context.textTheme.subtitle1!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color:
@@ -163,9 +164,10 @@ class HomeView extends StatelessWidget {
                                       child: AutoSizeText(
                                         DateDiff(
                                                 date: eventCardUpcoming[index]
-                                                    ['time'])
+                                                    ['time'],
+                                                dateDiff: '')
                                             .dateDayMinute,
-                                        style: context.textTheme.subtitle2
+                                        style: context.textTheme.subtitle2!
                                             .copyWith(
                                                 color:
                                                     context.colors.secondary),
@@ -174,8 +176,8 @@ class HomeView extends StatelessWidget {
                                     Expanded(
                                       flex: 2,
                                       child: AutoSizeText(
-                                        eventCardUpcoming[index]['type'],
-                                        style: context.textTheme.bodyText1
+                                        eventCardUpcoming[index]['type']!,
+                                        style: context.textTheme.bodyText1!
                                             .copyWith(
                                                 color: context.colors.secondary,
                                                 fontWeight: FontWeight.w500),
@@ -242,8 +244,9 @@ class HomeView extends StatelessWidget {
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 hintText: LocaleKeys.home_findEvent.locale,
-                                hintStyle: context.textTheme.subtitle2.copyWith(
-                                    color: context.colors.onSecondary)),
+                                hintStyle: context.textTheme.subtitle2!
+                                    .copyWith(
+                                        color: context.colors.onSecondary)),
                           ),
                           Expanded(
                             flex: 2,
@@ -259,7 +262,7 @@ class HomeView extends StatelessWidget {
                                                     0.02),
                                     child: AutoLocaleText(
                                       value: category[index].locale,
-                                      style: context.textTheme.subtitle2
+                                      style: context.textTheme.subtitle2!
                                           .copyWith(
                                               fontWeight: FontWeight.w400),
                                       minFontSize: 13,
@@ -282,8 +285,9 @@ class HomeView extends StatelessWidget {
                                   Spacer(),
                                   AutoLocaleText(
                                     value: LocaleKeys.home_viewAll.locale,
-                                    style: context.textTheme.bodyText1.copyWith(
-                                        color: context.colors.primary),
+                                    style: context.textTheme.bodyText1!
+                                        .copyWith(
+                                            color: context.colors.primary),
                                   )
                                 ],
                               ),
@@ -309,7 +313,7 @@ class HomeView extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: AssetImage(
-                                                eventCard[index]['image']),
+                                                eventCard[index]['image']!),
                                           ),
                                         ),
                                       ),
@@ -361,7 +365,7 @@ class HomeView extends StatelessWidget {
                                                     value: eventCard[index]
                                                         ['type'],
                                                     style: context
-                                                        .textTheme.overline
+                                                        .textTheme.overline!
                                                         .copyWith(
                                                             color: context
                                                                 .colors
@@ -376,7 +380,7 @@ class HomeView extends StatelessWidget {
                                               child: AutoLocaleText(
                                                 value: eventCard[index]['name'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
                                                   color:
                                                       context.colors.secondary,
@@ -389,7 +393,7 @@ class HomeView extends StatelessWidget {
                                               child: AutoLocaleText(
                                                 value: eventCard[index]['time'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
                                                   color:
                                                       context.colors.secondary,
@@ -421,8 +425,9 @@ class HomeView extends StatelessWidget {
                                   Spacer(),
                                   AutoLocaleText(
                                     value: LocaleKeys.home_viewAll.locale,
-                                    style: context.textTheme.bodyText1.copyWith(
-                                        color: context.colors.primary),
+                                    style: context.textTheme.bodyText1!
+                                        .copyWith(
+                                            color: context.colors.primary),
                                   )
                                 ],
                               ),
@@ -448,7 +453,7 @@ class HomeView extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: AssetImage(
-                                                eventCard[index]['image']),
+                                                eventCard[index]['image']!),
                                           ),
                                         ),
                                       ),
@@ -500,7 +505,7 @@ class HomeView extends StatelessWidget {
                                                     value: eventCard[index]
                                                         ['type'],
                                                     style: context
-                                                        .textTheme.overline
+                                                        .textTheme.overline!
                                                         .copyWith(
                                                             color: context
                                                                 .colors
@@ -515,7 +520,7 @@ class HomeView extends StatelessWidget {
                                               child: AutoLocaleText(
                                                 value: eventCard[index]['name'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
                                                   color:
                                                       context.colors.secondary,
@@ -528,7 +533,7 @@ class HomeView extends StatelessWidget {
                                               child: AutoLocaleText(
                                                 value: eventCard[index]['time'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
                                                   color:
                                                       context.colors.secondary,

@@ -6,7 +6,7 @@ import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
 class OnBoardingPage extends StatefulWidget {
-  OnBoardingPage({Key key}) : super(key: key);
+  OnBoardingPage({Key? key}) : super(key: key);
 
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
@@ -146,14 +146,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 }
 
 class OnboardingSliderCard extends StatelessWidget {
-  final String header;
-  final String colorHeader;
-  final String desc;
-  final String photo;
-  final String index;
-  final String color;
+  final String? header;
+  final String? colorHeader;
+  final String? desc;
+  final String? photo;
+  final String? index;
+  final String? color;
   const OnboardingSliderCard(
-      {Key key,
+      {Key? key,
       this.header,
       this.desc,
       this.photo,
@@ -172,15 +172,15 @@ class OnboardingSliderCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                textSliderCard(header, fontSize: 26),
-                textSliderCard(colorHeader,
+                textSliderCard(header!, fontSize: 26),
+                textSliderCard(colorHeader!,
                     fontSize: 26, fontWeight: FontWeight.bold),
               ],
             ),
           ),
           Expanded(
             flex: 2,
-            child: textSliderCard(desc, fontSize: 18),
+            child: textSliderCard(desc!, fontSize: 18),
           ),
           Expanded(
             flex: 10,
@@ -191,7 +191,7 @@ class OnboardingSliderCard extends StatelessWidget {
     );
   }
 
-  Text textSliderCard(String text, {double fontSize, FontWeight fontWeight}) {
+  Text textSliderCard(String text, {double? fontSize, FontWeight? fontWeight}) {
     return Text(text,
         style: TextStyle(fontSize: fontSize, fontWeight: fontWeight));
   }

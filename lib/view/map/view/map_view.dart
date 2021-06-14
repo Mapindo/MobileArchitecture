@@ -17,11 +17,11 @@ class MapView extends StatefulWidget {
 }
 
 class MapViewState extends State<MapView> {
-  BitmapDescriptor eventIcon;
+  late BitmapDescriptor eventIcon;
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
+    return BaseView<MapViewModel>(
       viewModel: MapViewModel(),
       onModelReady: (model) {
         model.setContext(context);
@@ -64,7 +64,8 @@ class MapViewState extends State<MapView> {
         .map(
           (e) => Marker(
               markerId: MarkerId(e.hashCode.toString()),
-              position: LatLng(e.location.latitude, e.location.longitude),
+              position:
+                  LatLng(e.location!.latitude ?? 0, e.location!.longitude ?? 0),
               icon: value.eventIcon ?? BitmapDescriptor.defaultMarker,
               zIndex: 5,
               infoWindow: InfoWindow(title: 'Test'),

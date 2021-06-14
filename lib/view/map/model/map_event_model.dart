@@ -4,19 +4,19 @@ part 'map_event_model.g.dart';
 
 @JsonSerializable()
 class MapEventModel extends INetworkModel<MapEventModel> {
-  int id;
-  String name;
-  String desc;
-  String date;
-  int tagId;
-  int capacity;
-  int isOnline;
-  int isPayment;
-  int placeId;
-  String updatedAt;
-  String createdAt;
-  int isRemoved;
-  Location location;
+  int? id;
+  String? name;
+  String? desc;
+  String? date;
+  int? tagId;
+  int? capacity;
+  int? isOnline;
+  int? isPayment;
+  int? placeId;
+  String? updatedAt;
+  String? createdAt;
+  int? isRemoved;
+  Location? location;
 
   MapEventModel(
       {this.id,
@@ -34,25 +34,25 @@ class MapEventModel extends INetworkModel<MapEventModel> {
       this.location});
 
   @override
-  MapEventModel fromJson(Map<String, Object> json) {
+  MapEventModel fromJson(Map<String, Object?> json) {
     return _$MapEventModelFromJson(json);
   }
 
   @override
-  Map<String, Object> toJson() {
+  Map<String, Object?> toJson() {
     return _$MapEventModelToJson(this);
   }
 }
 
 @JsonSerializable()
 class Location extends INetworkModel<Location> {
-  int id;
-  String name;
-  String placeAdress;
-  double latitude;
-  double longitude;
-  String updatedAt;
-  String createdAt;
+  int? id;
+  String? name;
+  String? placeAdress;
+  double? latitude;
+  double? longitude;
+  String? updatedAt;
+  String? createdAt;
 
   Location(
       {this.id,
@@ -64,16 +64,16 @@ class Location extends INetworkModel<Location> {
       this.createdAt});
 
   @override
-  Location fromJson(Map<String, Object> json) {
+  Location fromJson(Map<String, Object?> json) {
     return _$LocationFromJson(json);
   }
 
-  factory Location.fromJson(Map<String, Object> json) {
+  factory Location.fromJson(Map<String, Object?> json) {
     return _$LocationFromJson(json);
   }
 
   @override
-  Map<String, Object> toJson() {
+  Map<String, Object?> toJson() {
     return _$LocationToJson(this);
   }
 }

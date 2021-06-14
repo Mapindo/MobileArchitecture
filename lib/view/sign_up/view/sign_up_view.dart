@@ -13,7 +13,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String adSoyad, kullaniciAdi, emailAdress, sifre, sifreTekrar, telefonNo;
+  String? adSoyad, kullaniciAdi, emailAdress, sifre, sifreTekrar, telefonNo;
   bool autoControl = false;
   // TEXT
   String registerText = "Kayıt Ol";
@@ -100,14 +100,14 @@ class _SignUpState extends State<SignUp> {
   }
 
   Text text(String textValue,
-          {Color color, double fontSize, FontWeight fontWeight}) =>
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
       Text(textValue,
           style: TextStyle(
               color: color, fontSize: fontSize, fontWeight: fontWeight));
 
   TextFormField formField(String hintText, String labelText,
       TextInputType inputType, bool obsureText, validatorFunc) {
-    int maxLength;
+    int? maxLength;
     if (hintText == phoneText) {
       maxLength = 11;
     } else
@@ -189,8 +189,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   void registerOnPressed() {
-    if (formKey.currentState.validate()) {
-      formKey.currentState.save();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SelectPhoto()));
     } else {
@@ -201,38 +201,38 @@ class _SignUpState extends State<SignUp> {
   }
 
   // CONTROLS
-  String _emailKontrol(String mail) {
+  String? _emailKontrol(String mail) {
     Pattern pattern =
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = new RegExp(pattern as String);
     if (!regex.hasMatch(mail))
       return "Geçersiz mail adresi";
     else
       return null;
   }
 
-  String _isimKontrol(String name) {
+  String? _isimKontrol(String name) {
     if (name.length < 3)
       return "En az 3 harf olmalıdır";
     else
       return null;
   }
 
-  String _phoneControl(String phone) {
+  String? _phoneControl(String phone) {
     if (phone.length < 11)
       return "Telefon numarası hatalı";
     else
       return null;
   }
 
-  String _sifreControl(String sifre) {
+  String? _sifreControl(String sifre) {
     if (sifre.length < 8)
       return "Sifreniz en az 8 karakter olmalıdır";
     else
       return null;
   }
 
-  String _sifreTekrarControl(String sifreTekrari) {
+  String? _sifreTekrarControl(String sifreTekrari) {
     if (sifre != sifreTekrar)
       return "hata";
     else

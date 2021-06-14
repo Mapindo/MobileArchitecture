@@ -50,6 +50,11 @@
     "profile" :{
       "title": "Profil",
       "follow": "Takip Et"
+    },
+    "sendFeed": {
+      "cancel":"İptal",
+      "send": "Gönder",
+      "shareYourThought" : "Düşüncelerini paylaş.."
     }
   }
   

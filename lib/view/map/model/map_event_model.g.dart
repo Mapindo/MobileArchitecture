@@ -8,21 +8,23 @@ part of 'map_event_model.dart';
 
 MapEventModel _$MapEventModelFromJson(Map<String, dynamic> json) {
   return MapEventModel(
-    id: json['id'] as int,
-    name: json['name'] as String,
-    desc: json['desc'] as String,
-    date: json['date'] as String,
-    tagId: json['tagId'] as int,
-    capacity: json['capacity'] as int,
-    isOnline: json['isOnline'] as int,
-    isPayment: json['isPayment'] as int,
-    placeId: json['placeId'] as int,
-    updatedAt: json['updatedAt'] as String,
-    createdAt: json['createdAt'] as String,
-    isRemoved: json['isRemoved'] as int,
+    id: json['id'] as int?,
+    name: json['name'] as String?,
+    desc: json['desc'] as String?,
+    date: json['date'] as String?,
+    tagId: json['tagId'] as int?,
+    capacity: json['capacity'] as int?,
+    isOnline: json['isOnline'] as int?,
+    isPayment: json['isPayment'] as int?,
+    placeId: json['placeId'] as int?,
+    updatedAt: json['updatedAt'] as String?,
+    createdAt: json['createdAt'] as String?,
+    isRemoved: json['isRemoved'] as int?,
     location: json['location'] == null
         ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
+        : Location.fromJson((json['location'] as Map<String, dynamic>).map(
+            (k, e) => MapEntry(k, e as Object),
+          )),
   );
 }
 
@@ -45,13 +47,13 @@ Map<String, dynamic> _$MapEventModelToJson(MapEventModel instance) =>
 
 Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
-    id: json['id'] as int,
-    name: json['name'] as String,
-    placeAdress: json['placeAdress'] as String,
-    latitude: (json['latitude'] as num)?.toDouble(),
-    longitude: (json['longitude'] as num)?.toDouble(),
-    updatedAt: json['updatedAt'] as String,
-    createdAt: json['createdAt'] as String,
+    id: json['id'] as int?,
+    name: json['name'] as String?,
+    placeAdress: json['placeAdress'] as String?,
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
+    updatedAt: json['updatedAt'] as String?,
+    createdAt: json['createdAt'] as String?,
   );
 }
 

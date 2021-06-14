@@ -12,13 +12,13 @@ mixin _$MapViewModel on MapViewBase, Store {
   final _$eventIconAtom = Atom(name: 'MapViewBase.eventIcon');
 
   @override
-  BitmapDescriptor get eventIcon {
+  BitmapDescriptor? get eventIcon {
     _$eventIconAtom.reportRead();
     return super.eventIcon;
   }
 
   @override
-  set eventIcon(BitmapDescriptor value) {
+  set eventIcon(BitmapDescriptor? value) {
     _$eventIconAtom.reportWrite(value, super.eventIcon, () {
       super.eventIcon = value;
     });

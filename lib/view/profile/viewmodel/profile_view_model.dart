@@ -7,7 +7,7 @@ class ProfileViewModel = _ProfileViewModelBase with _$ProfileViewModel;
 
 abstract class _ProfileViewModelBase with Store, BaseViewModel {
   @observable
-  TabController tabController;
+  TabController? tabController;
 
   @observable
   int isTabSelectedValue = 1;

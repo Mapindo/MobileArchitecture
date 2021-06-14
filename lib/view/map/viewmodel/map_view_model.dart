@@ -15,14 +15,16 @@ class MapViewModel = MapViewBase with _$MapViewModel;
 
 abstract class MapViewBase with Store, BaseViewModel {
   @override
-  BuildContext context;
-  GoogleMapController controller;
-  PanelController panelController;
+  BuildContext? context;
+  GoogleMapController? controller;
+  PanelController? panelController;
   @observable
-  BitmapDescriptor eventIcon;
+  BitmapDescriptor? eventIcon;
 
+  @override
   void setContext(BuildContext context) => this.context = context;
 
+  @override
   void init() {
     // _throttleStringHelper = ThrottleStringHelper();
     // _fetchAllUser();
@@ -46,7 +48,7 @@ abstract class MapViewBase with Store, BaseViewModel {
 
   void markerOnTap(value) {
     print(value);
-    panelController.animatePanelToSnapPoint(
+    panelController!.animatePanelToSnapPoint(
         curve: Curves.easeInOutExpo, duration: Duration(milliseconds: 700));
   }
 
@@ -60,7 +62,7 @@ abstract class MapViewBase with Store, BaseViewModel {
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
         targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
   }

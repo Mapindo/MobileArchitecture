@@ -7,8 +7,8 @@ import 'theme_notifer.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/draggable_scroll_view/custom_draggable_scroll_view.dart';
 
 class ApplicationProvider {
-  static ApplicationProvider _instance;
-  static ApplicationProvider get instance {
+  static ApplicationProvider? _instance;
+  static ApplicationProvider? get instance {
     if (_instance == null) _instance = ApplicationProvider._init();
     return _instance;
   }
