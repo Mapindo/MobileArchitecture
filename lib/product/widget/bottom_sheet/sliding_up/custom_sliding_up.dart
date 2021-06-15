@@ -72,9 +72,12 @@ class _CustomSlidingUpState extends State<CustomSlidingUp> {
       backdropTapClosesPanel: widget.backdropTapClosesPanel ?? true,
       backdropEnabled: widget.backdropEnabled ?? true,
       backdropOpacity: widget.backdropOpacity ?? 0.15,
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(context.width * 0.08),
-      ),
+      isDraggable: true,
+      // borderRadius: BorderRadius.vertical(
+      // top: Radius.circular(context.width * 0.08),
+      // ),
+      color: Colors.transparent,
+      boxShadow: [],
       body: widget.body,
     );
   }

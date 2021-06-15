@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SlidingUpNotifier extends ChangeNotifier {
-  late double _panelSlide;
-  late bool _isShow;
+  double? _panelSlide;
+  bool? _isShow;
 
-  double get panelSlide => _panelSlide;
-  bool get isShow => _isShow;
+  double get panelSlide => _panelSlide ?? 0;
+  bool get isShow => _isShow ?? false;
 
   void setPanelSlide(double value) {
     _panelSlide = value;
