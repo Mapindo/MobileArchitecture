@@ -25,6 +25,13 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   late BitmapDescriptor eventIcon;
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
+
+  List imagesList = [
+    'https://i.pravatar.cc/150?img=1',
+    'https://i.pravatar.cc/150?img=2',
+    'https://i.pravatar.cc/150?img=3',
+    'https://i.pravatar.cc/150?img=4',
+  ];
   @override
   void initState() {
     super.initState();
@@ -179,32 +186,29 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
                           context, 'time', '25 Ekim Pazar', '08:00 - 19:00'),
                       eventTagDetail(context, 'price', '25₺+',
                           'Tek Oturum - Öğrenci 25₺, Tam 50₺'),
-                      eventTagDetail(context, 'users', '46 Kişi Gidiyor', ''),
-                      // Container(
-                      //   color: Colors.grey,
-                      //   width: double.infinity,
-                      //   alignment: AlignmentDirectional.center,
-                      //   child: Stack(
-                      //     fit: StackFit.loose,
-                      //     alignment: AlignmentDirectional.centerStart,
-                      //     children: [
-                      //       Positioned(
-                      //         left: 1,
-                      //         // right: 1,
-                      //         // width: 14,
-                      //         child: CircleAvatar(
-                      //           radius: 14,
-                      //           backgroundColor: Colors.white,
-                      //           child: CircleAvatar(
-                      //             radius: 12,
-                      //             backgroundImage:
-                      //                 NetworkImage('https://picsum.photos/200'),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // )
+                      Padding(
+                        padding: context.paddingLowVertical,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset('users'.toSVG),
+                            Padding(
+                              padding: context.paddingLowHorizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    '46 kişi gidiyor',
+                                    style: context.textTheme.bodyText2,
+                                  ),
+                                  circleAvatarsGroup(context)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -222,6 +226,52 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
               myLocationEnabled: true,
             );
           }),
+        ),
+      ),
+    );
+  }
+
+  Container circleAvatarsGroup(BuildContext context) {
+    return Container(
+      alignment: AlignmentDirectional.center,
+      padding: EdgeInsets.only(top: context.lowValue),
+      child: Stack(
+        alignment: AlignmentDirectional.centerStart,
+        children: [
+          // ...List.generate(
+          //         imagesList.length,
+          //         (index) =>
+          //             circleAvatarUsers(context, index, imagesList[index]))
+          //     .toList(),
+          circleAvatarUsers(context, 0, imagesList[0]),
+          circleAvatarUsers(context, 1, imagesList[1]),
+          circleAvatarUsers(context, 2, imagesList[2]),
+          circleAvatarUsers(context, 3, imagesList[3]),
+          Padding(
+            padding: EdgeInsets.only(
+                left: (context.width * .055) * imagesList.length),
+            child: Container(
+              child: AutoSizeText(
+                '+41',
+                style: context.textTheme.bodyText2!
+                    .copyWith(color: context.colors.onSecondary),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding circleAvatarUsers(BuildContext context, int index, String img) {
+    return Padding(
+      padding: EdgeInsets.only(left: (context.width * .045) * index),
+      child: CircleAvatar(
+        radius: 14,
+        backgroundColor: Colors.white,
+        child: CircleAvatar(
+          radius: 12,
+          backgroundImage: NetworkImage(img),
         ),
       ),
     );
