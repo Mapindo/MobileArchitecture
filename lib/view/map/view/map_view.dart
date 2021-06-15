@@ -17,11 +17,29 @@ class MapView extends StatefulWidget {
   State<MapView> createState() => MapViewState();
 }
 
-class MapViewState extends State<MapView> {
+class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   late BitmapDescriptor eventIcon;
+  late AnimationController _controller;
+  late Animation<Offset> _offsetAnimation;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: Offset(0, 2.0),
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOutQuad,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(Provider.of<SlidingUpNotifier>(context).panelSlide);
     return BaseView<MapViewModel>(
       viewModel: MapViewModel(),
       onModelReady: (model) {
@@ -29,10 +47,44 @@ class MapViewState extends State<MapView> {
         model.init();
       },
       onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(animateHeightAppbar),
+          child: AppBar(
+            title: Text('DevFest'),
+          ),
+        ),
         body: CustomSlidingUp(
+          maxHeight: context.height,
+          snapPoint: 0.5,
           panelController: value.panelController,
-          child: Center(
-            child: Text('This is the sliding Widget'),
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Container(
+                height: animateHeightBanner,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(context.width * 0.08),
+                  ),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: animateHeightBanner),
+                child: Container(
+                  height: context.height,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
           ),
           body: Observer(builder: (_) {
             return GoogleMap(
@@ -41,6 +93,8 @@ class MapViewState extends State<MapView> {
               zoomControlsEnabled: false,
               onMapCreated: (map) => value.mapsInit(map),
               markers: createMarker(value),
+              compassEnabled: true,
+              myLocationEnabled: true,
             );
           }),
         ),
@@ -78,4 +132,14 @@ class MapViewState extends State<MapView> {
       ),
     );
   }
+
+  double get animateHeightBanner =>
+      (Provider.of<SlidingUpNotifier>(context).panelSlide + .5) *
+      (context.height * .2);
+
+  double get animateHeightAppbar =>
+      Provider.of<SlidingUpNotifier>(context).panelSlide > .8
+          ? kToolbarHeight *
+              (.8 / Provider.of<SlidingUpNotifier>(context).panelSlide)
+          : 0;
 }
