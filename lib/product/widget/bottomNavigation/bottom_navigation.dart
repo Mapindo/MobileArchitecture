@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
+import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
 import 'package:fluttermvvmtemplate/view/map/view/map_view.dart';
 import 'package:fluttermvvmtemplate/view/notification_view/view/notification_view.dart';
@@ -43,7 +43,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
     _offsetAnimation = Tween<Offset>(
@@ -139,9 +139,8 @@ class _BottomNavigationState extends State<BottomNavigation>
     );
   }
 
-  void isAnimationBottomSheet(context) {
-    var _handleAnimation =
-        Provider.of<DraggableControllerNotifier>(context).handleAnimation;
-    _handleAnimation ? _controller.forward() : _controller.reverse();
+  Future<void> isAnimationBottomSheet(context) async {
+    var _handleAnimation = Provider.of<SlidingUpNotifier>(context).panelSlide;
+    await _handleAnimation > .2 ? _controller.forward() : _controller.reverse();
   }
 }

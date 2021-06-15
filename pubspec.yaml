@@ -30,9 +30,12 @@ dependencies:
   easy_localization: ^3.0.0
   easy_localization_loader: ^1.0.0
   flutter_mobx: ^2.0.0
-  google_maps_flutter: ^2.0.6
-  json_annotation: ^4.0.1
   flutter_svg: ^0.22.0
+  flutter_vector_icons: ^1.0.0
+  google_maps_flutter: ^2.0.6
+  image_picker: ^0.8.0+3
+  images_picker: ^1.2.4
+  json_annotation: ^4.0.1
   json_serializable: ^4.1.3
   kartal: ^2.1.0
   mobx: ^2.0.1
@@ -40,10 +43,8 @@ dependencies:
   pedantic: ^1.11.0
   provider: ^5.0.0
   shared_preferences: ^2.0.6
+  sliding_up_panel: ^2.0.0+1
   vexana: ^2.2.0
-  flutter_vector_icons: ^1.0.0
-  images_picker: ^1.2.4
-  image_picker: ^0.8.0+3
 
 dev_dependencies:
   flutter_test:
@@ -73,27 +74,23 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: Mulish
       fonts:
-        - asset: asset/fonts/Gilroy-Black.otf
-        - asset: asset/fonts/Gilroy-BlackItalic.otf
-        - asset: asset/fonts/Gilroy-Bold.otf
-        - asset: asset/fonts/Gilroy-BoldItalic.otf
-        - asset: asset/fonts/Gilroy-Extrabold.otf
-        - asset: asset/fonts/Gilroy-ExtraboldItalic.otf
-        - asset: asset/fonts/Gilroy-Heavy.otf
-        - asset: asset/fonts/Gilroy-HeavyItalic.otf
-        - asset: asset/fonts/Gilroy-Light.otf
-        - asset: asset/fonts/Gilroy-LightItalic.otf
-        - asset: asset/fonts/Gilroy-Medium.otf
-        - asset: asset/fonts/Gilroy-MediumItalic.otf
-        - asset: asset/fonts/Gilroy-Regular.otf
-        - asset: asset/fonts/Gilroy-RegularItalic.otf
-        - asset: asset/fonts/Gilroy-Semibold.otf
-        - asset: asset/fonts/Gilroy-SemiboldItalic.otf
-        - asset: asset/fonts/Gilroy-Thin.otf
-        - asset: asset/fonts/Gilroy-ThinItalic.otf
-        - asset: asset/fonts/Gilroy-UltraLight.otf
-        - asset: asset/fonts/Gilroy-UltraLightItalic.otf
+        - asset: asset/fonts/Mulish-Black.ttf
+        - asset: asset/fonts/Mulish-BlackItalic.ttf
+        - asset: asset/fonts/Mulish-Bold.ttf
+        - asset: asset/fonts/Mulish-BoldItalic.ttf
+        - asset: asset/fonts/Mulish-ExtraBold.ttf
+        - asset: asset/fonts/Mulish-ExtraBoldItalic.ttf
+        - asset: asset/fonts/Mulish-ExtraLight.ttf
+        - asset: asset/fonts/Mulish-ExtraLightItalic.ttf
+        - asset: asset/fonts/Mulish-Italic.ttf
+        - asset: asset/fonts/Mulish-Light.ttf
+        - asset: asset/fonts/Mulish-LightItalic.ttf
+        - asset: asset/fonts/Mulish-Medium.ttf
+        - asset: asset/fonts/Mulish-MediumItalic.ttf
+        - asset: asset/fonts/Mulish-Regular.ttf
+        - asset: asset/fonts/Mulish-SemiBold.ttf
+        - asset: asset/fonts/Mulish-SemiBoldItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
