@@ -40,6 +40,9 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     print(Provider.of<SlidingUpNotifier>(context).panelSlide);
+    print(Provider.of<SlidingUpNotifier>(context).panelSlide > .8
+        ? (1 - (0.8 / Provider.of<SlidingUpNotifier>(context).panelSlide))
+        : 0);
     return BaseView<MapViewModel>(
       viewModel: MapViewModel(),
       onModelReady: (model) {
@@ -60,12 +63,13 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: Duration.zero,
                 height: animateHeightBanner,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(context.width * 0.08),
+                    top: Radius.circular(animateBorderRadius),
                   ),
                   image: DecorationImage(
                     image: NetworkImage(
@@ -140,6 +144,10 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   double get animateHeightAppbar =>
       Provider.of<SlidingUpNotifier>(context).panelSlide > .8
           ? kToolbarHeight *
-              (.8 / Provider.of<SlidingUpNotifier>(context).panelSlide)
+              ((Provider.of<SlidingUpNotifier>(context).panelSlide - .8) / .2)
           : 0;
+  double get animateBorderRadius =>
+      Provider.of<SlidingUpNotifier>(context).panelSlide > .8
+          ? 0
+          : context.width * 0.08;
 }
