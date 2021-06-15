@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class SlidingUpNotifier extends ChangeNotifier {
-  late PanelController _currentScroll;
+  late double _panelSlide;
+  late bool _isShow;
 
-  PanelController get currenValue => _currentScroll;
+  double get panelSlide => _panelSlide;
+  bool get isShow => _isShow;
 
-  void changeValue(PanelController value) {
-    _currentScroll = value;
+  void setPanelSlide(double value) {
+    _panelSlide = value;
     notifyListeners();
   }
+
+  void setPanelShow(bool value) {
+    _isShow = value;
+    notifyListeners();
+  }
+
+  // void setScrollControllerValue(ScrollController value) {
+  //   _currentScrollController = value;
+  //   notifyListeners();
+  // }
 }

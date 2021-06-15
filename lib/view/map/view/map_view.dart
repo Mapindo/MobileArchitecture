@@ -5,6 +5,7 @@ import 'package:fluttermvvmtemplate/core/components/container/random_color_conta
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/draggable_scroll_view/custom_draggable_scroll_view.dart';
+import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/sliding_up/custom_sliding_up.dart';
 import 'package:fluttermvvmtemplate/product/widget/image_slider/draggable_image_slider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -28,23 +29,11 @@ class MapViewState extends State<MapView> {
         model.init();
       },
       onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
-        body: SlidingUpPanel(
-          controller: value.panelController,
-          maxHeight: 500,
-          minHeight: 0,
-          snapPoint: 0.5,
-          header: touchSwipePointer(context),
-          parallaxEnabled: true,
-          parallaxOffset: .2,
-          defaultPanelState: PanelState.CLOSED,
-          backdropTapClosesPanel: true,
-          backdropEnabled: true,
-          backdropOpacity: 0.15,
-          panel: Center(
-            child: Text("This is the sliding Widget"),
+        body: CustomSlidingUp(
+          panelController: value.panelController,
+          child: Center(
+            child: Text('This is the sliding Widget'),
           ),
-          borderRadius:
-              BorderRadius.vertical(top: Radius.circular(context.width * 0.08)),
           body: Observer(builder: (_) {
             return GoogleMap(
               mapType: MapType.normal,

@@ -43,7 +43,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
     _offsetAnimation = Tween<Offset>(
@@ -63,7 +63,7 @@ class _BottomNavigationState extends State<BottomNavigation>
 
   @override
   Widget build(BuildContext context) {
-    // isAnimationBottomSheet(context);
+    isAnimationBottomSheet(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -139,9 +139,8 @@ class _BottomNavigationState extends State<BottomNavigation>
     );
   }
 
-  // void isAnimationBottomSheet(context) {
-  //   var _handleAnimation =
-  //       Provider.of<DraggableControllerNotifier>(context).handleAnimation;
-  //   _handleAnimation ? _controller.forward() : _controller.reverse();
-  // }
+  Future<void> isAnimationBottomSheet(context) async {
+    var _handleAnimation = Provider.of<SlidingUpNotifier>(context).panelSlide;
+    await _handleAnimation > .2 ? _controller.forward() : _controller.reverse();
+  }
 }

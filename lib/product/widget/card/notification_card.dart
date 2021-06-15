@@ -16,8 +16,10 @@ List<UserList> userTag = [
 
 class NotificationCard extends StatelessWidget {
   final Notificaiton item;
+
+  // final String name = 'fatih';
   // BuildContext context;
-  NotificationCard({
+  const NotificationCard({
     Key? key,
     required this.item,
   }) : super(key: key);

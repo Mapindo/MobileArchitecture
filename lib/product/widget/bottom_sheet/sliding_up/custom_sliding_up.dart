@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
+import 'package:fluttermvvmtemplate/view/notification_view/model/notificaiton_model.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class CustomSlidingUp extends StatefulWidget {
-  final controller;
-  final maxHeight;
-  final minHeight;
-  final snapPoint;
-  final header;
-  final parallaxEnabled;
-  final parallaxOffset;
-  final defaultPanelState;
-  final backdropTapClosesPanel;
-  final backdropEnabled;
-  final backdropOpacity;
-  final panel;
-  final borderRadius;
-  final body;
+  PanelController? panelController;
+  double? maxHeight;
+  double? minHeight;
+  double? snapPoint;
+  Widget? header;
+  bool? parallaxEnabled;
+  double? parallaxOffset;
+  PanelState? defaultPanelState;
+  bool? backdropTapClosesPanel;
+  bool? backdropEnabled;
+  double? backdropOpacity;
+  Widget? panel;
+  Border? borderRadius;
+  Widget? body;
+  Widget? child;
   CustomSlidingUp({
     Key? key,
-    this.controller,
+    this.panelController,
     this.maxHeight,
     this.minHeight,
     this.snapPoint,
@@ -34,6 +38,7 @@ class CustomSlidingUp extends StatefulWidget {
     this.panel,
     this.borderRadius,
     this.body,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -42,9 +47,21 @@ class CustomSlidingUp extends StatefulWidget {
 
 class _CustomSlidingUpState extends State<CustomSlidingUp> {
   @override
+  @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      // controller: Provider.of<SlidingUpNotifier>(context, listen: false).changeValue(value),
+      onPanelSlide: (value) =>
+          Provider.of<SlidingUpNotifier>(context, listen: false)
+              .setPanelSlide(value),
+      onPanelOpened: () =>
+          Provider.of<SlidingUpNotifier>(context, listen: false)
+              .setPanelShow(true),
+      onPanelClosed: () =>
+          Provider.of<SlidingUpNotifier>(context, listen: false)
+              .setPanelShow(false),
+      controller: widget.panelController,
+      panelBuilder: (ScrollController scrollController) =>
+          _scrollingList(context, scrollController),
       maxHeight: widget.maxHeight ?? 500,
       minHeight: widget.minHeight ?? 0,
       snapPoint: widget.snapPoint ?? 0.5,
@@ -55,14 +72,17 @@ class _CustomSlidingUpState extends State<CustomSlidingUp> {
       backdropTapClosesPanel: widget.backdropTapClosesPanel ?? true,
       backdropEnabled: widget.backdropEnabled ?? true,
       backdropOpacity: widget.backdropOpacity ?? 0.15,
-      panel: widget.panel ??
-          Center(
-            child: Text('This is the sliding Widget'),
-          ),
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(MediaQuery.of(context).size.width * 0.08),
+        top: Radius.circular(context.width * 0.08),
       ),
       body: widget.body,
+    );
+  }
+
+  Widget _scrollingList(context, ScrollController sc) {
+    return SingleChildScrollView(
+      controller: sc,
+      child: widget.child,
     );
   }
 }

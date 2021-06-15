@@ -44,8 +44,9 @@ class MyApp extends StatelessWidget {
       theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
       // home: OnBoardingPage(),
       home: Container(
-          color: Color(0xffF7F8FA),
-          child: SafeArea(bottom: false, child: BottomNavigation())),
+        color: Color(0xffF7F8FA),
+        child: SafeArea(bottom: false, child: BottomNavigation()),
+      ),
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
     );

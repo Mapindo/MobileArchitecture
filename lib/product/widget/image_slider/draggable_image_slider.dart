@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttermvvmtemplate/product/notifier/draggable_scroll_notifer.dart';
 import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:provider/provider.dart';
