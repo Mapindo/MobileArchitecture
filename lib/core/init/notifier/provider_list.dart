@@ -23,8 +23,8 @@ class ApplicationProvider {
     Provider.value(value: NavigationService.instance)
   ];
   List<SingleChildWidget> uiChangesItems = [
-    // ChangeNotifierProvider(
-    // create: (context) => DraggableControllerNotifier(),
-    // )
+    ChangeNotifierProvider(
+      create: (context) => SlidingUpNotifier(),
+    )
   ];
 }

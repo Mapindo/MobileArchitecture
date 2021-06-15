@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class SlidingUpNotifier extends ChangeNotifier {
-  // DraggableScrollableNotification _currentScroll;
+  late PanelController _currentScroll;
 
-  // DraggableScrollableNotification get currenValue => _currentScroll;
+  PanelController get currenValue => _currentScroll;
 
-  // bool get handleAnimation => _currentScroll != null
-  //     ? _currentScroll.extent > _currentScroll.maxExtent - .05
-  //     : false;
-
-  // void changeValue(DraggableScrollableNotification value) {
-  //   _currentScroll = value;
-  //   notifyListeners();
-  // }
+  void changeValue(PanelController value) {
+    _currentScroll = value;
+    notifyListeners();
+  }
 }

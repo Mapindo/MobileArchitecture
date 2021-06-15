@@ -118,11 +118,11 @@ class HomeView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EventDetailView()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => EventDetailView()),
+                              // );
                             },
                             child: Padding(
                               padding: context.paddingLow,
