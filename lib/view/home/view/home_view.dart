@@ -72,9 +72,7 @@ class HomeView extends StatelessWidget {
             height: context.mediaQuery.size.height * 0.336,
             child: Column(
               children: [
-                Spacer(
-                  flex: 2,
-                ),
+                SizedBox(height: context.lowValue),
                 Expanded(
                   flex: 9,
                   child: Column(

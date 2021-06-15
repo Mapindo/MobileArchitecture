@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/helpers/dateDiff.dart';
+import 'package:fluttermvvmtemplate/product/widget/base_scaffold/base_scaffold.dart';
 import 'package:fluttermvvmtemplate/view/send_feed_view/view/send_feed_view.dart';
 import 'package:fluttermvvmtemplate/view/social_page/view_model/social_view_model.dart';
 
@@ -79,8 +80,11 @@ class SocialView extends StatelessWidget {
         model.init();
         model.setContext(context);
       },
-      onPageBuilder: (BuildContext context, SocialViewModel value) => Scaffold(
-        floatingActionButton: Padding(
+      onPageBuilder: (BuildContext context, SocialViewModel value) => 
+      
+      CustomScaffold(
+        resize_bottom_insets: false,
+        fab_button: Padding(
           padding: context.paddingNormalVertical
               .copyWith(top: 0, bottom: context.mediaQuery.size.height * 0.1),
           child: FloatingActionButton(
@@ -94,12 +98,17 @@ class SocialView extends StatelessWidget {
                 Icons.add,
                 color: context.colors.background,
                 size: 27,
-              )),
+              )
+              
+              ,),
+
         ),
-        body: Container(
+        widget: Container(
           child: Column(
             children: [
-              Expanded(flex: 1, child: Container()),
+              SizedBox(
+                height: context.lowValue,
+              ),
               Expanded(
                 flex: 1,
                 child: Row(
@@ -203,8 +212,14 @@ class SocialView extends StatelessWidget {
               )
             ],
           ),
-        ),
-      ),
+        ), bottom_safe_area_value: false, top_safe_area_value: true,
+      )
+      
+      // Scaffold(
+  
+       
+      //   body: 
+      // ),
     );
   }
 }
