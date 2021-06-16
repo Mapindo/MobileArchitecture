@@ -25,6 +25,27 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   late BitmapDescriptor eventIcon;
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
+  TabController? _tabController;
+  final tabs = <Widget>[
+    Tab(
+      text: 'Detaylar',
+    ),
+    Tab(
+      text: 'Akış',
+    ),
+    Tab(
+      text: 'Konuşmacılar',
+    ),
+    Tab(
+      text: 'Görseller',
+    ),
+  ];
+  final List imagesList = [
+    'https://i.pravatar.cc/150?img=1',
+    'https://i.pravatar.cc/150?img=2',
+    'https://i.pravatar.cc/150?img=3',
+    'https://i.pravatar.cc/150?img=4',
+  ];
   @override
   void initState() {
     super.initState();
@@ -53,175 +74,309 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
         model.setContext(context);
         model.init();
       },
-      onPageBuilder: (BuildContext context, MapViewModel value) => Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(animateHeightAppbar),
-          child: AppBar(
-            title: Text('DevFest'),
+      onPageBuilder: (BuildContext context, MapViewModel value) =>
+          DefaultTabController(
+        initialIndex: 0,
+        length: tabs.length,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(animateHeightAppbar),
+            child: AppBar(
+              backgroundColor: context.colors.secondary,
+              leading: IconButton(
+                  onPressed: () {
+                    value.panelController!.close();
+                  },
+                  icon: Icon(Icons.chevron_left_outlined)),
+              title: AutoSizeText(
+                'DevFest İstanbul 2021',
+                style: context.textTheme.subtitle1,
+              ),
+            ),
+          ),
+          body: CustomSlidingUp(
+            maxHeight: context.height,
+            snapPoint: 0.5,
+            panelController: value.panelController,
+            panelBuilder: (sc) => SingleChildScrollView(
+              controller: sc,
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  eventBannerContainer(),
+                  slidingUpContent(context),
+                ],
+              ),
+            ),
+            body: Observer(builder: (_) {
+              return GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: value.kLake,
+                zoomControlsEnabled: false,
+                onMapCreated: (map) => value.mapsInit(map),
+                markers: createMarker(value),
+                compassEnabled: true,
+                myLocationEnabled: true,
+              );
+            }),
           ),
         ),
-        body: CustomSlidingUp(
-          maxHeight: context.height,
-          snapPoint: 0.5,
-          panelController: value.panelController,
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              AnimatedContainer(
-                duration: Duration.zero,
-                height: animateHeightBanner,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(animateBorderRadius),
-                  ),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      ),
+    );
+  }
+
+  Padding slidingUpContent(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: animateHeightBanner),
+      child: Container(
+        // height: context.height,
+        width: context.width,
+        clipBehavior: Clip.hardEdge,
+        padding: context.paddingNormalHorizontal,
+        decoration: BoxDecoration(
+          color: context.colors.secondary,
+        ),
+        child: Column(
+          children: [
+            touchDragPlaceholder(context),
+            eventNameWithCategory(context),
+            organizerEventAreaContent(context),
+            eventTagDetail(context, 'location', 'Kongre ve Kültür Merkezi',
+                'İncilipınar,20150 Pamukkale/Denizli'),
+            eventTagDetail(context, 'time', '25 Ekim Pazar', '08:00 - 19:00'),
+            eventTagDetail(
+                context, 'price', '25₺+', 'Tek Oturum - Öğrenci 25₺, Tam 50₺'),
+            eventTagDetail_users(context),
+            Divider(),
+            Container(
+              width: context.width,
+              child: TabBar(
+                controller: _tabController,
+                labelPadding: context.paddingNormalHorizontal,
+                isScrollable: true,
+                indicatorWeight: 0.01,
+                onTap: (int selected) {},
+                indicatorColor: Colors.black,
+                labelColor: context.colors.primary,
+                labelStyle: context.textTheme.subtitle1,
+                unselectedLabelColor: context.colors.onSecondary,
+                unselectedLabelStyle: context.textTheme.subtitle1,
+                tabs: tabs,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: animateHeightBanner),
-                child: Container(
-                  height: context.height,
-                  width: double.infinity,
-                  clipBehavior: Clip.hardEdge,
-                  padding: context.paddingNormalHorizontal,
-                  decoration: BoxDecoration(
-                    color: context.colors.secondary,
+            ),
+            Container(
+              width: context.width,
+              height: context.height * .4,
+              child: TabBarView(
+                children: [
+                  Container(
+                    width: context.width,
+                    child: AutoSizeText(
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into',
+                      style: context.textTheme.bodyText2,
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: context.paddingLow,
-                        child: Container(
-                          width: context.width * .1,
-                          height: context.width * .015,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.grey[350],
-                          ),
-                        ),
+                  Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: context.colors.primary,
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AutoSizeText(
-                            'DevFest İstanbul 2021',
-                            style: context.textTheme.headline4!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          AutoSizeText(
-                            'Teknoloji',
-                            style: context.textTheme.subtitle1!.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: context.colors.onSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: context.paddingNormalVertical,
-                        child: Row(
-                          children: [
-                            Container(
-                              height: context.width * .11,
-                              width: context.width * .11,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 5,
-                                      color: Colors.black26,
-                                      spreadRadius: .1)
-                                ],
-                                borderRadius:
-                                    BorderRadius.circular(context.width * .03),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: context.paddingNormalHorizontal,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    AutoSizeText('GDG Denizli',
-                                        style: context.textTheme.bodyText1),
-                                    AutoSizeText(
-                                      '205 Katılımcı',
-                                      minFontSize: 3,
-                                      style: context.textTheme.bodyText1!
-                                          .copyWith(
-                                              fontSize: context.width * .03,
-                                              color:
-                                                  context.colors.onSecondary),
-                                    ),
-                                  ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                      eventTagDetail(
-                          context,
-                          'location',
-                          'Kongre ve Kültür Merkezi',
-                          'İncilipınar,20150 Pamukkale/Denizli'),
-                      eventTagDetail(
-                          context, 'time', '25 Ekim Pazar', '08:00 - 19:00'),
-                      eventTagDetail(context, 'price', '25₺+',
-                          'Tek Oturum - Öğrenci 25₺, Tam 50₺'),
-                      eventTagDetail(context, 'users', '46 Kişi Gidiyor', ''),
-                      // Container(
-                      //   color: Colors.grey,
-                      //   width: double.infinity,
-                      //   alignment: AlignmentDirectional.center,
-                      //   child: Stack(
-                      //     fit: StackFit.loose,
-                      //     alignment: AlignmentDirectional.centerStart,
-                      //     children: [
-                      //       Positioned(
-                      //         left: 1,
-                      //         // right: 1,
-                      //         // width: 14,
-                      //         child: CircleAvatar(
-                      //           radius: 14,
-                      //           backgroundColor: Colors.white,
-                      //           child: CircleAvatar(
-                      //             radius: 12,
-                      //             backgroundImage:
-                      //                 NetworkImage('https://picsum.photos/200'),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // )
-                    ],
+                    ),
+                    width: context.width,
                   ),
-                ),
+                  Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: context.colors.primary,
+                      ),
+                    ),
+                    width: context.width,
+                  ),
+                  Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: context.colors.primary,
+                      ),
+                    ),
+                    width: context.width,
+                  ),
+                ],
               ),
-            ],
+            ),
+            SizedBox(
+              height: context.height * .2,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Row eventNameWithCategory(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        AutoSizeText(
+          'DevFest İstanbul 2021',
+          style: context.textTheme.headline4!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
-          body: Observer(builder: (_) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: value.kLake,
-              zoomControlsEnabled: false,
-              onMapCreated: (map) => value.mapsInit(map),
-              markers: createMarker(value),
-              compassEnabled: true,
-              myLocationEnabled: true,
-            );
-          }),
+        ),
+        AutoSizeText(
+          'Teknoloji',
+          style: context.textTheme.subtitle1!.copyWith(
+            fontWeight: FontWeight.w500,
+            color: context.colors.onSecondary,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Padding touchDragPlaceholder(BuildContext context) {
+    return Padding(
+      padding: context.paddingLow,
+      child: Container(
+        width: context.width * .1,
+        height: context.width * .015,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: Colors.grey[350],
+        ),
+      ),
+    );
+  }
+
+  Padding eventTagDetail_users(BuildContext context) {
+    return Padding(
+      padding: context.paddingLowVertical,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset('users'.toSVG),
+          Padding(
+            padding: context.paddingLowHorizontal,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  '46 kişi gidiyor',
+                  style: context.textTheme.bodyText2,
+                ),
+                circleAvatarsGroup(context)
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding organizerEventAreaContent(BuildContext context) {
+    return Padding(
+      padding: context.paddingNormalVertical,
+      child: Row(
+        children: [
+          Container(
+            height: context.width * .11,
+            width: context.width * .11,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 5, color: Colors.black26, spreadRadius: .1)
+              ],
+              borderRadius: BorderRadius.circular(context.width * .03),
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://pbs.twimg.com/profile_images/1236548019656503299/VCtQW2JT_400x400.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: context.paddingNormalHorizontal,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AutoSizeText('GDG Denizli',
+                      style: context.textTheme.bodyText1),
+                  AutoSizeText(
+                    '205 Katılımcı',
+                    minFontSize: 3,
+                    style: context.textTheme.bodyText1!.copyWith(
+                        fontSize: context.width * .03,
+                        color: context.colors.onSecondary),
+                  ),
+                ]),
+          ),
+        ],
+      ),
+    );
+  }
+
+  AnimatedContainer eventBannerContainer() {
+    return AnimatedContainer(
+      duration: Duration.zero,
+      height: animateHeightBanner,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(animateBorderRadius),
+        ),
+        image: DecorationImage(
+          image: NetworkImage(
+              'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Container circleAvatarsGroup(BuildContext context) {
+    return Container(
+      alignment: AlignmentDirectional.center,
+      padding: EdgeInsets.only(top: context.lowValue),
+      child: Stack(
+        alignment: AlignmentDirectional.centerStart,
+        children: [
+          // ...List.generate(
+          //         imagesList.length,
+          //         (index) =>
+          //             circleAvatarUsers(context, index, imagesList[index]))
+          //     .toList(),
+          circleAvatarUsers(context, 0, imagesList[0]),
+          circleAvatarUsers(context, 1, imagesList[1]),
+          circleAvatarUsers(context, 2, imagesList[2]),
+          circleAvatarUsers(context, 3, imagesList[3]),
+          Padding(
+            padding: EdgeInsets.only(
+                left: (context.width * .055) * imagesList.length),
+            child: Container(
+              child: AutoSizeText(
+                '+41',
+                style: context.textTheme.bodyText2!
+                    .copyWith(color: context.colors.onSecondary),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding circleAvatarUsers(BuildContext context, int index, String img) {
+    return Padding(
+      padding: EdgeInsets.only(left: (context.width * .045) * index),
+      child: CircleAvatar(
+        radius: 14,
+        backgroundColor: Colors.white,
+        child: CircleAvatar(
+          radius: 12,
+          backgroundImage: NetworkImage(img),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class CustomSlidingUp extends StatefulWidget {
   Widget? panel;
   Border? borderRadius;
   Widget? body;
-  Widget? child;
+  Widget Function(ScrollController)? panelBuilder;
   CustomSlidingUp({
     Key? key,
     this.panelController,
@@ -38,7 +38,7 @@ class CustomSlidingUp extends StatefulWidget {
     this.panel,
     this.borderRadius,
     this.body,
-    this.child,
+    this.panelBuilder,
   }) : super(key: key);
 
   @override
@@ -60,8 +60,7 @@ class _CustomSlidingUpState extends State<CustomSlidingUp> {
           Provider.of<SlidingUpNotifier>(context, listen: false)
               .setPanelShow(false),
       controller: widget.panelController,
-      panelBuilder: (ScrollController scrollController) =>
-          _scrollingList(context, scrollController),
+      panelBuilder: widget.panelBuilder,
       maxHeight: widget.maxHeight ?? 500,
       minHeight: widget.minHeight ?? 0,
       snapPoint: widget.snapPoint ?? 0.5,
@@ -82,10 +81,10 @@ class _CustomSlidingUpState extends State<CustomSlidingUp> {
     );
   }
 
-  Widget _scrollingList(context, ScrollController sc) {
-    return SingleChildScrollView(
-      controller: sc,
-      child: widget.child,
-    );
-  }
+  // Widget _scrollingList(context, ScrollController sc) {
+  //   return SingleChildScrollView(
+  //     controller: sc,
+  //     child: widget.child,
+  //   );
+  // }
 }
