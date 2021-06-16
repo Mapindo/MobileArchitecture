@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
@@ -69,8 +70,51 @@ class _BottomNavigationState extends State<BottomNavigation>
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: buildFloatingActionButton(),
-      bottomNavigationBar: buildBottomAppBar(context),
+      bottomNavigationBar: !Provider.of<SlidingUpNotifier>(context).isShow
+          ? buildBottomAppBar(context)
+          : eventDetailBottomNavigation(context),
       body: _widgetOptions.elementAt(_selectedIndex),
+    );
+  }
+
+  Container eventDetailBottomNavigation(BuildContext context) {
+    return Container(
+      padding: context.paddingNormalHorizontal,
+      decoration: BoxDecoration(
+        color: context.colors.secondary,
+        boxShadow: [
+          BoxShadow(blurRadius: 4, color: Colors.black12, spreadRadius: 1)
+        ],
+      ),
+      height: kToolbarHeight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                'Katılıyor musun?',
+                style: context.textTheme.bodyText1!
+                    .copyWith(color: context.colors.primary),
+              ),
+              AutoSizeText('Limit yok',
+                  style: context.textTheme.bodyText2!
+                      .copyWith(color: context.colors.primary)),
+            ],
+          ),
+          ElevatedButton(
+              onPressed: () {},
+              child: AutoSizeText(
+                'Bilet Al',
+                style: context.textTheme.button!
+                    .copyWith(color: context.colors.secondary),
+              ))
+        ],
+      ),
     );
   }
 
