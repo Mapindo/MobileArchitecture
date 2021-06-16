@@ -1,7 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
 import 'package:fluttermvvmtemplate/core/components/container/random_color_container.dart';
+import 'package:fluttermvvmtemplate/core/components/text/auto_locale_text.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/notifier/sliding_up_notifer.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottom_sheet/draggable_scroll_view/custom_draggable_scroll_view.dart';
@@ -11,6 +14,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/map_view_model.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../../../core/extension/string_extension.dart';
 
 class MapView extends StatefulWidget {
   @override
@@ -40,6 +44,9 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     print(Provider.of<SlidingUpNotifier>(context).panelSlide);
+    print(Provider.of<SlidingUpNotifier>(context).panelSlide > .8
+        ? (1 - (0.8 / Provider.of<SlidingUpNotifier>(context).panelSlide))
+        : 0);
     return BaseView<MapViewModel>(
       viewModel: MapViewModel(),
       onModelReady: (model) {
@@ -60,12 +67,13 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: Duration.zero,
                 height: animateHeightBanner,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(context.width * 0.08),
+                    top: Radius.circular(animateBorderRadius),
                   ),
                   image: DecorationImage(
                     image: NetworkImage(
@@ -78,9 +86,126 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
                 padding: EdgeInsets.only(top: animateHeightBanner),
                 child: Container(
                   height: context.height,
+                  width: double.infinity,
                   clipBehavior: Clip.hardEdge,
+                  padding: context.paddingNormalHorizontal,
                   decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: context.colors.secondary,
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: context.paddingLow,
+                        child: Container(
+                          width: context.width * .1,
+                          height: context.width * .015,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.grey[350],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AutoSizeText(
+                            'DevFest İstanbul 2021',
+                            style: context.textTheme.headline4!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          AutoSizeText(
+                            'Teknoloji',
+                            style: context.textTheme.subtitle1!.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: context.colors.onSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: context.paddingNormalVertical,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: context.width * .11,
+                              width: context.width * .11,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      color: Colors.black26,
+                                      spreadRadius: .1)
+                                ],
+                                borderRadius:
+                                    BorderRadius.circular(context.width * .03),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://raw.githubusercontent.com/AshishBhoi/DevFest/master/assets/images/banner_light.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: context.paddingNormalHorizontal,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText('GDG Denizli',
+                                        style: context.textTheme.bodyText1),
+                                    AutoSizeText(
+                                      '205 Katılımcı',
+                                      minFontSize: 3,
+                                      style: context.textTheme.bodyText1!
+                                          .copyWith(
+                                              fontSize: context.width * .03,
+                                              color:
+                                                  context.colors.onSecondary),
+                                    ),
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      eventTagDetail(
+                          context,
+                          'location',
+                          'Kongre ve Kültür Merkezi',
+                          'İncilipınar,20150 Pamukkale/Denizli'),
+                      eventTagDetail(
+                          context, 'time', '25 Ekim Pazar', '08:00 - 19:00'),
+                      eventTagDetail(context, 'price', '25₺+',
+                          'Tek Oturum - Öğrenci 25₺, Tam 50₺'),
+                      eventTagDetail(context, 'users', '46 Kişi Gidiyor', ''),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: double.infinity,
+                      //   alignment: AlignmentDirectional.center,
+                      //   child: Stack(
+                      //     fit: StackFit.loose,
+                      //     alignment: AlignmentDirectional.centerStart,
+                      //     children: [
+                      //       Positioned(
+                      //         left: 1,
+                      //         // right: 1,
+                      //         // width: 14,
+                      //         child: CircleAvatar(
+                      //           radius: 14,
+                      //           backgroundColor: Colors.white,
+                      //           child: CircleAvatar(
+                      //             radius: 12,
+                      //             backgroundImage:
+                      //                 NetworkImage('https://picsum.photos/200'),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // )
+                    ],
                   ),
                 ),
               ),
@@ -98,6 +223,37 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
             );
           }),
         ),
+      ),
+    );
+  }
+
+  Padding eventTagDetail(
+      BuildContext context, String svgName, String title, String subtitle) {
+    return Padding(
+      padding: context.paddingLowVertical,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset(svgName.toSVG),
+          Padding(
+            padding: context.paddingLowHorizontal,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  title,
+                  style: context.textTheme.bodyText2,
+                ),
+                AutoSizeText(
+                  subtitle,
+                  style: context.textTheme.bodyText2!
+                      .copyWith(color: context.colors.onSecondary),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -140,6 +296,10 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
   double get animateHeightAppbar =>
       Provider.of<SlidingUpNotifier>(context).panelSlide > .8
           ? kToolbarHeight *
-              (.8 / Provider.of<SlidingUpNotifier>(context).panelSlide)
+              ((Provider.of<SlidingUpNotifier>(context).panelSlide - .8) / .2)
           : 0;
+  double get animateBorderRadius =>
+      Provider.of<SlidingUpNotifier>(context).panelSlide > .8
+          ? 0
+          : context.width * 0.08;
 }
