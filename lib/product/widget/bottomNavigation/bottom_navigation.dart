@@ -29,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),

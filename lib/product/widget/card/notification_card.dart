@@ -12,6 +12,7 @@ List<UserList> userTag = [
   UserList(user: 'Fatih Emre Kalem', id: 1),
   UserList(user: 'Abdullah Oğuz', id: 2),
   UserList(user: 'Halil İbrahim Ulu', id: 3),
+  UserList(user: 'Betül Üsküdar', id: 4),
 ];
 
 class NotificationCard extends StatelessWidget {

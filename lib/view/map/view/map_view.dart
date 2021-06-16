@@ -218,6 +218,8 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
       children: [
         AutoSizeText(
           'DevFest Denizli 2021',
+          maxFontSize: 22,
+          minFontSize: 10,
           style: context.textTheme.headline4!.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -225,6 +227,8 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
         ),
         AutoSizeText(
           'Teknoloji',
+          maxFontSize: 18,
+          minFontSize: 10,
           style: context.textTheme.subtitle1!.copyWith(
             fontWeight: FontWeight.w500,
             color: context.colors.onSecondary,
