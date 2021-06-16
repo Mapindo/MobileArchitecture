@@ -22,9 +22,7 @@ MapEventModel _$MapEventModelFromJson(Map<String, dynamic> json) {
     isRemoved: json['isRemoved'] as int?,
     location: json['location'] == null
         ? null
-        : Location.fromJson((json['location'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(k, e as Object),
-          )),
+        : Location.fromJson(json['location'] as Map<String, dynamic>),
   );
 }
 

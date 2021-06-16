@@ -1,6 +1,8 @@
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
 import 'package:fluttermvvmtemplate/core/components/text/auto_locale_text.dart';
 import 'package:fluttermvvmtemplate/core/components/text/locale_text.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
@@ -8,7 +10,9 @@ import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/core/init/lang/locale_keys.g.dart';
 import 'package:fluttermvvmtemplate/product/helpers/dateDiff.dart';
+import 'package:fluttermvvmtemplate/product/widget/base_scaffold/base_scaffold.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
+import 'package:fluttermvvmtemplate/view/home/home_viewmodel/home_view_model.dart';
 import '../../../core/extension/string_extension.dart';
 
 class HomeView extends StatelessWidget {
@@ -65,16 +69,22 @@ class HomeView extends StatelessWidget {
       },
     ];
 
-    return Scaffold(
-      body: Stack(
+return BaseView<HomeViewModel>(
+viewModel: HomeViewModel(),
+onModelReady: (model) {
+ model.setContext(context);
+},
+onPageBuilder: (BuildContext context,HomeViewModel value) => CustomScaffold(
+  background_color: context.colors.background,
+      top_safe_area_value: true,
+      bottom_safe_area_value: false,
+      widget: Stack(
         children: [
           Container(
             height: context.mediaQuery.size.height * 0.336,
             child: Column(
               children: [
-                Spacer(
-                  flex: 2,
-                ),
+                SizedBox(height: context.lowValue),
                 Expanded(
                   flex: 9,
                   child: Column(
@@ -562,6 +572,9 @@ class HomeView extends StatelessWidget {
               })
         ],
       ),
-    );
+    ),
+);
+
+    
   }
 }
