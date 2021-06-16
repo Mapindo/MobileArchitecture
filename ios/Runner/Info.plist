@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Communis fotoğraflarınıza erişmek istiyor</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Communis fotoğraflarınıza erişmek istiyor</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Communis videoda ses kaydı alabilmek için mikrafonunuza erişlmek istiyor</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

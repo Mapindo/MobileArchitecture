@@ -1,20 +1,30 @@
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
+import 'package:fluttermvvmtemplate/core/components/text/auto_locale_text.dart';
+import 'package:fluttermvvmtemplate/core/components/text/locale_text.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 // import '../../../product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttermvvmtemplate/core/init/lang/locale_keys.g.dart';
+import 'package:fluttermvvmtemplate/product/helpers/dateDiff.dart';
+import 'package:fluttermvvmtemplate/product/widget/base_scaffold/base_scaffold.dart';
 import 'package:fluttermvvmtemplate/view/event_detail/view/event_detail_view.dart';
+import 'package:fluttermvvmtemplate/view/home/home_viewmodel/home_view_model.dart';
+import '../../../core/extension/string_extension.dart';
 
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const category = <String>[
-      'Tümü',
-      ' Bilim',
-      'Spor',
-      'Teknoloji',
-      ' Kültür & Sanat',
-      'Tarih'
+      LocaleKeys.home_scrollEvent_all,
+      LocaleKeys.home_scrollEvent_science,
+      LocaleKeys.home_scrollEvent_technology,
+      LocaleKeys.home_scrollEvent_sport,
+      LocaleKeys.home_scrollEvent_artAndCulture,
+      LocaleKeys.home_scrollEvent_history
     ];
 
     final eventCard = [
@@ -38,58 +48,91 @@ class HomeView extends StatelessWidget {
       },
     ];
 
-    return Scaffold(
-      body: Stack(
+    final eventCardUpcoming = [
+      {
+        'type': 'Konser',
+        'name': 'Nirvana',
+        'time': '2021-05-02T10:37:30.250Z',
+        'image': 'asset/image/image_concert.png'
+      },
+      {
+        'type': 'Konferans',
+        'name': 'TEDx',
+        'time': '2021-05-06T10:37:30.250Z',
+        'image': 'asset/image/tedx_talk.png'
+      },
+      {
+        'type': 'Spor',
+        'name': 'Anadolu Efes & Asvel Lyon',
+        'time': '2021-05-04T10:37:30.250Z',
+        'image': 'asset/image/anadolu_efes.png'
+      },
+    ];
+
+return BaseView<HomeViewModel>(
+viewModel: HomeViewModel(),
+onModelReady: (model) {
+ model.setContext(context);
+},
+onPageBuilder: (BuildContext context,HomeViewModel value) => CustomScaffold(
+  background_color: context.colors.background,
+      top_safe_area_value: true,
+      bottom_safe_area_value: false,
+      widget: Stack(
         children: [
           Container(
-            height: context.mediaQuery.size.height * 0.3,
+            height: context.mediaQuery.size.height * 0.336,
             child: Column(
               children: [
-                Spacer(
-                  flex: 2,
-                ),
+                SizedBox(height: context.lowValue),
                 Expanded(
-                  flex: 4,
+                  flex: 9,
                   child: Column(
                     children: [
                       Row(
                         children: [
                           IconButton(icon: Icon(Icons.menu), onPressed: () {}),
                           Container(
-                            padding: context.paddingLowHorizontal,
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Merhaba Abdullah 🤩',
-                              style: context.textTheme.headline5,
-                            ),
-                          ),
+                              padding: context.paddingLowHorizontal,
+                              alignment: Alignment.topLeft,
+                              child: AutoLocaleText(
+                                  value: LocaleKeys.home_title.locale +
+                                      ' Abdullah',
+                                  style: context.textTheme.headline5,
+                                  minFontSize: 16)
+                              // Text(
+                              //   'Merhaba Abdullah 🤩',
+                              //   style: context.textTheme.headline5,
+                              // ),
+                              ),
                         ],
                       ),
                       Container(
                         padding: context.paddingNormalHorizontal.copyWith(
                             left: context.mediaQuery.size.width * 0.15),
                         alignment: Alignment.topLeft,
-                        child: Text('Yakında Gidebileceğin Etkinlikler',
-                            style: context.textTheme.subtitle1
-                                .copyWith(fontWeight: FontWeight.w400)),
+                        child: AutoLocaleText(
+                          value: LocaleKeys.home_upcomingEvents.locale,
+                          minFontSize: 12,
+                        ),
                       )
                     ],
                   ),
                 ),
                 Expanded(
-                  flex: 7,
+                  flex: 14,
                   child: Container(
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: 20,
+                        itemCount: eventCardUpcoming.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EventDetailView()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => EventDetailView()),
+                              // );
                             },
                             child: Padding(
                               padding: context.paddingLow,
@@ -101,11 +144,12 @@ class HomeView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         colorFilter: ColorFilter.mode(
-                                            Colors.black.withOpacity(0.2),
+                                            Colors.black.withOpacity(0.36),
                                             BlendMode.dstATop),
                                         fit: BoxFit.cover,
                                         image: AssetImage(
-                                            'asset/image/image_concert.png')),
+                                            eventCardUpcoming[index]
+                                                ['image']!)),
                                     color: context.colors.primary,
                                     borderRadius: BorderRadius.circular(24)),
                                 width: context.mediaQuery.size.width * 0.7,
@@ -115,20 +159,25 @@ class HomeView extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       flex: 2,
-                                      child: Text(
-                                        "Nirvana",
-                                        style: context.textTheme.subtitle1
+                                      child: AutoSizeText(
+                                        eventCardUpcoming[index]['name']!,
+                                        style: context.textTheme.subtitle1!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color:
                                                     context.colors.secondary),
+                                        minFontSize: 12,
                                       ),
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Text(
-                                        '2 Şubat' + ' / ' + '22:00',
-                                        style: context.textTheme.subtitle2
+                                      child: AutoSizeText(
+                                        DateDiff(
+                                                date: eventCardUpcoming[index]
+                                                    ['time'],
+                                                dateDiff: '')
+                                            .dateDayMinute,
+                                        style: context.textTheme.subtitle2!
                                             .copyWith(
                                                 color:
                                                     context.colors.secondary),
@@ -136,9 +185,9 @@ class HomeView extends StatelessWidget {
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Text(
-                                        'Concert',
-                                        style: context.textTheme.bodyText1
+                                      child: AutoSizeText(
+                                        eventCardUpcoming[index]['type']!,
+                                        style: context.textTheme.bodyText1!
                                             .copyWith(
                                                 color: context.colors.secondary,
                                                 fontWeight: FontWeight.w500),
@@ -156,8 +205,8 @@ class HomeView extends StatelessWidget {
             ),
           ),
           DraggableScrollableSheet(
-              initialChildSize: 0.7,
-              minChildSize: 0.7,
+              initialChildSize: 0.65,
+              minChildSize: 0.65,
               maxChildSize: 1,
               builder: (context, scrollController) {
                 return SingleChildScrollView(
@@ -204,12 +253,13 @@ class HomeView extends StatelessWidget {
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
-                                hintText: 'Etkinliğini Bul',
-                                hintStyle: context.textTheme.subtitle2.copyWith(
-                                    color: context.colors.onSecondary)),
+                                hintText: LocaleKeys.home_findEvent.locale,
+                                hintStyle: context.textTheme.subtitle2!
+                                    .copyWith(
+                                        color: context.colors.onSecondary)),
                           ),
                           Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: ListView.builder(
                               itemCount: category.length,
                               scrollDirection: Axis.horizontal,
@@ -220,29 +270,34 @@ class HomeView extends StatelessWidget {
                                             top:
                                                 context.mediaQuery.size.height *
                                                     0.02),
-                                    child: Text(category[index],
-                                        style: context.textTheme.subtitle2
-                                            .copyWith(
-                                                fontWeight: FontWeight.w400)));
+                                    child: AutoLocaleText(
+                                      value: category[index].locale,
+                                      style: context.textTheme.subtitle2!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w400),
+                                      minFontSize: 13,
+                                    ));
                               },
                             ),
                           ),
                           Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: Container(
                               alignment: Alignment.center,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Önerilen',
+                                  AutoLocaleText(
+                                    value:
+                                        LocaleKeys.home_scrollEvent_all.locale,
                                     style: context.textTheme.bodyText1,
                                   ),
                                   Spacer(),
-                                  Text(
-                                    'Hepsini Gör',
-                                    style: context.textTheme.bodyText1.copyWith(
-                                        color: context.colors.primary),
+                                  AutoLocaleText(
+                                    value: LocaleKeys.home_viewAll.locale,
+                                    style: context.textTheme.bodyText1!
+                                        .copyWith(
+                                            color: context.colors.primary),
                                   )
                                 ],
                               ),
@@ -268,7 +323,7 @@ class HomeView extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: AssetImage(
-                                                eventCard[index]['image']),
+                                                eventCard[index]['image']!),
                                           ),
                                         ),
                                       ),
@@ -316,44 +371,45 @@ class HomeView extends StatelessWidget {
                                                     width: 4,
                                                     height: 30,
                                                   ),
-                                                  Text(
-                                                    eventCard[index]['type'],
+                                                  AutoLocaleText(
+                                                    value: eventCard[index]
+                                                        ['type'],
                                                     style: context
-                                                        .textTheme.overline
+                                                        .textTheme.overline!
                                                         .copyWith(
-                                                            fontSize: 12,
                                                             color: context
                                                                 .colors
                                                                 .secondary),
+                                                    minFontSize: 10,
                                                     textAlign: TextAlign.center,
                                                   )
                                                 ],
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                eventCard[index]['name'],
+                                              child: AutoLocaleText(
+                                                value: eventCard[index]['name'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
-                                                  fontSize: 16,
                                                   color:
                                                       context.colors.secondary,
                                                   fontWeight: FontWeight.w700,
                                                 ),
+                                                minFontSize: 15,
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                eventCard[index]['time'],
+                                              child: AutoLocaleText(
+                                                value: eventCard[index]['time'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
-                                                  fontSize: 16,
                                                   color:
                                                       context.colors.secondary,
                                                   fontWeight: FontWeight.w700,
                                                 ),
+                                                minFontSize: 10,
                                               ),
                                             ),
                                           ],
@@ -366,21 +422,22 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: Container(
                               alignment: Alignment.center,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Arkadaşlarının Gidecekleri',
+                                  AutoLocaleText(
+                                    value: LocaleKeys.home_viewAll,
                                     style: context.textTheme.bodyText1,
                                   ),
                                   Spacer(),
-                                  Text(
-                                    'Hepsini Gör',
-                                    style: context.textTheme.bodyText1.copyWith(
-                                        color: context.colors.primary),
+                                  AutoLocaleText(
+                                    value: LocaleKeys.home_viewAll.locale,
+                                    style: context.textTheme.bodyText1!
+                                        .copyWith(
+                                            color: context.colors.primary),
                                   )
                                 ],
                               ),
@@ -406,7 +463,7 @@ class HomeView extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: AssetImage(
-                                                eventCard[index]['image']),
+                                                eventCard[index]['image']!),
                                           ),
                                         ),
                                       ),
@@ -454,44 +511,45 @@ class HomeView extends StatelessWidget {
                                                     width: 4,
                                                     height: 30,
                                                   ),
-                                                  Text(
-                                                    eventCard[index]['type'],
+                                                  AutoLocaleText(
+                                                    value: eventCard[index]
+                                                        ['type'],
                                                     style: context
-                                                        .textTheme.overline
+                                                        .textTheme.overline!
                                                         .copyWith(
-                                                            fontSize: 12,
                                                             color: context
                                                                 .colors
                                                                 .secondary),
+                                                    minFontSize: 10,
                                                     textAlign: TextAlign.center,
                                                   )
                                                 ],
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                eventCard[index]['name'],
+                                              child: AutoLocaleText(
+                                                value: eventCard[index]['name'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
-                                                  fontSize: 16,
                                                   color:
                                                       context.colors.secondary,
                                                   fontWeight: FontWeight.w700,
                                                 ),
+                                                minFontSize: 15,
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                eventCard[index]['time'],
+                                              child: AutoLocaleText(
+                                                value: eventCard[index]['time'],
                                                 style: context
-                                                    .textTheme.bodyText1
+                                                    .textTheme.bodyText1!
                                                     .copyWith(
-                                                  fontSize: 16,
                                                   color:
                                                       context.colors.secondary,
                                                   fontWeight: FontWeight.w700,
                                                 ),
+                                                minFontSize: 10,
                                               ),
                                             ),
                                           ],
@@ -514,6 +572,9 @@ class HomeView extends StatelessWidget {
               })
         ],
       ),
-    );
+    ),
+);
+
+    
   }
 }

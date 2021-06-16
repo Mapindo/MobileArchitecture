@@ -1,11 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
 class OnBoardingPage extends StatefulWidget {
-  OnBoardingPage({Key key}) : super(key: key);
+  OnBoardingPage({Key? key}) : super(key: key);
 
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
@@ -18,28 +19,28 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding1Photo.jpg"
+      "photo": "asset/svg/onBoard3.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding2Photo.jpg"
+      "photo": "asset/svg/onBoard4.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding3Photo.jpg"
+      "photo": "asset/svg/onBoard1.svg"
     },
     {
       "header": "Your thoughts. ",
       "colorHeader": "Clanner",
       "color": "Colors.blue",
       "desc": "Bring clarity to your thougths",
-      "photo": "asset/image/onBoarding4Photo.jpg"
+      "photo": "asset/svg/onBoard2.svg"
     },
   ];
 
@@ -57,19 +58,30 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Spacer(flex: 1),
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 35),
-                        child: splashScreenLists(),
+                      flex: 10,
+                      child: splashScreenLists(),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Column(
+                        children: [
+                          Spacer(flex: 3),
+                          Expanded(
+                            flex: 3,
+                            child: login(),
+                          ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: signUp(),
+                          ),
+                          Spacer(flex: 2),
+                        ],
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 7),
-                      child: login(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 50),
-                      child: signUp(),
                     ),
                   ],
                 ),
@@ -98,104 +110,89 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   RaisedButton login() {
     return RaisedButton(
       onPressed: () {
-        debugPrint("Logın  çalıştı");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginScreen(),
-          ),
-        );
+        loginOnPressed();
       },
       color: Colors.black,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Text(
-          "Login",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-          ),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        child: text("Login", Colors.white),
       ),
       shape: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          borderRadius: BorderRadius.all(Radius.circular(80.0))),
     );
   }
 
-  TextButton signUp() {
-    return TextButton(
-      onPressed: () {
-        debugPrint("Sign up çalıştı");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SignUp(),
-          ),
-        );
-      },
-      child: Text(
-        "SignUp",
-        style: TextStyle(fontSize: 30, color: Colors.black),
-      ),
+  void loginOnPressed() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
     );
   }
+
+  GestureDetector signUp() {
+    return GestureDetector(
+      onTap: () {
+        sigUpOnTap();
+      },
+      child: text("Sign Up", Colors.black),
+    );
+  }
+
+  void sigUpOnTap() => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SignUp()));
+
+  Text text(String text, Color color) =>
+      Text(text, style: TextStyle(color: color, fontSize: 22));
 }
 
 class OnboardingSliderCard extends StatelessWidget {
-  final String header;
-  final String colorHeader;
-  final String desc;
-  final String photo;
-  final String index;
-  final String color;
-  const OnboardingSliderCard({
-    Key key,
-    this.header,
-    this.desc,
-    this.photo,
-    this.index,
-    this.colorHeader,
-    this.color,
-  }) : super(key: key);
+  final String? header;
+  final String? colorHeader;
+  final String? desc;
+  final String? photo;
+  final String? index;
+  final String? color;
+  const OnboardingSliderCard(
+      {Key? key,
+      this.header,
+      this.desc,
+      this.photo,
+      this.index,
+      this.colorHeader,
+      this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 15),
+          Expanded(
+            flex: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  header,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text(
-                  colorHeader,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
+                textSliderCard(header!, fontSize: 26),
+                textSliderCard(colorHeader!,
+                    fontSize: 26, fontWeight: FontWeight.bold),
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 15),
-            child: Text(
-              desc,
-              style: TextStyle(fontSize: 20),
-              textAlign: TextAlign.center,
-            ),
+          Expanded(
+            flex: 2,
+            child: textSliderCard(desc!, fontSize: 18),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 20),
-            child: Image.asset("${photo.toString()}"),
+          Expanded(
+            flex: 10,
+            child: SvgPicture.asset("${photo.toString()}"),
           ),
         ],
       ),
     );
+  }
+
+  Text textSliderCard(String text, {double? fontSize, FontWeight? fontWeight}) {
+    return Text(text,
+        style: TextStyle(fontSize: fontSize, fontWeight: fontWeight));
   }
 }
