@@ -76,12 +76,22 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
       },
       onPageBuilder: (BuildContext context, MapViewModel value) =>
           DefaultTabController(
+        initialIndex: 0,
         length: tabs.length,
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(animateHeightAppbar),
             child: AppBar(
-              title: Text('DevFest'),
+              backgroundColor: context.colors.secondary,
+              leading: IconButton(
+                  onPressed: () {
+                    value.panelController!.close();
+                  },
+                  icon: Icon(Icons.chevron_left_outlined)),
+              title: AutoSizeText(
+                'DevFest İstanbul 2021',
+                style: context.textTheme.subtitle1,
+              ),
             ),
           ),
           body: CustomSlidingUp(
