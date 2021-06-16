@@ -29,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
@@ -119,7 +119,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   }
 
   void _onItemTapped(int index) {
-    print(index);
+    // print(index);
     setState(() {
       _selectedIndex = index;
     });

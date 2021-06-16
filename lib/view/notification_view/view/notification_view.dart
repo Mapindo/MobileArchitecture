@@ -16,31 +16,32 @@ List<Notificaiton> notify = [
       date: '2021-05-15T21:30:00.250Z',
       isReady: true,
       status: 1,
-      image: 'https://placeimg.com/640/480/people',
+      image: 'https://avatars.githubusercontent.com/u/36731163?v=',
       token: '123'),
-  Notificaiton(
-      title: '',
-      body: '@2 seni takip etti',
-      date: '2021-05-02T10:37:30.250Z',
-      isReady: false,
-      image: 'https://placeimg.com/640/480/people',
-      status: 2,
-      token: '123'),
+  // Notificaiton(
+  //     title: '',
+  //     body: '@2 seni takip etti',
+  //     date: '2021-05-02T10:37:30.250Z',
+  //     isReady: false,
+  //     image: 'https://avatars.githubusercontent.com/u/34376691?v=4',
+  //     status: 2,
+  //     token: '123'),
   Notificaiton(
       title: '',
       body: '@3 seni takip etti',
       date: '2021-05-02T10:37:30.250Z',
       isReady: false,
       status: 3,
-      image: 'https://placeimg.com/640/480/people',
+      image: 'https://avatars.githubusercontent.com/u/62259512?v=4',
       token: '123'),
   Notificaiton(
       title: '',
-      body: '@1 seni takip etti',
-      date: '2021-04-02T10:37:30.250Z',
+      body: '@4 seni takip etti',
+      date: '2021-05-02T10:37:30.250Z',
       isReady: false,
       status: 4,
-      image: 'https://placeimg.com/640/480/people',
+      image:
+          'https://pbs.twimg.com/profile_images/1352733037163900935/3oDljPVM_400x400.jpg',
       token: '123'),
 ];
 // 2021-04-02T10:37:30.250Z
@@ -63,8 +64,8 @@ class NotificationView extends StatelessWidget {
             onPressed: () {}),
         title: Text(
           LocaleKeys.notificaiton_notificaitons.locale,
-          style:
-              context.textTheme.headline6!.copyWith(fontWeight: FontWeight.w500),
+          style: context.textTheme.headline6!
+              .copyWith(fontWeight: FontWeight.w500),
         ),
       ),
       body: Container(
