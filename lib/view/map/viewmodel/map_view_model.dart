@@ -7,7 +7,6 @@ import 'package:fluttermvvmtemplate/view/map/model/map_event_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:ui' as ui;
-
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 part 'map_view_model.g.dart';
 
@@ -33,9 +32,10 @@ abstract class MapViewBase with Store, BaseViewModel {
 
 //example markers
   List<MapEventModel> mapEventList = [
-    MapEventModel(location: Location(latitude: 35, longitude: 30)),
-    MapEventModel(location: Location(latitude: 40, longitude: 30)),
-    MapEventModel(location: Location(latitude: 35, longitude: 35))
+    MapEventModel(
+        location: Location(latitude: 37.7347649, longitude: 29.0489951)),
+    // MapEventModel(location: Location(latitude: 40, longitude: 30)),
+    // MapEventModel(location: Location(latitude: 35, longitude: 35))
   ];
 
   final CameraPosition kLake =
@@ -47,7 +47,7 @@ abstract class MapViewBase with Store, BaseViewModel {
   // }
 
   void markerOnTap(value) {
-    print(value);
+    // print(value);
     panelController!.animatePanelToSnapPoint(
         curve: Curves.easeInOutExpo, duration: Duration(milliseconds: 700));
   }

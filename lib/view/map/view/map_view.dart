@@ -13,7 +13,6 @@ import 'package:fluttermvvmtemplate/product/widget/image_slider/draggable_image_
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/map_view_model.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../core/extension/string_extension.dart';
 
 class MapView extends StatefulWidget {
@@ -89,7 +88,7 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
                   },
                   icon: Icon(Icons.chevron_left_outlined)),
               title: AutoSizeText(
-                'DevFest İstanbul 2021',
+                'DevFest Denizli 2021',
                 style: context.textTheme.subtitle1,
               ),
             ),
@@ -218,7 +217,7 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AutoSizeText(
-          'DevFest İstanbul 2021',
+          'DevFest Denizli 2021',
           style: context.textTheme.headline4!.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -420,9 +419,10 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
               markerId: MarkerId(e.hashCode.toString()),
               position:
                   LatLng(e.location!.latitude ?? 0, e.location!.longitude ?? 0),
-              icon: value.eventIcon ?? BitmapDescriptor.defaultMarker,
+              // icon: value.eventIcon ?? BitmapDescriptor.defaultMarker,
+              icon: BitmapDescriptor.defaultMarker,
               zIndex: 5,
-              infoWindow: InfoWindow(title: 'Test'),
+              infoWindow: InfoWindow(title: 'Devfest Denizli 2021'),
               onTap: () => value.markerOnTap(e)),
         )
         .toSet();
