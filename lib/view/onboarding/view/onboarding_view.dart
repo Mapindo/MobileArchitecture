@@ -1,7 +1,14 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttermvvmtemplate/core/base/view/base_widget.dart';
+import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
+import 'package:fluttermvvmtemplate/core/extension/string_extension.dart';
+import 'package:fluttermvvmtemplate/view/onboarding/model/onboarding_model.dart';
+import 'package:fluttermvvmtemplate/view/onboarding/viewModel/onboarding_view_model.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 
@@ -13,186 +20,110 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-  List<Map<String, String>> splashData = [
-    {
-      "header": "Your thoughts. ",
-      "colorHeader": "Clanner",
-      "color": "Colors.blue",
-      "desc": "Bring clarity to your thougths",
-      "photo": "asset/svg/onBoard3.svg"
-    },
-    {
-      "header": "Your thoughts. ",
-      "colorHeader": "Clanner",
-      "color": "Colors.blue",
-      "desc": "Bring clarity to your thougths",
-      "photo": "asset/svg/onBoard4.svg"
-    },
-    {
-      "header": "Your thoughts. ",
-      "colorHeader": "Clanner",
-      "color": "Colors.blue",
-      "desc": "Bring clarity to your thougths",
-      "photo": "asset/svg/onBoard1.svg"
-    },
-    {
-      "header": "Your thoughts. ",
-      "colorHeader": "Clanner",
-      "color": "Colors.blue",
-      "desc": "Bring clarity to your thougths",
-      "photo": "asset/svg/onBoard2.svg"
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: Container(
-                color: Colors.white10.withOpacity(0.1),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Spacer(flex: 1),
-                    Expanded(
-                      flex: 10,
-                      child: splashScreenLists(),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Column(
-                        children: [
-                          Spacer(flex: 3),
-                          Expanded(
-                            flex: 3,
-                            child: login(),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: signUp(),
-                          ),
-                          Spacer(flex: 2),
-                        ],
-                      ),
-                    ),
-                  ],
+    return BaseView<OnboardingViewModel>(
+      viewModel: OnboardingViewModel(),
+      onModelReady: (model) {
+        model.setContext(context);
+        model.init();
+      },
+      onPageBuilder: (BuildContext context, OnboardingViewModel viewModel) =>
+          Scaffold(
+              body: Column(
+        children: [
+          Spacer(),
+          Expanded(
+              flex: 10,
+              child: PageView.builder(
+                  itemCount: viewModel.onboardingItem.length,
+                  controller: viewModel.sliderController,
+                  onPageChanged: (index) => viewModel.changeCurrentIndex(index),
+                  itemBuilder: (context, index) => buildContentSlider(
+                      context, viewModel.onboardingItem[index]))),
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => Observer(builder: (_) {
+                      return Padding(
+                        padding: context.paddingLow * .5,
+                        child: CircleAvatar(
+                          radius: viewModel.currentIndex == index
+                              ? context.width * 0.015
+                              : context.width * 0.01,
+                          backgroundColor: context.colors.primary.withOpacity(
+                              viewModel.currentIndex == index ? 1 : .2),
+                        ),
+                      );
+                    })),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: context.width * .5,
+              height: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(context.normalValue),
+                  ),
                 ),
+                child: Observer(builder: (_) {
+                  return Text(
+                    viewModel.isChangeButton ? 'Giriş Yap' : 'İleri',
+                    style: context.textTheme.subtitle1!
+                        .copyWith(color: Colors.white),
+                  );
+                }),
+                onPressed: () {
+                  viewModel.nextCurrentIndex;
+                },
               ),
             ),
           ),
-        ),
-      ),
+          Spacer()
+        ],
+      )),
     );
   }
 
-  Container splashScreenLists() {
-    return Container(
-      child: PageView.builder(
-        itemCount: splashData.length,
-        itemBuilder: (context, index) => OnboardingSliderCard(
-          header: splashData[index]["header"],
-          desc: splashData[index]["desc"],
-          photo: splashData[index]["photo"],
-          colorHeader: splashData[index]["colorHeader"],
-        ),
-      ),
-    );
-  }
-
-  RaisedButton login() {
-    return RaisedButton(
-      onPressed: () {
-        loginOnPressed();
-      },
-      color: Colors.black,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 50),
-        child: text("Login", Colors.white),
-      ),
-      shape: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(80.0))),
-    );
-  }
-
-  void loginOnPressed() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginView()),
-    );
-  }
-
-  GestureDetector signUp() {
-    return GestureDetector(
-      onTap: () {
-        sigUpOnTap();
-      },
-      child: text("Sign Up", Colors.black),
-    );
-  }
-
-  void sigUpOnTap() => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SignUp()));
-
-  Text text(String text, Color color) =>
-      Text(text, style: TextStyle(color: color, fontSize: 22));
-}
-
-class OnboardingSliderCard extends StatelessWidget {
-  final String? header;
-  final String? colorHeader;
-  final String? desc;
-  final String? photo;
-  final String? index;
-  final String? color;
-  const OnboardingSliderCard(
-      {Key? key,
-      this.header,
-      this.desc,
-      this.photo,
-      this.index,
-      this.colorHeader,
-      this.color})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Container buildContentSlider(BuildContext context, OnBoardingModel item) {
     return Container(
       child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                textSliderCard(header!, fontSize: 26),
-                textSliderCard(colorHeader!,
-                    fontSize: 26, fontWeight: FontWeight.bold),
-              ],
+          Container(
+            padding: context.paddingMediumVertical,
+            child: AutoSizeText(
+              item.title,
+              style: context.textTheme.headline5!
+                  .copyWith(color: context.colors.onSurface),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: textSliderCard(desc!, fontSize: 18),
-          ),
-          Expanded(
-            flex: 10,
-            child: SvgPicture.asset("${photo.toString()}"),
+          SvgPicture.asset(
+            item.image.toSVG,
+            fit: BoxFit.cover,
           ),
         ],
       ),
     );
   }
 
-  Text textSliderCard(String text, {double? fontSize, FontWeight? fontWeight}) {
-    return Text(text,
-        style: TextStyle(fontSize: fontSize, fontWeight: fontWeight));
-  }
+  // Padding dottedCircle(BuildContext context, bool isActive) {
+  //   return Padding(
+  //     padding: context.paddingLow * .5,
+  //     child: Container(
+  //       height: context.normalValue * .75,
+  //       width: context.normalValue * .75,
+  //       decoration: BoxDecoration(
+  //         color: isActive ? context.colors.primary : context.colors.onSecondary,
+  //         borderRadius: BorderRadius.all(
+  //           Radius.circular(context.height),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
