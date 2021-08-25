@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/home/view/home_view.dart';
+import 'package:fluttermvvmtemplate/view/map/view/map_view.dart';
+import 'package:fluttermvvmtemplate/view/notification_view/view/notification_view.dart';
 import 'package:fluttermvvmtemplate/view/onboarding/view/onboarding_view.dart';
 import 'package:fluttermvvmtemplate/view/profile/view/profile_view.dart';
 import 'package:fluttermvvmtemplate/view/send_feed_view/view/send_feed_view.dart';
+import 'package:fluttermvvmtemplate/view/social_page/view/social_view.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view/sign_in_view.dart';
 import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
@@ -42,9 +45,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
-      // home: SignUp(),
-      home: OnBoardingPage(),
-      // home: BottomNavigation(),
+      // home: OnBoardingPage(),
+      home: LoginView(),
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
     );
