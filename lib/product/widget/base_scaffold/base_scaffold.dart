@@ -8,6 +8,7 @@ class CustomScaffold extends StatelessWidget {
   Widget? fab_button;
   Color? background_color;
   bool? resize_bottom_insets;
+  Color? safe_area_background;
   CustomScaffold({
     Key? key,
     this.appbar,
@@ -17,19 +18,23 @@ class CustomScaffold extends StatelessWidget {
     this.fab_button,
     this.background_color,
     this.resize_bottom_insets,
+    this.safe_area_background
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: top_safe_area_value,
-      bottom: bottom_safe_area_value,
-      child: Scaffold(
-        resizeToAvoidBottomInset: resize_bottom_insets,
-        backgroundColor: background_color,
-        floatingActionButton: fab_button,
-        appBar: appbar,
-        body: widget,
+    return Container(
+      color: safe_area_background,
+      child: SafeArea(
+        top: top_safe_area_value,
+        bottom: bottom_safe_area_value,
+        child: Scaffold(
+          resizeToAvoidBottomInset: resize_bottom_insets,
+          backgroundColor: background_color,
+          floatingActionButton: fab_button,
+          appBar: appbar,
+          body: widget,
+        ),
       ),
     );
   }
