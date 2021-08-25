@@ -20,7 +20,7 @@
     "tab2": "SignUp",
     "email": "Email",
     "password": "Password",
-    "forgotText": "Forgot Password",
+    "forgotText": "Forgot Password ?",
     "login": "Login",
     "dontAccount": "Dont have account"
   },

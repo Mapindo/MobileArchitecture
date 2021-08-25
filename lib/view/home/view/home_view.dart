@@ -81,10 +81,10 @@ class HomeView extends StatelessWidget {
         widget: Stack(
           children: [
             Container(
-              height: context.mediaQuery.size.height * 0.336,
+              height: context.mediaQuery.size.height * 0.316,
               child: Column(
                 children: [
-                  SizedBox(height: context.lowValue),
+                  SizedBox(height: context.mediaQuery.size.height * 0.02),
                   Expanded(
                     flex: 9,
                     child: Column(

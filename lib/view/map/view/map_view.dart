@@ -86,7 +86,7 @@ class MapViewState extends State<MapView> with SingleTickerProviderStateMixin {
                   onPressed: () {
                     value.panelController!.close();
                   },
-                  icon: Icon(Icons.chevron_left_outlined)),
+                  icon: Icon(Icons.chevron_left_outlined, size: 32)),
               title: AutoSizeText(
                 'DevFest Denizli 2021',
                 style: context.textTheme.subtitle1,
