@@ -106,12 +106,13 @@ class _SignUpState extends State<SignUp> {
               color: color, fontSize: fontSize, fontWeight: fontWeight));
 
   TextFormField formField(String hintText, String labelText,
-      TextInputType inputType, bool obsureText, validatorFunc) {
+      TextInputType inputType, bool obsureText, Function validatorFunc) {
     int? maxLength;
     if (hintText == phoneText) {
       maxLength = 11;
-    } else
+    } else {
       maxLength = null;
+    }
 
     return TextFormField(
         obscureText: obsureText, // şifre görünmezliği
@@ -129,7 +130,7 @@ class _SignUpState extends State<SignUp> {
           errorBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         ),
-        validator: validatorFunc,
+        validator: (value) => validatorFunc(value),
         maxLength: maxLength,
         onSaved: (value) {
           if (hintText == nameText) adSoyad = value;
@@ -201,41 +202,25 @@ class _SignUpState extends State<SignUp> {
   }
 
   // CONTROLS
-  String? _emailKontrol(String mail) {
+  String? _emailKontrol(String? mail) {
     Pattern pattern =
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regex = new RegExp(pattern as String);
-    if (!regex.hasMatch(mail))
+    if (!regex.hasMatch(mail!))
       return "Geçersiz mail adresi";
     else
       return null;
   }
 
-  String? _isimKontrol(String name) {
-    if (name.length < 3)
-      return "En az 3 harf olmalıdır";
-    else
-      return null;
-  }
+  String? _isimKontrol(String name) =>
+      name.length < 3 ? "En az 3 harf olmalıdır" : null;
 
-  String? _phoneControl(String phone) {
-    if (phone.length < 11)
-      return "Telefon numarası hatalı";
-    else
-      return null;
-  }
+  String? _phoneControl(String phone) =>
+      phone.length < 11 ? 'Telefon numarası hatalı' : null;
 
-  String? _sifreControl(String sifre) {
-    if (sifre.length < 8)
-      return "Sifreniz en az 8 karakter olmalıdır";
-    else
-      return null;
-  }
+  String? _sifreControl(String sifre) =>
+      sifre.length < 8 ? 'Sifreniz en az 8 karakter olmalıdır' : null;
 
-  String? _sifreTekrarControl(String sifreTekrari) {
-    if (sifre != sifreTekrar)
-      return "hata";
-    else
-      return null;
-  }
+  String? _sifreTekrarControl(String sifreTekrari) =>
+      sifre != sifreTekrar ? 'hata' : null;
 }
