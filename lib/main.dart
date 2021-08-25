@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
       // home: SignUp(),
-      home: OnBoardingPage(),
-      // home: BottomNavigation(),
+      // home: OnBoardingPage(),
+      home: BottomNavigation(),
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
     );
