@@ -23,12 +23,13 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
 
   List<OnBoardingModel> onboardingItem = [];
   PageController sliderController = PageController();
+
   @observable
   int currentIndex = 0;
 
   @action
   void changeCurrentIndex(int index) => currentIndex = index;
-  @action
+
   void get nextCurrentIndex {
     if (isChangeButton) {
       completeToOnBoard();
