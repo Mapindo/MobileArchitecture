@@ -4,11 +4,13 @@ import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 
 class TextInputWidget extends StatelessWidget {
   final String? labelName;
+  final bool? obsecureText;
   final TextEditingController? controller;
 
   TextInputWidget({
     Key? key,
     this.labelName,
+    this.obsecureText,
     this.controller,
   }) : super(key: key);
 
@@ -17,7 +19,7 @@ class TextInputWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        obscureText: false,
+        obscureText: obsecureText ?? false,
         controller: controller,
         decoration: InputDecoration(
             hoverColor: context.colors.background,
