@@ -75,8 +75,8 @@ class LoginView extends StatelessWidget {
           flex: 3,
           child: CornerRectangleButton(
             onPress: () {},
-            padding: EdgeInsets.symmetric(horizontal: context.height * 0.11),
-            text: 'Giriş Yap',
+            padding: EdgeInsets.symmetric(horizontal: context.height * 0.09),
+            text: LocaleKeys.login_login.locale,
             textStyle: context.textTheme.headline6!
                 .copyWith(color: context.colors.background),
           ),
@@ -86,8 +86,23 @@ class LoginView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AutoLocaleText(
-                value: LocaleKeys.login_ifYouDontHaveAccount.locale,
+              Row(
+                children: [
+                  AutoLocaleText(
+                    value: LocaleKeys.login_ifYouDontHaveAccount.locale,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      print('Register tapped');
+                    },
+                    child: AutoLocaleText(
+                      style: context.textTheme.bodyText2!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: context.colors.primary),
+                      value: ' ${LocaleKeys.login_register.locale}',
+                    ),
+                  )
+                ],
               ),
             ],
           ),
