@@ -22,7 +22,10 @@
     "password": "Password",
     "forgotText": "Forgot Password ?",
     "login": "Login",
-    "dontAccount": "Dont have account"
+    "or": "or",
+    "dontAccount": "Dont have account",
+    "ifYouDontHaveAccount": "If you don't have an existing account",
+    "register": "Register"
   },
   "home": {
     "title": "Hello",
