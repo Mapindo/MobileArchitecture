@@ -29,7 +29,7 @@ mixin _$OnboardingViewModel on _OnboardingViewModelBase, Store {
       ActionController(name: '_OnboardingViewModelBase');
 
   @override
-  void changeCurrentIndex(dynamic index) {
+  void changeCurrentIndex(int index) {
     final _$actionInfo = _$_OnboardingViewModelBaseActionController.startAction(
         name: '_OnboardingViewModelBase.changeCurrentIndex');
     try {

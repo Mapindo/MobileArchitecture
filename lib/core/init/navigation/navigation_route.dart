@@ -17,7 +17,7 @@ class NavigationRoute {
       case NavigationConstants.TEST_VIEW:
         return normalNavigate(HomeView());
       case NavigationConstants.LOGIN_VIEW:
-        return normalNavigate(SignUp());
+        return normalNavigate(SignUpView());
       default:
         return MaterialPageRoute(
           builder: (context) => NotFoundNavigationWidget(),
