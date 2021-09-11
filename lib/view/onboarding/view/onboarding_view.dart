@@ -22,13 +22,13 @@ class OnBoardingPage extends StatefulWidget {
 class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
-    return BaseView<OnboardingViewModel>(
-      viewModel: OnboardingViewModel(),
+    return BaseView<OnBoardingViewModel>(
+      viewModel: OnBoardingViewModel(),
       onModelReady: (model) {
         model.setContext(context);
         model.init();
       },
-      onPageBuilder: (BuildContext context, OnboardingViewModel viewModel) =>
+      onPageBuilder: (BuildContext context, OnBoardingViewModel viewModel) =>
           Scaffold(
               body: Column(
         children: [

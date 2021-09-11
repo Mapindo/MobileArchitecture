@@ -20,6 +20,7 @@ abstract class  LocaleKeys {
   static const login_login = 'login.login';
   static const login_or = 'login.or';
   static const login_ifYouDontHaveAccount = 'login.ifYouDontHaveAccount';
+  static const login_register = 'login.register';
   static const login = 'login';
   static const home_title = 'home.title';
   static const home_upcomingEvents = 'home.upcomingEvents';
