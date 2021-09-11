@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttermvvmtemplate/view/category_select/category.dart';
-import 'package:fluttermvvmtemplate/view/category_select/category_view.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
 
 class SignUp extends StatefulWidget {

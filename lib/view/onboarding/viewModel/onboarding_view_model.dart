@@ -6,11 +6,11 @@ import 'package:fluttermvvmtemplate/view/onboarding/model/onboarding_model.dart'
 import 'package:mobx/mobx.dart';
 part 'onboarding_view_model.g.dart';
 
-class OnboardingViewModel = _OnboardingViewModelBase with _$OnboardingViewModel;
+class OnBoardingViewModel = _OnBoardingViewModelBase with _$OnBoardingViewModel;
 
-abstract class _OnboardingViewModelBase with Store, BaseViewModel {
-  @override
+abstract class _OnBoardingViewModelBase with Store, BaseViewModel {
   void setContext(BuildContext context) => this.context = context;
+
   @override
   void init() {
     onboardingItem
@@ -23,12 +23,13 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
 
   List<OnBoardingModel> onboardingItem = [];
   PageController sliderController = PageController();
+
   @observable
   int currentIndex = 0;
 
   @action
   void changeCurrentIndex(int index) => currentIndex = index;
-  @action
+
   void get nextCurrentIndex {
     if (isChangeButton) {
       completeToOnBoard();
@@ -41,6 +42,7 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
 
   bool get isChangeButton => currentIndex == onboardingItem.length - 1;
 
+  @action
   Future<void> completeToOnBoard() async {
     // changeLoading();
     await localeManager.setBoolValue(PreferencesKeys.IS_FIRST_APP, true);
