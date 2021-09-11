@@ -1,12 +1,25 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
-import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
-import 'select_photo_view_model.dart';
+import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo_view_model.dart';
+import 'package:provider/provider.dart';
 
-class SelectPhotoView extends SelectPhotoViewModel {
+class SelectPhotoView extends StatefulWidget {
+  SelectPhotoView({Key? key}) : super(key: key);
+
+  @override
+  _SelectPhotoState createState() => _SelectPhotoState();
+}
+
+class _SelectPhotoState extends State<SelectPhotoView> {
+  final photo = SelectPhoto();
+  @override
   Widget build(BuildContext context) {
+    final _selectPhotoViewModel = Provider.of<SelectPhotoViewModel>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -22,7 +35,7 @@ class SelectPhotoView extends SelectPhotoViewModel {
             ),
             Expanded(
               flex: 5,
-              child: photoColumn(),
+              child: photoColumn(_selectPhotoViewModel),
             ),
             Spacer(flex: 1),
             Expanded(
@@ -63,7 +76,7 @@ class SelectPhotoView extends SelectPhotoViewModel {
     );
   }
 
-  Column photoColumn() {
+  Column photoColumn(SelectPhotoViewModel selectPhotoViewModel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -79,7 +92,14 @@ class SelectPhotoView extends SelectPhotoViewModel {
                 onPressed: () {})),
         Expanded(
           flex: 4,
-          child: Image.asset("asset/image/avatar.jpg"),
+          child: GestureDetector(
+              onTap: () {
+                bottomSheat(selectPhotoViewModel);
+              },
+              child: CircleAvatar(
+                radius: 80,
+                backgroundImage: imageProvider(selectPhotoViewModel),
+              )),
         ),
         Expanded(
           flex: 2,
@@ -94,6 +114,14 @@ class SelectPhotoView extends SelectPhotoViewModel {
         ),
       ],
     );
+  }
+
+  ImageProvider imageProvider(SelectPhotoViewModel selectPhotoViewModel) {
+    if (selectPhotoViewModel.profilPhoto == null) {
+      return AssetImage("asset/image/avatar.jpg");
+    } else {
+      return FileImage(File(selectPhotoViewModel.profilPhoto!.path));
+    }
   }
 
   RaisedButton butonFinish() {
@@ -113,6 +141,48 @@ class SelectPhotoView extends SelectPhotoViewModel {
       color: Colors.black,
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0))),
+    );
+  }
+
+  bottomSheat(SelectPhotoViewModel selectPhotoViewModel) {
+    showModalBottomSheet(
+      enableDrag: false,
+      context: context,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.25,
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            ListTile(
+              leading: Icon(
+                Icons.camera,
+                color: Colors.grey,
+              ),
+              title: Text(
+                "Kameradan seç",
+                style: context.theme.textTheme.headline5,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                selectPhotoViewModel.selectPhotoFromCamera();
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.image,
+                color: Colors.grey,
+              ),
+              title: Text(
+                "Galeriden seç",
+                style: context.theme.textTheme.headline5,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                selectPhotoViewModel.selectPhotoFromGaleri();
+              },
+            ),
+          ]),
+        );
+      },
     );
   }
 }

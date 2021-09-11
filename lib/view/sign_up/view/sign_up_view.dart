@@ -6,6 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category.dart';
 import 'package:fluttermvvmtemplate/view/category_select/category_view.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
+import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo_view.dart';
+import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo_view_model.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -192,8 +196,12 @@ class _SignUpState extends State<SignUp> {
   void registerOnPressed() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SelectPhoto()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ChangeNotifierProvider(
+          create: (BuildContext context) => SelectPhotoViewModel(),
+          child: SelectPhotoView(),
+        );
+      }));
     } else {
       setState(() {
         autoControl = true;

@@ -1,9 +1,18 @@
-import 'package:flutter/material.dart';
-import 'select_photo_view.dart';
+import 'package:image_picker/image_picker.dart';
 
-class SelectPhoto extends StatefulWidget {
-  SelectPhoto({Key? key}) : super(key: key);
+class SelectPhoto {
+  XFile? selectedPhoto;
+  SelectPhoto({this.selectedPhoto});
+
+  Map<String, dynamic> toMap() {
+    return {"selectedPhoto": selectedPhoto};
+  }
+
+  SelectPhoto.fromMap(Map<String, dynamic> map)
+      : selectedPhoto = map["selectedPhoto"];
 
   @override
-  SelectPhotoView createState() => SelectPhotoView();
+  String toString() {
+    return "selectedPhoto: $selectedPhoto";
+  }
 }

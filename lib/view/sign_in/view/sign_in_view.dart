@@ -11,6 +11,7 @@ import 'package:fluttermvvmtemplate/product/widget/base_scaffold/base_scaffold.d
 import 'package:fluttermvvmtemplate/product/widget/button/circle_button.dart';
 import 'package:fluttermvvmtemplate/product/widget/button/corner_rectangle_button.dart';
 import 'package:fluttermvvmtemplate/view/sign_in/view_model/login_view_model.dart';
+import 'package:fluttermvvmtemplate/view/sign_up/view/sign_up_view.dart';
 import '../../../core/extension/string_extension.dart';
 
 class LoginView extends StatelessWidget {
@@ -74,7 +75,10 @@ class LoginView extends StatelessWidget {
         Expanded(
           flex: 3,
           child: CornerRectangleButton(
-            onPress: () {},
+            onPress: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SignUp()));
+            },
             padding: EdgeInsets.symmetric(horizontal: context.height * 0.11),
             text: 'Giriş Yap',
             textStyle: context.textTheme.headline6!
