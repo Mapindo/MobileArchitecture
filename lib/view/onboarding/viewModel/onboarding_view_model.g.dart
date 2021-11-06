@@ -8,9 +8,9 @@ part of 'onboarding_view_model.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$OnboardingViewModel on _OnboardingViewModelBase, Store {
+mixin _$OnBoardingViewModel on _OnBoardingViewModelBase, Store {
   final _$currentIndexAtom =
-      Atom(name: '_OnboardingViewModelBase.currentIndex');
+      Atom(name: '_OnBoardingViewModelBase.currentIndex');
 
   @override
   int get currentIndex {
@@ -25,17 +25,25 @@ mixin _$OnboardingViewModel on _OnboardingViewModelBase, Store {
     });
   }
 
-  final _$_OnboardingViewModelBaseActionController =
-      ActionController(name: '_OnboardingViewModelBase');
+  final _$completeToOnBoardAsyncAction =
+      AsyncAction('_OnBoardingViewModelBase.completeToOnBoard');
 
   @override
-  void changeCurrentIndex(dynamic index) {
-    final _$actionInfo = _$_OnboardingViewModelBaseActionController.startAction(
-        name: '_OnboardingViewModelBase.changeCurrentIndex');
+  Future<void> completeToOnBoard() {
+    return _$completeToOnBoardAsyncAction.run(() => super.completeToOnBoard());
+  }
+
+  final _$_OnBoardingViewModelBaseActionController =
+      ActionController(name: '_OnBoardingViewModelBase');
+
+  @override
+  void changeCurrentIndex(int index) {
+    final _$actionInfo = _$_OnBoardingViewModelBaseActionController.startAction(
+        name: '_OnBoardingViewModelBase.changeCurrentIndex');
     try {
       return super.changeCurrentIndex(index);
     } finally {
-      _$_OnboardingViewModelBaseActionController.endAction(_$actionInfo);
+      _$_OnBoardingViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 

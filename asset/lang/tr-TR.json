@@ -16,14 +16,15 @@
     },
   
     "login": {
-      "tab1": "Login",
-      "tab2": "SignUp",
+      "tab1": "Giriş Yap",
+      "tab2": "Kayıt Ol",
       "email": "Email",
-      "password": "Password",
-      "forgotText": "Forgot Password ?",
-      "login": "Login",
-      "or": "or",
-      "ifYouDontHaveAccount": "If you don't have an existing account,"
+      "password": "Şifre",
+      "forgotText": "Şifremi unuttum ?",
+      "login": "Giriş Yap",
+      "or": "ya da",
+      "ifYouDontHaveAccount": "Eğer hesabın yoksa ",
+      "register": "Kayıt Ol"
     },
     "home": {
       "title": "Merhaba",

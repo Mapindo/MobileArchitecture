@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermvvmtemplate/core/extension/context_extension.dart';
 import 'package:fluttermvvmtemplate/product/widget/bottomNavigation/bottom_navigation.dart';
-import 'package:fluttermvvmtemplate/view/category_select/category.dart';
+import 'package:fluttermvvmtemplate/view/category_select/view/category_view.dart';
 import 'package:fluttermvvmtemplate/view/select_profile_photo/select_photo.dart';
 import 'select_photo_view_model.dart';
 
@@ -102,7 +102,7 @@ class SelectPhotoView extends SelectPhotoViewModel {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Category(),
+            builder: (context) => CategorySelect(),
           ),
         );
       },
